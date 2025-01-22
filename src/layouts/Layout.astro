@@ -1,3 +1,6 @@
+---
+import '@css/app.css';
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -12,11 +15,15 @@
 	</body>
 </html>
 
-<style>
+<style lang="postcss">
+  @import "tailwindcss/theme" theme(reference);
+  @import "@css/tailwind/theme.css" theme(reference);
 	html,
 	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+        @apply
+            m-4
+            w-full
+            h-full
+            text-black;
 	}
 </style>

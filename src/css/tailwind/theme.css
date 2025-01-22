@@ -1,0 +1,12 @@
+/*
+ * HACK: for some reason the svelte preprocess won't allow
+ * any other definitions inside a reference(theme) import
+ * for svelte.
+ * */ 
+@theme {
+  --font-*: initial;
+  --font-nf-symbols: Symbols Nerd Font;
+  --font-firacode: FiraCode Nerd Font;
+
+  --color-transparent: transparent;
+}
