@@ -1,9 +1,17 @@
 <script lang="ts">
-    import Form from "@components/ui/forms/Form.svelte";
+    import Form from "@forms/Form.svelte";
+
+    import PlayerInfo from "@sheets/sections/PlayerInfo.svelte";
 </script>
 
 <Form>
-    <fieldset>
-        <h3>Character Sheet</h3>
-    </fieldset>
+    <header>
+        <h2>Character Sheet</h2>
+    </header>
+
+    <PlayerInfo />
 </Form>
+
+<style lang="postcss">
+    @import "tailwindcss/theme" theme(reference);
+</style>

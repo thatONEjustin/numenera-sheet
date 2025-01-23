@@ -32,6 +32,9 @@
             "@sheets/*": [
                 "src/components/sheets/*"
             ],
+            "@forms/*": [
+                "src/components/ui/forms/*"
+            ],
             "@node/*": [
                 "node_modules/*"
             ]

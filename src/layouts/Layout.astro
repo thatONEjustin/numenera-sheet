@@ -16,14 +16,10 @@ import '@css/app.css';
 </html>
 
 <style lang="postcss">
-  @import "tailwindcss/theme" theme(reference);
-  @import "@css/tailwind/theme.css" theme(reference);
-	html,
-	body {
-        @apply
-            m-4
-            w-full
-            h-full
-            text-black;
-	}
+@import "tailwindcss/theme" theme(reference);
+@import "@css/tailwind/theme.css" theme(reference);
+
+body, html {
+    @apply m-0;
+}
 </style>
