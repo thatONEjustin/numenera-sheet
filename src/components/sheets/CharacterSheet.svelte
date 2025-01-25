@@ -1,5 +1,6 @@
 <script lang="ts">
     import Form from "@forms/Form.svelte";
+    import SubmitButton from "@forms/fields/SubmitButton.svelte";
 
     import PlayerInfo from "@sheets/sections/PlayerInfo.svelte";
 </script>
@@ -10,6 +11,8 @@
     </header>
 
     <PlayerInfo />
+
+    <SubmitButton />
 </Form>
 
 <style lang="postcss">

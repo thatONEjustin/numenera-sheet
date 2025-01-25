@@ -21,5 +21,9 @@
 
     fieldset {
         @apply m-0;
+
+        > h3 {
+            @apply text-3xl;
+        }
     }
 </style>
