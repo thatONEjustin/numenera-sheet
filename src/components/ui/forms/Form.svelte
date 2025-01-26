@@ -34,6 +34,7 @@
                 [field_key]: value,
             };
         });
+
         if (storageAvailable("localStorage") == false) return;
 
         localStorage.setItem(

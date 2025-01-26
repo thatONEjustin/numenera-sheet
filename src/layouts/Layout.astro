@@ -14,15 +14,8 @@ import { ClientRouter } from 'astro:transitions';
         <ClientRouter />
 	</head>
 	<body>
-		<slot />
+        <div class="Page">
+            <slot />
+        </div>
 	</body>
 </html>
-
-<style lang="postcss">
-@import "tailwindcss/theme" theme(reference);
-@import "@css/tailwind/theme.css" theme(reference);
-
-body, html {
-    @apply m-0;
-}
-</style>
