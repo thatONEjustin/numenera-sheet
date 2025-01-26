@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
+    import type { Snippet } from "@components/types";
 
     import LZString from "lz-string";
     import { storageAvailable } from "@js/utils";

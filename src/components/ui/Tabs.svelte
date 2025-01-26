@@ -1,24 +1,15 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
-
-    type TabsProps = {
-        tabs: Array<Tab>;
-        children?: Snippet;
-        active?: number;
-    };
-
-    type Tab = {
-        label: string;
-        index: number;
-        content: Snippet;
-    };
-
+    import type { Tabs as TabsProps, Snippet } from "@components/types";
     import SubmitButton from "@forms/fields/SubmitButton.svelte";
-    // import SubmitButton from "@forms/SubmitButton.svelte";
 
     import { fly, slide, scale } from "svelte/transition";
 
-    let { tabs, children, active = $bindable(1) }: TabsProps = $props();
+    let {
+        tabs,
+        children,
+        sheet_data,
+        active = $bindable(0),
+    }: TabsProps = $props();
 
     function show_tab(index: number): void {
         active = index;
@@ -26,13 +17,14 @@
         return;
     }
 
-    function click_next(_event: Event): void {
-        // console.log($host())
+    function click_next(event: Event): void {
+        console.log(event);
+        event.preventDefault();
     }
 </script>
 
 <ul class="TabsNav">
-    {#each tabs as { label, index }}
+    {#each tabs as { label }, index}
         <li class:active={active === index} class="TabsNav-tab">
             <a
                 href={`#${label.toLowerCase().replace(" ", "")}`}
@@ -45,17 +37,29 @@
 </ul>
 
 <div class="Tabs">
-    {#each tabs as { content: Content, index }}
+    {#each tabs as { content: Content, label }, index}
         {#if active == index}
             <section
                 class="Tab"
                 in:fly={{ x: "100%", y: 0, delay: 350 }}
                 out:fly={{ x: "-100%", y: 0, duration: 250 }}
             >
-                <!-- transition:slide -->
+                <Content {sheet_data} />
+                {label}
+                {index}
+            </section>
+        {/if}
+        <!--
+        {#if active == index}
+            <section
+                class="Tab"
+                in:fly={{ x: "100%", y: 0, delay: 350 }}
+                out:fly={{ x: "-100%", y: 0, duration: 250 }}
+            >
                 <Content />
             </section>
         {/if}
+        -->
     {/each}
 
     {#if children}
@@ -63,10 +67,10 @@
     {/if}
 </div>
 
-<SubmitButton class="mt-2">
+<button onclick={click_next}>
     Next
     <i class="nf nf-fa-arrow_right"></i>
-</SubmitButton>
+</button>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
@@ -83,9 +87,9 @@
 
             &.active {
                 @apply border
-                    border-red-500
-                    border-b-red-500
-                    bg-red-500;
+                    border-blue-500
+                    border-b-blue-500
+                    bg-blue-500;
 
                 a {
                     @apply text-white;
@@ -105,8 +109,8 @@
         display: grid;
         grid-template-areas: "stack";
 
-        @apply border-red-500
-            bg-red-500;
+        @apply border-blue-500
+            bg-blue-500;
 
         > .Tab {
             @apply p-5;

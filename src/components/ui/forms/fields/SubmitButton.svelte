@@ -1,14 +1,13 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
-    import type { ClassValue } from "svelte/elements";
+    import type { Snippet, ClassValue } from "@components/types";
 
-    interface SubmitButtonType {
+    type SubmitButtonType = {
         name?: string;
         class?: ClassValue;
         id?: string;
         children?: Snippet;
         onclick?: any;
-    }
+    };
 
     const {
         name,

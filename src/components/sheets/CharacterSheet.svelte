@@ -1,31 +1,16 @@
 <script lang="ts">
     import LZString from "lz-string";
+    import { storageAvailable } from "@js/utils";
 
     import Form from "@forms/Form.svelte";
     import SubmitButton from "@forms/fields/SubmitButton.svelte";
 
     import PlayerInfo from "@sheets/sections/PlayerInfo.svelte";
 
-    import { storageAvailable } from "@js/utils";
-    import CharacterBasicInfo from "./sections/CharacterBasicInfo.svelte";
+    import CharacterDescription from "@sheets/sections/CharacterDescription.svelte";
+    import CharacterStats from "@sheets/sections/CharacterStats.svelte";
 
     let sheet_data: object = {};
-
-    /*
-    if (
-        storageAvailable("localStorage") == true &&
-        localStorage.getItem("sheetData")
-    ) {
-        data_string = localStorage.getItem("sheetData");
-    }
-
-    if (data_string != "" && data_string != null) {
-        let decompress: any =
-            LZString.decompressFromEncodedURIComponent(data_string);
-        sheet_data = JSON.parse(decompress);
-        let { character, player } = sheet_data;
-    }
-    */
 
     function get_data_string(local_storage_key: string): any {
         if (
@@ -53,7 +38,8 @@
     </header>
 
     <PlayerInfo {sheet_data} />
-    <CharacterBasicInfo {sheet_data} />
+    <CharacterStats {sheet_data} />
+    <CharacterDescription {sheet_data} />
 
     <SubmitButton />
 </Form>

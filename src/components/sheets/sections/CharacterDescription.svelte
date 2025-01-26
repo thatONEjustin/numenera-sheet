@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
+    import type { Snippet } from "@components/types";
 
     import InputField from "@forms/fields/InputField.svelte";
     import Accordion from "@components/ui/Accordion.svelte";

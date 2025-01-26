@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
+    import type { Snippet } from "@components/types";
 
     type TextInput = {
         name: string;
@@ -125,6 +125,11 @@
             @apply py-3
                 cursor-pointer
                 text-black
+                rounded-md
+                px-4
+                py-2
+                border
+                border-gray-300
                 text-left;
 
             &.has-value {
@@ -136,12 +141,8 @@
             &.edit {
                 @apply bg-cyan-300
                     text-white
-                    border
                     border-black
-                    rounded-md
                     mt-2
-                    px-4
-                    py-2
                     cursor-pointer
                     w-max
                     max-w-max;
