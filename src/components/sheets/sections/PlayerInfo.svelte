@@ -1,16 +1,25 @@
 <script lang="ts">
+    import type { Snippet } from "svelte";
+
     import InputField from "@forms/fields/InputField.svelte";
 
-    const player_name = "";
+    type PlayerInfo = {
+        sheet_data?: any;
+        children?: Snippet;
+    };
+
+    const { sheet_data }: PlayerInfo = $props();
+
+    let { player } = sheet_data;
 </script>
 
-<fieldset>
+<fieldset name="playerInfo">
     <h3>Player Info</h3>
     <InputField
         type="text"
         label="Player Name"
         name="player_name"
-        value={player_name}
+        value={player?.name}
         id="player_name"
         required
     />
