@@ -9,16 +9,19 @@ import CharacterSheet from "@sheets/CharacterSheet.svelte"
 
 
 /* BUG: content doesn't render with my current implementation
-const tabs:Array<Tab> = [
-    {
-        label: "Character Sheet",
-        content: CharacterSheet as Snippet
-    },
-]
+    const tabs:Array<Tab> = [
+        {
+            label: "Character Sheet",
+            content: CharacterSheet as Snippet
+        },
+    ]
 */
 
 ---
 
 <Layout>
     <CharacterSheet client:only="svelte" />
+
+    <!-- TODO: figure out why this doesnt work, it works in the other sheet -->
+    <!-- <Tabs client:only="svelte" {tabs} /> -->
 </Layout>
