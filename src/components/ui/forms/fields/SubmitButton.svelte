@@ -1,23 +1,32 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
+    import type { ClassValue } from "svelte/elements";
 
     interface SubmitButtonType {
         name?: string;
+        class?: ClassValue;
         id?: string;
-        className?: string;
         children?: Snippet;
         onclick?: any;
     }
 
-    let {
-        name = "submit_next",
-        id = "submit_next",
-        className = "",
+    const {
+        name,
+        class: className,
+        id,
         children,
+        onclick,
     }: SubmitButtonType = $props();
+
+    // let {
+    //     name = "submit_next",
+    //     id = "submit_next",
+    //     class,
+    //     children,
+    // } = $props();
 </script>
 
-<div class={`${className} Submit`}>
+<div class={["Submit", className]}>
     <button type="submit" {name} {id} class="Submit-button">
         {#if children}
             {@render children()}

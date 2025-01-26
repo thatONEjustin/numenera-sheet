@@ -63,13 +63,15 @@
     {/if}
 </div>
 
-<SubmitButton className="mt-2">
+<SubmitButton class="mt-2">
     Next
     <i class="nf nf-fa-arrow_right"></i>
 </SubmitButton>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
+    @import "@css/tailwind/theme.css" theme(reference);
+
     .TabsNav {
         @apply flex
             items-stretch

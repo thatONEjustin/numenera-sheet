@@ -18,7 +18,7 @@
 
     let form: HTMLFormElement | undefined;
 
-    function onsubmit(event: SubmitEvent) {
+    function onsubmit(_: SubmitEvent) {
         let form_data = new FormData(form);
         let json_data: any = {};
 
@@ -44,7 +44,7 @@
     }
 </script>
 
-<form method="POST" action="/" {onsubmit} bind:this={form}>
+<form action="/" {onsubmit} bind:this={form}>
     {#if children}
         {@render children?.()}
     {/if}
