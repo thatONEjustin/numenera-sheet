@@ -2,6 +2,8 @@
 import '@css/app.css';
 
 import { ClientRouter } from 'astro:transitions';
+
+const { title = "Numenera Character Sheet" } = Astro.props
 ---
 <!doctype html>
 <html lang="en">
@@ -10,10 +12,11 @@ import { ClientRouter } from 'astro:transitions';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+        <title>{title}</title>
         <ClientRouter />
 	</head>
 	<body>
+        <!-- <div class="Page" transition:animate="fade"> -->
         <div class="Page">
             <slot />
         </div>
