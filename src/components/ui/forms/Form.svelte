@@ -44,7 +44,7 @@
     }
 </script>
 
-<form method="POST" {onsubmit} bind:this={form}>
+<form method="POST" action="/" {onsubmit} bind:this={form}>
     {#if children}
         {@render children?.()}
     {/if}
