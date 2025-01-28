@@ -10,6 +10,7 @@
         "archswap": "rm -rf node_modules/ package-lock.json && npm install"
     },
     "dependencies": {
+        "@astrojs/node": "^9.0.2",
         "@astrojs/svelte": "^7.0.4",
         "@tailwindcss/postcss": "^4.0.0",
         "astro": "^5.1.7",
