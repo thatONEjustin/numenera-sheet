@@ -4,12 +4,6 @@
     import InputField from "@forms/fields/InputField.svelte";
     import Accordion from "@ui/Accordion.svelte";
 
-    type CharacterData = {
-        name?: string;
-        description?: string;
-        backstory?: string;
-    };
-
     type CharacterBasicInfo = {
         sheet_data?: any;
         children?: Snippet;

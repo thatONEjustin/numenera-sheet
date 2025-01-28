@@ -35,6 +35,7 @@
         -->
 
         <CharacterStat
+            label="Might"
             type="text"
             name="stats_might"
             id="stats_might"

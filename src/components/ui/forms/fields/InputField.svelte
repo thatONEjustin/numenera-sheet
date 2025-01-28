@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { Snippet, TextInput } from "@components/types";
+    import type { TextInput } from "@components/types";
 
     type TextInputElement =
         | HTMLInputElement
         | HTMLTextAreaElement
         | HTMLSelectElement;
 
-    import { fade } from "svelte/transition";
+    // import { fade } from "svelte/transition";
 
     let {
         name = "",
@@ -114,8 +114,7 @@
         }
 
         > button {
-            @apply py-3
-                cursor-pointer
+            @apply cursor-pointer
                 text-black
                 rounded-md
                 px-4
