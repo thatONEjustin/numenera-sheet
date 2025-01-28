@@ -1,19 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types";
-
-    type TextInput = {
-        name: string;
-        type: string;
-        id: string;
-        hideLabel?: boolean;
-        label: string;
-        labelTag?: Snippet;
-        required?: boolean;
-        className?: string;
-        rows?: number;
-        placeholder?: string;
-        value?: string;
-    };
+    import type { Snippet, TextInput } from "@components/types";
 
     type TextInputElement =
         | HTMLInputElement
@@ -30,7 +16,7 @@
         labelTag,
         hideLabel = false,
         required = false,
-        className = "",
+        class: className = "",
         rows = 4,
         placeholder = "",
         value = $bindable(""),
@@ -46,7 +32,7 @@
 
     let editing: boolean = $state(false);
 
-    function input_field_save(_event: Event) {
+    function input_field_save(_: Event) {
         editing = !editing;
 
         if (editing) return;
@@ -56,9 +42,15 @@
 </script>
 
 <div class:className class="input-field">
-    {#if labelTag && !hideLabel}
+    <!--
+    {#if labelTag && hideLabel == true}
+    {:else if hideLabel == false}
+        <label for={name}>{label}</label>
+    {/if}
+    -->
+    {#if labelTag && hideLabel == false}
         {@render labelTag()}
-    {:else if !hideLabel}
+    {:else if hideLabel == false}
         <label for={name}>{label}</label>
     {/if}
 

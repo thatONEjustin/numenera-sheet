@@ -29,8 +29,11 @@
             "@img/*": [
                 "src/img/*"
             ],
-            "@sheets/*": [
-                "src/components/sheets/*"
+            "@game/*": [
+                "src/components/game/*"
+            ],
+            "@ui/*": [
+                "src/components/ui/*"
             ],
             "@forms/*": [
                 "src/components/ui/forms/*"

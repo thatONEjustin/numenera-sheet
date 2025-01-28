@@ -2,7 +2,7 @@
     import type { Snippet } from "@components/types";
 
     import InputField from "@forms/fields/InputField.svelte";
-    import Accordion from "@components/ui/Accordion.svelte";
+    import Accordion from "@ui/Accordion.svelte";
 
     type CharacterData = {
         name?: string;
@@ -31,6 +31,30 @@
         required
     />
 
+    <Accordion class="grid grid-cols-2 gap-x-4">
+        {#snippet title()}
+            <h4>Backstory & Description</h4>
+        {/snippet}
+
+        <InputField
+            type="textarea"
+            label="Description"
+            rows={10}
+            name="character_description"
+            id="character_description"
+            value={character?.description}
+        />
+
+        <InputField
+            type="textarea"
+            label="Backstory"
+            rows={10}
+            name="character_backstory"
+            id="character_backstory"
+            value={character?.backstory}
+        />
+    </Accordion>
+    <!--
     <div class="grid grid-cols-2 gap-x-4">
         <Accordion>
             {#snippet title()}
@@ -63,4 +87,5 @@
             />
         </Accordion>
     </div>
+    -->
 </fieldset>

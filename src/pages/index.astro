@@ -1,27 +1,10 @@
 ---
-import type { Tab, Snippet } from "@components/types"
-
 import Layout from '../layouts/Layout.astro';
 
-// import Tabs from "@components/ui/Tabs.svelte";
 
-import CharacterSheet from "@sheets/CharacterSheet.svelte"
-
-
-/* BUG: content doesn't render with my current implementation
-    const tabs:Array<Tab> = [
-        {
-            label: "Character Sheet",
-            content: CharacterSheet as Snippet
-        },
-    ]
-*/
-
+import Numenera from '@components/game/Numenera.svelte';
 ---
 
 <Layout>
-    <CharacterSheet client:only="svelte" />
-
-    <!-- TODO: figure out why this doesnt work, it works in the other sheet -->
-    <!-- <Tabs client:only="svelte" {tabs} /> -->
+    <Numenera client:only="svelte" />
 </Layout>

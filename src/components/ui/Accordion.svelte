@@ -1,22 +1,14 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types";
+    import type { Accordion as AccordionProps } from "@components/types";
     import { scale } from "svelte/transition";
 
-    interface AccordionType {
-        containerClass?: string;
-        open?: boolean;
-        title?: Snippet;
-        children?: Snippet;
-        openIndicator?: Snippet;
-    }
-
     let {
-        containerClass = "",
+        class: className = "",
         open = false,
         title,
         children,
         openIndicator,
-    }: AccordionType = $props();
+    }: AccordionProps = $props();
 
     function show(event: Event) {
         event.preventDefault();
@@ -24,7 +16,7 @@
     }
 </script>
 
-<div class={`accordion ${containerClass}`}>
+<div class={["accordion", className]}>
     <button type="button" class="accordion-title" onclick={show}>
         {#if title}
             {@render title()}
@@ -45,8 +37,12 @@
         {/if}
     </button>
 
-    {#if !open}
+    {#if open}
         <div class="accordion" transition:scale>
+            {@render children?.()}
+        </div>
+    {:else}
+        <div class="hidden">
             {@render children?.()}
         </div>
     {/if}
@@ -55,7 +51,7 @@
 <style lang="postcss">
     .accordion {
         @apply flex
-      flex-col;
+            flex-col;
     }
 
     .accordion-title {

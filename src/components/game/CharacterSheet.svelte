@@ -5,10 +5,9 @@
     import Form from "@forms/Form.svelte";
     import SubmitButton from "@forms/fields/SubmitButton.svelte";
 
-    import PlayerInfo from "@sheets/sections/PlayerInfo.svelte";
-
-    import CharacterDescription from "@sheets/sections/CharacterDescription.svelte";
-    import CharacterStats from "@sheets/sections/CharacterStats.svelte";
+    import PlayerInfo from "@game/sheet-sections/PlayerInfo.svelte";
+    import CharacterDescription from "@game/sheet-sections/CharacterDescription.svelte";
+    import CharacterStats from "@game/sheet-sections/CharacterStats.svelte";
 
     let sheet_data: object = {};
 

@@ -1,7 +1,8 @@
 import type { Component, Snippet } from "svelte";
-export type { Component, Snippet };
-
 import type { ClassValue } from "svelte/elements"
+
+export type { Component, Snippet, ClassValue };
+
 
 type Tab = {
     label: string;
@@ -15,4 +16,34 @@ type Tabs = {
     active?: number;
 };
 
-export type { Tab, Tabs, ClassValue }
+type Accordion = {
+    class?: ClassValue,
+    open?: boolean;
+    title?: Snippet;
+    children?: Snippet;
+    openIndicator?: Snippet;
+};
+
+type TextInput = {
+    name: string;
+    type: string;
+    id: string;
+    hideLabel?: boolean;
+    label?: string;
+    labelTag?: Snippet;
+    required?: boolean;
+    class?: ClassValue;
+    rows?: number;
+    placeholder?: string;
+    value?: string;
+};
+
+type SubmitButton = {
+    name?: string;
+    class?: ClassValue;
+    id?: string;
+    children?: Snippet;
+    onclick?: any;
+};
+
+export type { Tab, Tabs, Accordion, SubmitButton, TextInput }

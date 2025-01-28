@@ -1,13 +1,5 @@
 <script lang="ts">
-    import type { Snippet, ClassValue } from "@components/types";
-
-    type SubmitButtonType = {
-        name?: string;
-        class?: ClassValue;
-        id?: string;
-        children?: Snippet;
-        onclick?: any;
-    };
+    import type { SubmitButton } from "@components/types";
 
     const {
         name,
@@ -15,14 +7,7 @@
         id,
         children,
         onclick,
-    }: SubmitButtonType = $props();
-
-    // let {
-    //     name = "submit_next",
-    //     id = "submit_next",
-    //     class,
-    //     children,
-    // } = $props();
+    }: SubmitButton = $props();
 </script>
 
 <div class={["Submit", className]}>

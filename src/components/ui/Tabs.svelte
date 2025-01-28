@@ -4,12 +4,7 @@
 
     import { fly, slide, scale } from "svelte/transition";
 
-    let {
-        tabs,
-        children,
-        sheet_data,
-        active = $bindable(0),
-    }: TabsProps = $props();
+    let { tabs, children, active = $bindable(0) }: TabsProps = $props();
 
     function show_tab(index: number): void {
         active = index;
@@ -37,19 +32,7 @@
 </ul>
 
 <div class="Tabs">
-    {#each tabs as { content: Content, label }, index}
-        {#if active == index}
-            <section
-                class="Tab"
-                in:fly={{ x: "100%", y: 0, delay: 350 }}
-                out:fly={{ x: "-100%", y: 0, duration: 250 }}
-            >
-                <Content {sheet_data} />
-                {label}
-                {index}
-            </section>
-        {/if}
-        <!--
+    {#each tabs as { content: Content }, index}
         {#if active == index}
             <section
                 class="Tab"
@@ -59,7 +42,6 @@
                 <Content />
             </section>
         {/if}
-        -->
     {/each}
 
     {#if children}
@@ -74,7 +56,6 @@
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
-    @import "@css/tailwind/theme.css" theme(reference);
 
     .TabsNav {
         @apply flex
