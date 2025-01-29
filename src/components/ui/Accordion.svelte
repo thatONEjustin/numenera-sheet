@@ -29,9 +29,9 @@
         {:else}
             <div class="font-bold text-3xl">
                 {#if open}
-                    <i class="nf nf-fa-circle_plus"></i>
-                {:else}
                     <i class="nf nf-fa-circle_minus"></i>
+                {:else}
+                    <i class="nf nf-fa-circle_plus"></i>
                 {/if}
             </div>
         {/if}

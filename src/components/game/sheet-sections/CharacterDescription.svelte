@@ -17,7 +17,7 @@
 <fieldset name="characterInfo">
     <h3>Character Info</h3>
 
-    <Accordion>
+    <Accordion open="true">
         {#snippet title()}
             <h4>Backstory & Description</h4>
         {/snippet}

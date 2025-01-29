@@ -10,7 +10,7 @@
     import CharacterStats from "@game/sheet-sections/CharacterStats.svelte";
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
 
-    let sheet_data: any = $state({});
+    // let sheet_data: any = $state({});
 
     function get_data_string(local_storage_key: string): any {
         if (
@@ -23,15 +23,20 @@
         return localStorage.getItem(local_storage_key);
     }
 
-    const data_string = get_data_string("sheetData");
+    let hide_name_generator: boolean = $state(false);
+    const sheet_data = $derived.by(() => {
+        const data_string = get_data_string("sheetData");
 
-    if (data_string != "") {
-        let decompress: any =
-            LZString.decompressFromEncodedURIComponent(data_string);
-        sheet_data = JSON.parse(decompress);
-    }
+        if (data_string != "") {
+            let decompress: any =
+                LZString.decompressFromEncodedURIComponent(data_string);
+            // sheet_data = JSON.parse(decompress);
 
-    let hide_name_generator: boolean = $state(true);
+            return JSON.parse(decompress);
+        }
+
+        return {};
+    });
 
     function is_name_fancy(): boolean {
         if (
@@ -47,37 +52,41 @@
     }
 
     function show_name_generator(event: Event) {
-        event.preventDefault();
         hide_name_generator = !hide_name_generator;
+        event.preventDefault();
+    }
+
+    if (is_name_fancy()) {
+        hide_name_generator = true;
     }
 </script>
 
+{#snippet fancy_name(sheet_data: any)}
+    <div class="flex flex-row content-between py-10">
+        <h1 class="text-5xl">
+            {sheet_data.character.name} the {sheet_data.characterClass
+                .descriptor}
+            {sheet_data.characterClass.type}, who {sheet_data.characterClass
+                .focus}
+        </h1>
+        <button
+            type="button"
+            class="ml-auto cursor-pointer"
+            aria-labelledby="reset_name"
+            onclick={show_name_generator}
+        >
+            <i aria-label="reset_name" class="nf nf-fa-close"></i>
+        </button>
+    </div>
+{/snippet}
 <Form>
-    <!-- TODO: while this works and is cool, there is no way to reset it or show the other data -->
-    {#if is_name_fancy() == true}
-        <div class="flex flex-row content-between">
-            <h2>
-                {sheet_data.character.name} the {sheet_data.characterClass
-                    .descriptor}
-                {sheet_data.characterClass.type}, who {sheet_data.characterClass
-                    .focus}
-            </h2>
-            <button
-                type="button"
-                class="ml-auto"
-                aria-labelledby="reset_name"
-                onclick={show_name_generator}
-            >
-                <i aria-label="reset_name" class="nf nf-fa-close"></i>
-            </button>
-        </div>
-    {/if}
-
     {#if hide_name_generator == false}
         <div class="grid grid-cols-2 gap-x-6">
             <PlayerInfo {sheet_data} />
             <CharacterClass {sheet_data} />
         </div>
+    {:else}
+        {@render fancy_name(sheet_data)}
     {/if}
 
     <CharacterDescription {sheet_data} />
