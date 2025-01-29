@@ -12,18 +12,15 @@
     }
 
     function click_next(event: Event): void {
-        console.log(event);
         event.preventDefault();
     }
 </script>
 
 <ul class="TabsNav">
     {#each tabs as { label }, index}
-        <li class:active={active === index} class="TabsNav-tab">
-            <a
-                href={`#${label.toLowerCase().replace(" ", "")}`}
-                onclick={() => show_tab(index)}
-            >
+        {@const href = `#${label.toLowerCase().replace(" ", "")}`}
+        <li class={["TabsNav-tab", active === index ? "active" : ""]}>
+            <a {href} onclick={() => show_tab(index)}>
                 {label}
             </a>
         </li>
@@ -47,11 +44,6 @@
         {@render children?.()}
     {/if}
 </div>
-
-<button onclick={click_next}>
-    Next
-    <i class="nf nf-fa-arrow_right"></i>
-</button>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
