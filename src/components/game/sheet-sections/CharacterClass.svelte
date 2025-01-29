@@ -15,7 +15,7 @@
 </script>
 
 <fieldset name="characterStats">
-    <div class="flex flex-row">
+    <div class="grid grid-cols-3 gap-x-6">
         <InputField
             label="Descriptor"
             type="text"
