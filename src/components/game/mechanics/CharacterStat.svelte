@@ -1,33 +1,35 @@
 <script lang="ts">
-    import type { TextInput } from "@components/types";
+    import type { TextInput } from "@components/types.d";
     import InputField from "@forms/fields/InputField.svelte";
 
     // let { props } = $props()
     let {
-        name = "",
-        type = "",
-        id = "",
-        label = "",
+        name,
+        type,
+        id,
+        hideLabel,
+        label,
         labelTag,
-        hideLabel = false,
-        required = false,
-        class: className = "",
+        required,
+        class: className,
         rows,
-        placeholder = "",
-        value = $bindable(""),
+        placeholder,
+        value,
     }: TextInput = $props();
 </script>
 
-<InputField
-    {name}
-    {type}
-    {id}
-    {label}
-    {hideLabel}
-    {required}
-    class={className}
-    {rows}
-    {placeholder}
-    {value}
-    {labelTag}
-/>
+<div class="">
+    <InputField
+        class={className}
+        {name}
+        {type}
+        {id}
+        {hideLabel}
+        {label}
+        {required}
+        {rows}
+        {placeholder}
+        {value}
+        {labelTag}
+    />
+</div>

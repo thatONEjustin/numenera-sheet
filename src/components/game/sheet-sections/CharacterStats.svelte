@@ -1,7 +1,6 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types";
+    import type { Snippet } from "@components/types.d";
 
-    import InputField from "@forms/fields/InputField.svelte";
     import CharacterStat from "@game/mechanics/CharacterStat.svelte";
 
     type StatsProps = {
@@ -15,49 +14,97 @@
 </script>
 
 <fieldset name="characterStats">
-    <h3>Character Stats</h3>
+    <div class="grid grid-cols-4 gap-x-6 mb-4">
+        <h2>Stats</h2>
 
-    <div class="grid grid-cols-3 gap-x-4 max-w-1/3">
-        <!-- NOTE: keep this pattern, its cool that I can 
-                pass a snippet downwards
-                 
-                <CharacterStat
-                    type="text"
-                    name="stats_might"
-                    id="stats_might"
-                    value={stats?.might}
-                    required
-                >
-                    {#snippet labelTag()}
-                        <h1>Might</h1>
-                    {/snippet}
-                </CharacterStat>
-        -->
-
+        <h2>Might</h2>
+        <h2>Speed</h2>
+        <h2>Intellect</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-x-6 content-center">
+        <h3>Pool</h3>
         <CharacterStat
             label="Might"
-            type="text"
+            hideLabel={true}
+            type="number"
+            class="!mt-0"
             name="stats_might"
             id="stats_might"
             value={stats?.might}
             required
         />
-
-        <InputField
-            type="text"
+        <CharacterStat
             label="Speed"
+            hideLabel={true}
+            type="number"
+            class="!mt-0"
             name="stats_speed"
             id="stats_speed"
             value={stats?.speed}
             required
         />
-
-        <InputField
-            type="text"
+        <CharacterStat
             label="Intellect"
+            hideLabel={true}
+            type="number"
+            class="!my-0"
             name="stats_intellect"
             id="stats_intellect"
             value={stats?.intellect}
+            required
+        />
+    </div>
+    <div class="grid grid-cols-4 gap-x-6">
+        <h3>Edge</h3>
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_mightEdge"
+            id="stats_mightEdge"
+            value={stats?.mightEdge}
+            required
+        />
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_speedEdge"
+            id="stats_speedEdge"
+            value={stats?.speedEdge}
+            required
+        />
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_intellectEdge"
+            id="stats_intellectEdge"
+            value={stats?.intellectEdge}
+            required
+        />
+    </div>
+    <div class="grid grid-cols-4 gap-x-6">
+        <h3>Effort</h3>
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_mightEffort"
+            id="stats_mightEffort"
+            value={stats?.mightEffort}
+            required
+        />
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_speedEffort"
+            id="stats_speedEffort"
+            value={stats?.speedEffort}
+            required
+        />
+        <CharacterStat
+            hideLabel={true}
+            type="number"
+            name="stats_intellectEffort"
+            id="stats_intellectEffort"
+            value={stats?.intellectEffort}
             required
         />
     </div>

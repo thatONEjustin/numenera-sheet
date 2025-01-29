@@ -1,8 +1,7 @@
 <script lang="ts">
-    import type { Tabs as TabsProps, Snippet } from "@components/types";
-    import SubmitButton from "@forms/fields/SubmitButton.svelte";
+    import type { Tabs as TabsProps } from "@components/types.d";
 
-    import { fly, slide, scale } from "svelte/transition";
+    import { fly } from "svelte/transition";
 
     let { tabs, children, active = $bindable(0) }: TabsProps = $props();
 
@@ -91,7 +90,7 @@
         grid-template-areas: "stack";
 
         @apply border-blue-500
-            bg-blue-500;
+            bg-white;
 
         > .Tab {
             @apply p-5;

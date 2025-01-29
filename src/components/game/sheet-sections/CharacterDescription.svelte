@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types";
+    import type { Snippet } from "@components/types.d";
 
     import InputField from "@forms/fields/InputField.svelte";
     import Accordion from "@ui/Accordion.svelte";
@@ -16,37 +16,31 @@
 
 <fieldset name="characterInfo">
     <h3>Character Info</h3>
-    <InputField
-        type="text"
-        label="Character Name"
-        name="character_name"
-        id="character_name"
-        value={character?.name}
-        required
-    />
 
-    <Accordion class="grid grid-cols-2 gap-x-4">
+    <Accordion>
         {#snippet title()}
             <h4>Backstory & Description</h4>
         {/snippet}
 
-        <InputField
-            type="textarea"
-            label="Description"
-            rows={10}
-            name="character_description"
-            id="character_description"
-            value={character?.description}
-        />
+        <div>
+            <InputField
+                type="textarea"
+                label="Description"
+                rows={4}
+                name="character_description"
+                id="character_description"
+                value={character?.description}
+            />
 
-        <InputField
-            type="textarea"
-            label="Backstory"
-            rows={10}
-            name="character_backstory"
-            id="character_backstory"
-            value={character?.backstory}
-        />
+            <InputField
+                type="textarea"
+                label="Backstory"
+                rows={10}
+                name="character_backstory"
+                id="character_backstory"
+                value={character?.backstory}
+            />
+        </div>
     </Accordion>
     <!--
     <div class="grid grid-cols-2 gap-x-4">

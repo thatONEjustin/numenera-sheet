@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SubmitButton } from "@components/types";
+    import type { SubmitButton } from "@components/types.d";
 
     const {
         name,

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TextInput } from "@components/types";
+    import type { TextInput } from "@components/types.d";
 
     type TextInputElement =
         | HTMLInputElement
@@ -9,45 +9,40 @@
     // import { fade } from "svelte/transition";
 
     let {
-        name = "",
-        type = "",
-        id = "",
-        label = "",
-        labelTag,
+        name,
+        type,
+        id,
         hideLabel = false,
+        label: raw_label = "",
+        labelTag,
         required = false,
-        class: className = "",
+        class: className,
         rows = 4,
-        placeholder = "",
+        placeholder: raw_placeholder = "",
         value = $bindable(""),
     }: TextInput = $props();
 
-    let input: TextInputElement = $state() as TextInputElement;
-
-    let display_placeholder: string = $derived.by(() => {
-        return placeholder != ""
-            ? placeholder
-            : `Enter ${name.replaceAll("_", " ")} here`;
-    });
-
+    let input_element: TextInputElement = $state() as TextInputElement;
     let editing: boolean = $state(false);
 
-    function input_field_save(_: Event) {
+    const label: string = $derived.by(() => {
+        return raw_label.trim() != "" ? raw_label : name.replaceAll("_", " ");
+    });
+
+    const placeholder: string = $derived.by(() => {
+        return raw_placeholder != "" ? raw_placeholder : `Enter ${label} here`;
+    });
+
+    function onclick(_: Event) {
         editing = !editing;
 
         if (editing) return;
 
-        value = input.value;
+        value = input_element.value;
     }
 </script>
 
-<div class:className class="input-field">
-    <!--
-    {#if labelTag && hideLabel == true}
-    {:else if hideLabel == false}
-        <label for={name}>{label}</label>
-    {/if}
-    -->
+<div class={["input-field", className]}>
     {#if labelTag && hideLabel == false}
         {@render labelTag()}
     {:else if hideLabel == false}
@@ -56,9 +51,12 @@
 
     {#if !editing && value != ""}
         <button
-            class:has-value={value != ""}
             type="button"
-            onclick={input_field_save}
+            class={[
+                value != "" ? "has-value" : "",
+                "max-h-16 overflow-y-hidden",
+            ]}
+            {onclick}
         >
             {value}
         </button>
@@ -71,9 +69,9 @@
             {id}
             {value}
             {required}
-            placeholder={display_placeholder}
-            class:hidden={!editing && value != ""}
-            bind:this={input}
+            {placeholder}
+            class={!editing && value != "" ? "hidden" : ""}
+            bind:this={input_element}
         />
     {/if}
 
@@ -83,18 +81,17 @@
             {id}
             {rows}
             {required}
-            placeholder={display_placeholder}
-            class:hidden={!editing && value != ""}
-            bind:this={input}>{value}</textarea
+            {placeholder}
+            class={!editing && value != "" ? "hidden" : ""}
+            bind:this={input_element}>{value}</textarea
         >
     {/if}
 
     {#if editing || value != ""}
         <button
-            class="edit"
-            class:hidden={!editing || value == ""}
+            class={[!editing || value == "" ? "hidden" : "", "edit"]}
             type="submit"
-            onclick={input_field_save}
+            {onclick}
         >
             Save
         </button>

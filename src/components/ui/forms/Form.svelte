@@ -1,20 +1,10 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types";
+    import type { Form as FormProps } from "@components/types.d";
 
     import LZString from "lz-string";
     import { storageAvailable } from "@js/utils";
 
-    type FormProps = {
-        data_string?: string;
-        children?: Snippet;
-        active?: any;
-    };
-
-    let {
-        data_string = "",
-        children,
-        active = $bindable(1),
-    }: FormProps = $props();
+    let { children }: FormProps = $props();
 
     let form: HTMLFormElement | undefined;
 
@@ -45,7 +35,5 @@
 </script>
 
 <form action="/" {onsubmit} bind:this={form}>
-    {#if children}
-        {@render children?.()}
-    {/if}
+    {@render children?.()}
 </form>

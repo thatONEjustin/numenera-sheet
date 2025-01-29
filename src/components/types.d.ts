@@ -1,8 +1,6 @@
 import type { Component, Snippet } from "svelte";
 import type { ClassValue } from "svelte/elements"
 
-export type { Component, Snippet, ClassValue };
-
 
 type Tab = {
     label: string;
@@ -22,6 +20,10 @@ type Accordion = {
     title?: Snippet;
     children?: Snippet;
     openIndicator?: Snippet;
+};
+
+type Form = {
+    children?: Snippet;
 };
 
 type TextInput = {
@@ -46,4 +48,8 @@ type SubmitButton = {
     onclick?: any;
 };
 
-export type { Tab, Tabs, Accordion, SubmitButton, TextInput }
+// NOTE: Svelte Types
+export type { Component, Snippet, ClassValue };
+
+// NOTE: Justins Types
+export type { Tab, Tabs, Accordion, SubmitButton, TextInput, Form }

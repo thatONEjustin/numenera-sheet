@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Accordion as AccordionProps } from "@components/types";
+    import type { Accordion as AccordionProps } from "@components/types.d";
     import { scale } from "svelte/transition";
 
     let {
