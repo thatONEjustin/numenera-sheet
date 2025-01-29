@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+import Numenera from '@components/game/Numenera.svelte';
+---
+
+<Layout>
+    <Numenera client:only="svelte" />
+</Layout>

@@ -10,7 +10,7 @@
 
     const { sheet_data }: PlayerInfo = $props();
 
-    let { player, character } = sheet_data;
+    let { character } = sheet_data;
 </script>
 
 <fieldset name="playerInfo">
