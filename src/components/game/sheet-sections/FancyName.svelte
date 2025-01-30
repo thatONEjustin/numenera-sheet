@@ -53,6 +53,11 @@
             <i aria-label="reset_name" class="nf nf-fa-close"></i>
         </button>
     </div>
+
+    <div class="hidden">
+        <PlayerInfo {sheet_data} />
+        <CharacterClass {sheet_data} />
+    </div>
 {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
         <PlayerInfo {sheet_data} />

@@ -27,37 +27,6 @@
     {@debug error}
 {/await}
 
-<!--
-<Form>
-    {#if hide_name_generator == false}
-        <div class="grid grid-cols-2 gap-x-6">
-            <PlayerInfo {sheet_data} />
-            <CharacterClass {sheet_data} />
-        </div>
-    {:else}
-        <div class="flex flex-row content-between py-10">
-            <FancyName {sheet_data} />
-            <button
-                type="button"
-                class="ml-auto cursor-pointer"
-                aria-labelledby="reset_name"
-                onclick={show_name_generator}
-            >
-                <i aria-label="reset_name" class="nf nf-fa-close"></i>
-            </button>
-        </div>
-    {/if}
-
-    <CharacterDescription {sheet_data} />
-
-    <div class="grid grid-cols-2 gap-x-6">
-        <CharacterStats {sheet_data} />
-    </div>
-
-    <SubmitButton />
-</Form>
-    -->
-
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
 </style>
