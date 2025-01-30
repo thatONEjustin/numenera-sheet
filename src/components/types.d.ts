@@ -5,6 +5,7 @@ import type { ClassValue } from "svelte/elements"
 type Tab = {
     label: string;
     content?: Snippet;
+    sheetData?: any;
 }
 
 type Tabs = {
