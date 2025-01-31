@@ -2,7 +2,6 @@
     import type { TextInput } from "@components/types.d";
     import InputField from "@forms/fields/InputField.svelte";
 
-    // let { props } = $props()
     let {
         name,
         type,

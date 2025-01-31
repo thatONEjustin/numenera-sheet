@@ -1,14 +1,9 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types.d";
+    import type { SheetSection } from "@components/types.d";
 
     import InputField from "@forms/fields/InputField.svelte";
 
-    type PlayerInfo = {
-        sheet_data?: any;
-        children?: Snippet;
-    };
-
-    const { sheet_data }: PlayerInfo = $props();
+    const { sheet_data }: SheetSection = $props();
 
     let { character } = sheet_data;
 </script>

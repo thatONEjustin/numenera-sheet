@@ -1,25 +1,18 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types.d";
+    import type { SheetSection } from "@components/types.d";
 
     import InputField from "@forms/fields/InputField.svelte";
     import Accordion from "@ui/Accordion.svelte";
 
-    type CharacterBasicInfo = {
-        sheet_data?: any;
-        children?: Snippet;
-    };
-
-    let { sheet_data }: CharacterBasicInfo = $props();
+    let { sheet_data }: SheetSection = $props();
 
     let { character } = sheet_data;
 </script>
 
 <fieldset name="characterInfo">
-    <h3>Character Info</h3>
-
     <Accordion open={true}>
         {#snippet title()}
-            <h4>Backstory & Description</h4>
+            <h3 class="py-6">Character Background</h3>
         {/snippet}
 
         <div>

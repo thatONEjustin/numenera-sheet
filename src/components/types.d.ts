@@ -1,6 +1,8 @@
 import type { Component, Snippet } from "svelte";
 import type { ClassValue } from "svelte/elements"
 
+// NOTE: Svelte Types
+export type { Component, Snippet, ClassValue };
 
 type Tab = {
     label: string;
@@ -49,8 +51,13 @@ type SubmitButton = {
     onclick?: any;
 };
 
-// NOTE: Svelte Types
-export type { Component, Snippet, ClassValue };
+type SheetSection = {
+    class?: ClassValue;
+    sheet_data?: any;
+    children?: Snippet;
+}
+
+
 
 // NOTE: Justins Types
-export type { Tab, Tabs, Accordion, SubmitButton, TextInput, Form }
+export type { Tab, Tabs, Accordion, SubmitButton, TextInput, Form, SheetSection }

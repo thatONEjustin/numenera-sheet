@@ -1,15 +1,8 @@
 <script lang="ts">
-    import type { Snippet } from "@components/types.d";
+    import type { SheetSection } from "@components/types.d";
     import InputField from "@components/ui/forms/fields/InputField.svelte";
 
-    // import CharacterStat from "@game/mechanics/CharacterStat.svelte";
-
-    type StatsProps = {
-        sheet_data?: any;
-        children?: Snippet;
-    };
-
-    let { sheet_data }: StatsProps = $props();
+    let { sheet_data }: SheetSection = $props();
 
     let { characterClass } = sheet_data;
 </script>

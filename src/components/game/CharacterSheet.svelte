@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getSheetData } from "@js/utils";
+    import type { SheetSection } from "@components/types";
 
     import Form from "@forms/Form.svelte";
     import SubmitButton from "@forms/fields/SubmitButton.svelte";
@@ -7,25 +7,23 @@
     import CharacterDescription from "@game/sheet-sections/CharacterDescription.svelte";
     import CharacterStats from "@game/sheet-sections/CharacterStats.svelte";
     import FancyName from "@game/sheet-sections/FancyName.svelte";
+
+    let { sheet_data }: SheetSection = $props();
 </script>
 
-{#await getSheetData()}
-    <p>Loading</p>
-{:then sheet_data}
-    <Form>
-        <FancyName {sheet_data} />
+<Form>
+    <FancyName {sheet_data} />
 
+    <div class="py-6">
         <CharacterDescription {sheet_data} />
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
-            <CharacterStats {sheet_data} />
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+        <CharacterStats {sheet_data} />
+    </div>
 
-        <SubmitButton />
-    </Form>
-{:catch error}
-    {@debug error}
-{/await}
+    <SubmitButton />
+</Form>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);

@@ -1,14 +1,9 @@
 <script lang="ts">
-    import type { Tabs as TabsProps } from "@components/types.d";
+    import type { Tabs } from "@components/types.d";
 
     import { fly } from "svelte/transition";
 
-    let {
-        tabs,
-        sheetData,
-        children,
-        active = $bindable(0),
-    }: TabsProps = $props();
+    let { tabs, sheet_data, children, active = $bindable(0) }: Tabs = $props();
 
     function show_tab(index: number): void {
         active = index;
@@ -16,7 +11,7 @@
         return;
     }
 
-    function click_next(event: Event): void {
+    function _click_next(event: Event): void {
         event.preventDefault();
     }
 </script>
@@ -40,7 +35,7 @@
                 in:fly={{ x: "100%", y: 0, delay: 350 }}
                 out:fly={{ x: "-100%", y: 0, duration: 250 }}
             >
-                <Content {sheetData} />
+                <Content {sheet_data} />
             </section>
         {/if}
     {/each}
