@@ -12,6 +12,5 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
     },
-    integrations: [svelte()],
-    adapter: netlify()
+    integrations: [svelte()]
 });
