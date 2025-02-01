@@ -15,7 +15,7 @@
 </script>
 
 <SheetSection class={className}>
-    <div class="grid grid-cols-3 gap-x-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6">
         <SelectField
             label="Type"
             name="characterClass_type"
