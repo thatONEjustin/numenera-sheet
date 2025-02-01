@@ -22,7 +22,6 @@
         <h3 class="my-auto">Pool</h3>
         <CharacterStat
             label="Might"
-            type="number"
             name="stats_might"
             id="stats_might"
             value={stats?.might}
@@ -30,7 +29,6 @@
         />
         <CharacterStat
             label="Speed"
-            type="number"
             name="stats_speed"
             id="stats_speed"
             value={stats?.speed}
@@ -38,7 +36,6 @@
         />
         <CharacterStat
             label="Intellect"
-            type="number"
             name="stats_intellect"
             id="stats_intellect"
             value={stats?.intellect}
@@ -48,21 +45,18 @@
     <div class="grid grid-cols-4 gap-x-6">
         <h3 class="my-auto">Edge</h3>
         <CharacterStat
-            type="number"
             name="stats_mightEdge"
             id="stats_mightEdge"
             value={stats?.mightEdge}
             required
         />
         <CharacterStat
-            type="number"
             name="stats_speedEdge"
             id="stats_speedEdge"
             value={stats?.speedEdge}
             required
         />
         <CharacterStat
-            type="number"
             name="stats_intellectEdge"
             id="stats_intellectEdge"
             value={stats?.intellectEdge}

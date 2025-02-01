@@ -32,8 +32,19 @@
         <CharacterStat
             type="number"
             name="advancement_effort"
+            min="1"
             id="advancement_effort"
             value={advancement?.effort}
+            required
+        />
+    </div>
+    <div class="grid grid-cols-4 gap-x-6">
+        <h3 class="my-auto">Experience</h3>
+        <CharacterStat
+            type="number"
+            name="advancement_xp"
+            id="advancement_xp"
+            value={advancement?.xp}
             required
         />
     </div>

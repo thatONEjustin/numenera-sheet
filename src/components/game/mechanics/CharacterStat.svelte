@@ -1,29 +1,47 @@
-<script lang="ts" generics="BaseInputTypes extends 'input' | 'textarea'">
-    // import type { CharacterStat as TextInput } from "@components/types.d";
-    import TextInputField from "@forms/fields/TextInputField.svelte";
-    import type {
-        JustinTextInput,
-        SvelteHTMLElements,
-    } from "@components/types";
+<script lang="ts" generics="BaseInputTypes extends 'input'">
+    import type { SvelteHTMLElements, Snippet } from "@components/types";
+    import NumberField from "@components/ui/forms/fields/NumberField.svelte";
 
-    type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
+    type JustinNumberField = {
+        name: string;
+        label?: string;
+        hideLabel?: boolean;
+        labelTag?: Snippet;
+        placeholder?: string;
+    };
+
+    type NumberProps = SvelteHTMLElements[BaseInputTypes] & JustinNumberField;
 
     let {
         name,
-        type,
         id,
         hideLabel = true,
+        min = 0,
+        max,
         label,
         labelTag,
         required,
         class: className,
-        rows,
         placeholder,
         value,
-    }: TextInput = $props();
+    }: NumberProps = $props();
 </script>
 
 <div class="">
+    <NumberField
+        class={className}
+        {name}
+        {min}
+        {max}
+        {id}
+        {hideLabel}
+        {label}
+        {required}
+        {placeholder}
+        {value}
+        {labelTag}
+    />
+    <!--
     <TextInputField
         class={className}
         {name}
@@ -37,4 +55,5 @@
         {value}
         {labelTag}
     />
+    -->
 </div>
