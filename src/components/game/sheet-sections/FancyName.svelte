@@ -79,7 +79,7 @@
         {@const type = sheet_data.characterClass?.type}
         <div class="py-10 flex flex-row items-start" transition:slide>
             <h1 class="text-5xl">
-                {sheet_data.character.name} the {clean_label(
+                {sheet_data.character.name} a {clean_label(
                     descriptor,
                     character_descriptor_options,
                 )}
