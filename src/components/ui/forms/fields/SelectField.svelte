@@ -1,6 +1,12 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
 
+    /*
+     * TODO: write options array to have label be optional
+     * just make it so that when just an array of strings
+     * is passed we just capitalize the value for the label
+     **/
+
     let {
         options = [],
         value = $bindable(""),
@@ -11,8 +17,6 @@
 
     let { name, label, id } = input;
     let select_field;
-
-    // let active = $state(false);
 
     function showList(event: Event) {
         active = !active;

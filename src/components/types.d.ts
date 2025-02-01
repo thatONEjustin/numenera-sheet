@@ -29,6 +29,11 @@ type Form = {
     children?: Snippet;
 };
 
+/*
+ * TODO: test and see if we can just **inherit** the 
+ * HTMLInputElement type and add my extra needed 
+ * props 
+ **/
 type TextInput = {
     name: string;
     type: string;

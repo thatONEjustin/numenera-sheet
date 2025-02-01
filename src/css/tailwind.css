@@ -1,8 +1,9 @@
+@import 'tailwindcss';
 
 /*
- * HACK: this is what I've come up with for a full implementation
- * of tailwind 4 beta alongside astro 4. 
- * */ 
+* NOTE: separating tailwind into files 
+* for old times sake? lmao
+**/
 @import '@css/tailwind/theme.css';
 @import '@css/tailwind/base.css';
 @import '@css/tailwind/utilities.css';
