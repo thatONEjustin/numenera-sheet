@@ -22,7 +22,3 @@
 
     <SubmitButton />
 </Form>
-
-<style lang="postcss">
-    @import "tailwindcss/theme" theme(reference);
-</style>

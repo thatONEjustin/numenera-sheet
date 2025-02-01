@@ -54,7 +54,7 @@
             type="button"
             class={[
                 value != "" ? "has-value" : "",
-                "max-h-16 overflow-y-hidden",
+                type == "textarea" ? "max-h-16 overflow-y-hidden" : "",
             ]}
             {onclick}
         >

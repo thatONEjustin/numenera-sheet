@@ -1,74 +1,54 @@
-<!--
-<script>
-    export let options = ['']
-    export let value = ($$restProps.value) ? options.find((item) => item == $$restProps.value) : options[0]
-
-    const { name, id, label, required, containerClass } = $$restProps
-
-
-    let active = false
-
-    function showList(event) {
-    active = ! active
-    }
-
-    function select(option) {
-    value = option 
-    active = false
-    }
-</script>
--->
-
 <script lang="ts">
-    import type { Snippet } from "svelte";
-
-    // type SelectInput = HTMLSelectElement;
+    import { slide } from "svelte/transition";
 
     let {
         options = [],
         value = $bindable(""),
-        containerClass = "",
+        class: className = "",
         active = $bindable(false),
         ...input
     } = $props();
 
     let { name, label, id } = input;
+    let select_field;
 
     // let active = $state(false);
 
-    // function showList(event) {
-    //   active = !active;
-    // }
-    //
-    // function select(option) {
-    //   value = option;
-    //   active = false;
-    // }
+    function showList(event: Event) {
+        active = !active;
+        event.preventDefault();
+    }
+
+    function select(option: string) {
+        value = option;
+        active = false;
+    }
 </script>
 
-<div class="FieldContainer {containerClass}">
+<div class={["select-field", className]}>
     <label for={name}>{label}</label>
 
-    <!--
-  <div class="DropdownContainer">
-    <a href="#" class="cursor-pointer" on:click|preventDefault={showList}
-      >{value == "" ? "Default" : value}</a
-    >
-
-    <div class:hidden={!active} class="Dropdown">
-      {#each options as { value, label }}
-        <a
-          href="#"
-          class="Dropdown-option"
-          on:click|preventDefault={select(value)}>{label}</a
+    <div class="select-container">
+        <button
+            class="cursor-pointer w-full h-full block text-left font-bold"
+            onclick={showList}
         >
-      {/each}
-    </div>
-  </div>
-  -->
+            {value == "" ? "Default" : value}
+        </button>
 
-    <select {name} {id} bind:value>
-        {#each options as { option_value, label }}
+        {#if active}
+            <div class="select-options" transition:slide>
+                {#each options as { value, label }}
+                    <button class="select-option" onclick={() => select(value)}>
+                        {label}
+                    </button>
+                {/each}
+            </div>
+        {/if}
+    </div>
+
+    <select class="hidden" {name} {id} bind:value bind:this={select_field}>
+        {#each options as { value: option_value, label }}
             <option value={option_value}>{label}</option>
         {/each}
     </select>
@@ -77,43 +57,49 @@
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
 
-    .FieldContainer {
+    .select-field {
         @apply flex
-      flex-col
-      my-3;
+            flex-col
+            my-3;
 
         > label {
             @apply pb-1
-        mb-3;
+                mb-3
+                text-left;
         }
     }
 
-    .DropdownContainer {
+    .select-container {
         @apply border 
-      border-slate-600 
-      rounded-md 
-      p-3 
-      relative;
+            border-gray-300
+            rounded-md
+            px-4
+            py-2
+            relative;
     }
-    .Dropdown {
-        @apply absolute 
-      flex
-      flex-col
-      bg-white
-      rounded-md 
-      border 
-      border-slate-400 
-      min-w-max
-      z-20;
-    }
-
-    .Dropdown-option {
-        @apply px-3 
-        py-3
-        cursor-pointer;
+    .select-options {
+        @apply absolute
+            flex
+            flex-col
+            bg-white
+            text-left
+            rounded-md
+            border 
+            border-gray-400
+            min-w-max
+            max-w-full
+            w-full
+            z-20;
     }
 
-    .Dropdown-option.hidden {
+    .select-option {
+        @apply px-3
+            py-3
+            cursor-pointer
+            text-left;
+    }
+
+    .select-option.hidden {
         @apply !hidden;
     }
 </style>
