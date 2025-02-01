@@ -9,7 +9,7 @@
 
     let { characterClass } = sheet_data;
 
-    const descriptor_options = [
+    const character_type_options = [
         {
             label: "Jack",
             value: "jack",
@@ -28,31 +28,21 @@
 <SheetSection class={className}>
     <div class="grid grid-cols-3 gap-x-6">
         <SelectField
-            label="Descriptor"
-            type="text"
-            name="characterClass_descriptor"
-            id="characterClass_descriptor"
-            options={descriptor_options}
-            value={characterClass?.descriptor}
-            required
-        />
-        <!--
-        <TextInputField
-            label="Descriptor"
-            type="text"
-            name="characterClass_descriptor"
-            id="characterClass_descriptor"
-            value={characterClass?.descriptor}
-            required
-        />
-        -->
-
-        <TextInputField
             label="Type"
             type="text"
             name="characterClass_type"
             id="characterClass_type"
+            options={character_type_options}
             value={characterClass?.type}
+            required
+        />
+
+        <TextInputField
+            label="Descriptor"
+            type="text"
+            name="characterClass_descriptor"
+            id="characterClass_descriptor"
+            value={characterClass?.descriptor}
             required
         />
 
