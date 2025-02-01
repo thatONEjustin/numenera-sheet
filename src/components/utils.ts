@@ -34,13 +34,12 @@ export function getSheetData() {
     return new Promise((resolve, reject) => {
         const data_string = get_data_string("sheetData")
 
-        switch (data_string) {
-            case "":
-                resolve({})
-                break
-            default:
-                const decompress = LZString.decompressFromEncodedURIComponent(data_string);
-                resolve(JSON.parse(decompress))
+        if (data_string == "") {
+            resolve({})
+            return
         }
+
+        const decompress = LZString.decompressFromEncodedURIComponent(data_string);
+        resolve(JSON.parse(decompress))
     })
 }

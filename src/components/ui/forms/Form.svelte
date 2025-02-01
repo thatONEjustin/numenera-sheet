@@ -2,7 +2,7 @@
     import type { Form as FormProps } from "@components/types.d";
 
     import LZString from "lz-string";
-    import { storageAvailable } from "@js/utils";
+    import { storageAvailable } from "@components/utils";
 
     let { children }: FormProps = $props();
 

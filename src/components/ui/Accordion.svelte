@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Accordion as AccordionProps } from "@components/types.d";
-    import { scale } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     let {
         class: className = "",
@@ -38,7 +38,7 @@
     </button>
 
     {#if open}
-        <div class="accordion" transition:scale>
+        <div class="accordion" transition:slide>
             {@render children?.()}
         </div>
     {:else}

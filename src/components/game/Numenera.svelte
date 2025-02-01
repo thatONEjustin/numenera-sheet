@@ -5,7 +5,7 @@
     import CharacterSheet from "@game/CharacterSheet.svelte";
     import Combat from "@game/Combat.svelte";
 
-    import { getSheetData } from "@js/utils";
+    import { getSheetData } from "@components/utils";
 
     const tabs: Array<Tab> = [
         {

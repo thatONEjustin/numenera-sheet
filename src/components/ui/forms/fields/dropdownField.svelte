@@ -20,34 +20,36 @@ function select(option) {
 -->
 
 <script lang="ts">
-  import type { Snippet } from "svelte";
+    import type { Snippet } from "svelte";
 
-  // type SelectInput = HTMLSelectElement;
+    // type SelectInput = HTMLSelectElement;
 
-  let {
-    options = [],
-    value = $bindable(""),
-    containerClass = "",
-    active = $bindable(false),
-    ...input
-  } = $props();
+    let {
+        options = [],
+        value = $bindable(""),
+        containerClass = "",
+        active = $bindable(false),
+        ...input
+    } = $props();
 
-  // let active = $state(false);
+    let { name, label, id } = input;
 
-  // function showList(event) {
-  //   active = !active;
-  // }
-  //
-  // function select(option) {
-  //   value = option;
-  //   active = false;
-  // }
+    // let active = $state(false);
+
+    // function showList(event) {
+    //   active = !active;
+    // }
+    //
+    // function select(option) {
+    //   value = option;
+    //   active = false;
+    // }
 </script>
 
 <div class="FieldContainer {containerClass}">
-  <label for={input.name}>{input.label}</label>
+    <label for={name}>{label}</label>
 
-  <!--
+    <!--
   <div class="DropdownContainer">
     <a href="#" class="cursor-pointer" on:click|preventDefault={showList}
       >{value == "" ? "Default" : value}</a
@@ -65,37 +67,36 @@ function select(option) {
   </div>
   -->
 
-  <select name={input.name} id={input.id} bind:value>
-    {#each options as option}
-      <option value={option.value}>{option.label}</option>
-    {/each}
-  </select>
+    <select {name} {id} bind:value>
+        {#each options as { value, label }}
+            <option {value}>{label}</option>
+        {/each}
+    </select>
 </div>
 
 <style lang="postcss">
-  @import "tailwindcss/theme" theme(reference);
-  @import "@css/tailwind/theme.css" theme(reference);
+    @import "tailwindcss/theme" theme(reference);
 
-  .FieldContainer {
-    @apply flex
+    .FieldContainer {
+        @apply flex
       flex-col
       my-3;
 
-    > label {
-      @apply pb-1
+        > label {
+            @apply pb-1
         mb-3;
+        }
     }
-  }
 
-  .DropdownContainer {
-    @apply border 
+    .DropdownContainer {
+        @apply border 
       border-slate-600 
       rounded-md 
       p-3 
       relative;
-  }
-  .Dropdown {
-    @apply absolute 
+    }
+    .Dropdown {
+        @apply absolute 
       flex
       flex-col
       bg-white
@@ -104,15 +105,15 @@ function select(option) {
       border-slate-400 
       min-w-max
       z-20;
+    }
 
-    &-option {
-      @apply px-3 
+    .Dropdown-option {
+        @apply px-3 
         py-3
         cursor-pointer;
     }
 
-    &.hidden {
-      @apply !hidden;
+    .Dropdown-option.hidden {
+        @apply !hidden;
     }
-  }
 </style>
