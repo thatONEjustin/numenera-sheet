@@ -11,13 +11,9 @@
         | undefined;
 
     async function onsubmit(event: SubmitEvent) {
-        let form_data = new FormData(form);
-        let json_data: any = {};
-
-        // console.log(getSheetData());
-        let current_sheet: any = await getSheetData().then((data) => data);
-        // console.log(current_sheet);
-        json_data = { json_data, ...current_sheet };
+        event.preventDefault();
+        const form_data = new FormData(form);
+        let json_data: any = await getSheetData().then((data) => data);
 
         form_data.forEach(function (value: FormDataEntryValue, key: string) {
             if (key.includes("_") == false) {
@@ -26,7 +22,7 @@
 
             const [category_key, field_key] = key.split("_");
 
-            // console.log(current_sheet[category_key], value);
+            // console.log(json_data[category_key]);
 
             json_data[category_key] = {
                 ...json_data[category_key],
