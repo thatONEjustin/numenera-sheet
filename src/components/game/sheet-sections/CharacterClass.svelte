@@ -3,6 +3,8 @@
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
 
+    import SelectField from "@ui/forms/fields/dropdownField.svelte";
+
     let { class: className, sheet_data }: SheetProps = $props();
 
     let { characterClass } = sheet_data;

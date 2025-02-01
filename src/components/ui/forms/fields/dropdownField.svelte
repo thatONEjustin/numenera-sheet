@@ -1,21 +1,21 @@
 <!--
 <script>
-export let options = ['']
-export let value = ($$restProps.value) ? options.find((item) => item == $$restProps.value) : options[0]
+    export let options = ['']
+    export let value = ($$restProps.value) ? options.find((item) => item == $$restProps.value) : options[0]
 
-const { name, id, label, required, containerClass } = $$restProps
+    const { name, id, label, required, containerClass } = $$restProps
 
 
-let active = false
+    let active = false
 
-function showList(event) {
-  active = ! active
-}
+    function showList(event) {
+    active = ! active
+    }
 
-function select(option) {
-  value = option 
-  active = false
-}
+    function select(option) {
+    value = option 
+    active = false
+    }
 </script>
 -->
 
@@ -68,8 +68,8 @@ function select(option) {
   -->
 
     <select {name} {id} bind:value>
-        {#each options as { value, label }}
-            <option {value}>{label}</option>
+        {#each options as { option_value, label }}
+            <option value={option_value}>{label}</option>
         {/each}
     </select>
 </div>

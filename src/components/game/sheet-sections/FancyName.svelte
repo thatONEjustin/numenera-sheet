@@ -39,25 +39,25 @@
 </script>
 
 <SheetSection name="fancy-name" class={className}>
-    <div
-        class:hidden={has_fancy_name() == false}
-        class="flex flex-row content-between py-10"
-    >
-        <h1 class="text-5xl">
-            {sheet_data.character.name} the {sheet_data.characterClass
-                .descriptor}
-            {sheet_data.characterClass.type}, who {sheet_data.characterClass
-                .focus}
-        </h1>
-        <button
-            type="button"
-            class="ml-auto cursor-pointer"
-            aria-labelledby="reset_name"
-            onclick={show_name_generator}
-        >
-            <i aria-label="reset_name" class="nf nf-fa-close"></i>
-        </button>
-    </div>
+    {#if has_fancy_name()}
+        <!-- content here -->
+        <div class="flex flex-row content-between py-10">
+            <h1 class="text-5xl">
+                {sheet_data.character.name} the {sheet_data.characterClass
+                    .descriptor}
+                {sheet_data.characterClass.type}, who {sheet_data.characterClass
+                    .focus}
+            </h1>
+            <button
+                type="button"
+                class="ml-auto cursor-pointer"
+                aria-labelledby="reset_name"
+                onclick={show_name_generator}
+            >
+                <i aria-label="reset_name" class="nf nf-fa-close"></i>
+            </button>
+        </div>
+    {/if}
 
     <div
         class:hidden={has_fancy_name() == true}
