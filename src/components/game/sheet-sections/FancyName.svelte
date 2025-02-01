@@ -41,7 +41,7 @@
 <SheetSection name="fancy-name" class={className}>
     {#if has_fancy_name()}
         <!-- content here -->
-        <div class="flex flex-row content-between py-10">
+        <div class="py-10 flex flex-row items-start">
             <h1 class="text-5xl">
                 {sheet_data.character.name} the {sheet_data.characterClass
                     .descriptor}
@@ -50,11 +50,12 @@
             </h1>
             <button
                 type="button"
-                class="ml-auto cursor-pointer"
+                class="ml-auto cursor-pointer flex items-start justify-center bg-red-400 text-white max-h-max"
                 aria-labelledby="reset_name"
                 onclick={show_name_generator}
             >
-                <i aria-label="reset_name" class="nf nf-fa-close"></i>
+                edit
+                <i aria-label="reset_name" class="nf nf-fa-pencil"></i>
             </button>
         </div>
     {/if}

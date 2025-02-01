@@ -8,10 +8,35 @@
     let { class: className, sheet_data }: SheetProps = $props();
 
     let { characterClass } = sheet_data;
+
+    const descriptor_options = [
+        {
+            label: "Jack",
+            value: "jack",
+        },
+        {
+            label: "Nano",
+            value: "nano",
+        },
+        {
+            label: "Glaive",
+            value: "glaive",
+        },
+    ];
 </script>
 
 <SheetSection class={className}>
     <div class="grid grid-cols-3 gap-x-6">
+        <SelectField
+            label="Descriptor"
+            type="text"
+            name="characterClass_descriptor"
+            id="characterClass_descriptor"
+            options={descriptor_options}
+            value={characterClass?.descriptor}
+            required
+        />
+        <!--
         <TextInputField
             label="Descriptor"
             type="text"
@@ -20,6 +45,7 @@
             value={characterClass?.descriptor}
             required
         />
+        -->
 
         <TextInputField
             label="Type"

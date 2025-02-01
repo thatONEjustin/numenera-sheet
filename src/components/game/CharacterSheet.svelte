@@ -11,7 +11,6 @@
     let { sheet_data }: SheetSection = $props();
 </script>
 
-{@debug sheet_data}
 <Form>
     <FancyName {sheet_data} />
 
