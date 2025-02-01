@@ -1,13 +1,7 @@
 <script lang="ts">
     import type { SubmitButton } from "@components/types.d";
 
-    const {
-        name,
-        class: className,
-        id,
-        children,
-        onclick,
-    }: SubmitButton = $props();
+    const { name, class: className, id, children }: SubmitButton = $props();
 </script>
 
 <div class={["Submit", className]}>

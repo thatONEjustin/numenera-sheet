@@ -3,7 +3,7 @@
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import PlayerInfo from "@game/sheet-sections/PlayerInfo.svelte";
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
-    import { fly, slide } from "svelte/transition";
+    import { slide } from "svelte/transition";
 
     const { class: className, sheet_data }: SheetProps = $props();
 
