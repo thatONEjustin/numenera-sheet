@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types.d";
-
+    import type { SheetSection as SheetProps } from "@components/types.d";
+    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import PlayerInfo from "@game/sheet-sections/PlayerInfo.svelte";
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
 
-    const { sheet_data }: SheetSection = $props();
+    const { class: className, sheet_data }: SheetProps = $props();
 
     const is_fancy = $derived.by(() => {
         const check_sheet = Object.keys(sheet_data).filter((key) => {
@@ -38,28 +38,32 @@
     }
 </script>
 
-<div
-    class:hidden={has_fancy_name() == false}
-    class="flex flex-row content-between py-10"
->
-    <h1 class="text-5xl">
-        {sheet_data.character.name} the {sheet_data.characterClass.descriptor}
-        {sheet_data.characterClass.type}, who {sheet_data.characterClass.focus}
-    </h1>
-    <button
-        type="button"
-        class="ml-auto cursor-pointer"
-        aria-labelledby="reset_name"
-        onclick={show_name_generator}
+<SheetSection name="fancy-name" class={className}>
+    <div
+        class:hidden={has_fancy_name() == false}
+        class="flex flex-row content-between py-10"
     >
-        <i aria-label="reset_name" class="nf nf-fa-close"></i>
-    </button>
-</div>
+        <h1 class="text-5xl">
+            {sheet_data.character.name} the {sheet_data.characterClass
+                .descriptor}
+            {sheet_data.characterClass.type}, who {sheet_data.characterClass
+                .focus}
+        </h1>
+        <button
+            type="button"
+            class="ml-auto cursor-pointer"
+            aria-labelledby="reset_name"
+            onclick={show_name_generator}
+        >
+            <i aria-label="reset_name" class="nf nf-fa-close"></i>
+        </button>
+    </div>
 
-<div
-    class:hidden={has_fancy_name() == true}
-    class="grid grid-cols-1 md:grid-cols-2 gap-x-6"
->
-    <PlayerInfo {sheet_data} />
-    <CharacterClass {sheet_data} />
-</div>
+    <div
+        class:hidden={has_fancy_name() == true}
+        class="grid grid-cols-1 md:grid-cols-2 gap-x-6"
+    >
+        <PlayerInfo {sheet_data} />
+        <CharacterClass {sheet_data} />
+    </div>
+</SheetSection>

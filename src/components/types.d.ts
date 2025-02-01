@@ -52,6 +52,7 @@ type SubmitButton = {
 };
 
 type SheetSection = {
+    name?: string;
     class?: ClassValue;
     sheet_data?: any;
     children?: Snippet;

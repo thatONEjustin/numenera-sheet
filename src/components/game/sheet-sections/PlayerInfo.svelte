@@ -1,15 +1,15 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types.d";
+    import type { SheetSection as SheetProps } from "@components/types.d";
+    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
+    import TextInputField from "@forms/fields/TextInputField.svelte";
 
-    import InputField from "@forms/fields/InputField.svelte";
-
-    const { sheet_data }: SheetSection = $props();
+    const { class: className, sheet_data }: SheetProps = $props();
 
     let { character } = sheet_data;
 </script>
 
-<fieldset name="playerInfo">
-    <InputField
+<SheetSection name="playerInfo" class={className}>
+    <TextInputField
         type="text"
         label="Character Name"
         name="character_name"
@@ -17,18 +17,4 @@
         value={character?.name}
         required
     />
-    <!--
-    <InputField
-        type="text"
-        label="Player Name"
-        name="player_name"
-        value={player?.name}
-        id="player_name"
-        required
-    />
-    -->
-</fieldset>
-
-<style lang="postcss">
-    @import "tailwindcss/theme" theme(reference);
-</style>
+</SheetSection>

@@ -1,15 +1,16 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types.d";
-    import InputField from "@components/ui/forms/fields/InputField.svelte";
+    import type { SheetSection as SheetProps } from "@components/types.d";
+    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
+    import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
 
-    let { sheet_data }: SheetSection = $props();
+    let { class: className, sheet_data }: SheetProps = $props();
 
     let { characterClass } = sheet_data;
 </script>
 
-<fieldset name="characterStats">
+<SheetSection class={className}>
     <div class="grid grid-cols-3 gap-x-6">
-        <InputField
+        <TextInputField
             label="Descriptor"
             type="text"
             name="characterClass_descriptor"
@@ -18,7 +19,7 @@
             required
         />
 
-        <InputField
+        <TextInputField
             label="Type"
             type="text"
             name="characterClass_type"
@@ -27,7 +28,7 @@
             required
         />
 
-        <InputField
+        <TextInputField
             label="Focus"
             type="text"
             name="characterClass_focus"
@@ -36,4 +37,4 @@
             required
         />
     </div>
-</fieldset>
+</SheetSection>

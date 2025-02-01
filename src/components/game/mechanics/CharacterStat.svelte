@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { TextInput } from "@components/types.d";
-    import InputField from "@forms/fields/InputField.svelte";
+    import TextInputField from "@forms/fields/TextInputField.svelte";
 
     let {
         name,
@@ -18,7 +18,7 @@
 </script>
 
 <div class="">
-    <InputField
+    <TextInputField
         class={className}
         {name}
         {type}

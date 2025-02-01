@@ -1,22 +1,23 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types.d";
+    import type { SheetSection as SheetProps } from "@components/types.d";
 
-    import InputField from "@forms/fields/InputField.svelte";
+    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
+    import TextInputField from "@forms/fields/TextInputField.svelte";
     import Accordion from "@ui/Accordion.svelte";
 
-    let { sheet_data }: SheetSection = $props();
+    let { class: className, sheet_data }: SheetProps = $props();
 
     let { character } = sheet_data;
 </script>
 
-<fieldset name="characterInfo">
-    <Accordion open={true}>
+<SheetSection name="character-info" class={className}>
+    <Accordion open={false}>
         {#snippet title()}
             <h3 class="py-6">Character Background</h3>
         {/snippet}
 
         <div>
-            <InputField
+            <TextInputField
                 type="textarea"
                 label="Description"
                 rows={4}
@@ -25,7 +26,7 @@
                 value={character?.description}
             />
 
-            <InputField
+            <TextInputField
                 type="textarea"
                 label="Backstory"
                 rows={10}
@@ -35,38 +36,4 @@
             />
         </div>
     </Accordion>
-    <!--
-    <div class="grid grid-cols-2 gap-x-4">
-        <Accordion>
-            {#snippet title()}
-                <h4>Description</h4>
-            {/snippet}
-
-            <InputField
-                type="textarea"
-                hideLabel={true}
-                label="Description"
-                rows={10}
-                name="character_description"
-                id="character_description"
-                value={character?.description}
-            />
-        </Accordion>
-        <Accordion>
-            {#snippet title()}
-                <h4>Backstory</h4>
-            {/snippet}
-
-            <InputField
-                type="textarea"
-                hideLabel={true}
-                label="Backstory"
-                rows={10}
-                name="character_backstory"
-                id="character_backstory"
-                value={character?.backstory}
-            />
-        </Accordion>
-    </div>
-    -->
-</fieldset>
+</SheetSection>
