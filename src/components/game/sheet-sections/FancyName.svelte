@@ -64,11 +64,11 @@
 {#snippet userInputs(hidden: boolean = false)}
     <div
         class:hidden
-        class="grid grid-cols-1 md:grid-cols-2 gap-x-6"
+        class="grid grid-cols-1 md:grid-cols-12 gap-x-6"
         transition:slide
     >
-        <PlayerInfo {sheet_data} />
-        <CharacterClass {sheet_data} />
+        <PlayerInfo class="col-span-5" {sheet_data} />
+        <CharacterClass class="col-span-7" {sheet_data} />
     </div>
 {/snippet}
 

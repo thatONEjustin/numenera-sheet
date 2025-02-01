@@ -22,6 +22,7 @@
             label="Tier"
             type="number"
             name="advancement_tier"
+            min="1"
             id="advancement_tier"
             value={advancement?.tier}
             required

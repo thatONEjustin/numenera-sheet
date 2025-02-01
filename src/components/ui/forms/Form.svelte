@@ -11,7 +11,6 @@
         | undefined;
 
     async function onsubmit(event: SubmitEvent) {
-        event.preventDefault();
         const form_data = new FormData(form);
         let json_data: any = await getSheetData().then((data) => data);
 

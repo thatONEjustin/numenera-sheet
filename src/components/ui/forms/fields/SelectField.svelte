@@ -185,7 +185,8 @@
         @apply px-3
             py-3
             cursor-pointer
-            text-left;
+            text-left
+            break-words;
     }
 
     .select-option.hidden {
