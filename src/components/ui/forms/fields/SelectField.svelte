@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { clickOutside } from "@components/utils";
     import { slide } from "svelte/transition";
 
-    import type { ClassValue } from "@components/types";
+    // import type { ClassValue } from "@components/types";
 
+    /*
     type SelectOption = {
         label?: string;
         value: string;
@@ -15,7 +17,8 @@
         value?: string;
     };
 
-    // type SelectField = HTMLSelectElement & HTMLOptionElement & JustinSelectField;
+    type SelectField = HTMLSelectElement & HTMLOptionElement & JustinSelectField;
+    */
 
     let {
         options,
@@ -45,27 +48,60 @@
 
         return option_label;
     }
+
+    let filter_input: any = $state() as HTMLInputElement;
+    let filter_value: string = $state("");
+
+    let filtered_options = (input: string, options: any) => {
+        if (input == "" || input.length < 2) {
+            return options;
+        }
+
+        return options.filter((item: any) =>
+            item?.value.includes(input.toLowerCase()),
+        );
+    };
 </script>
 
 <div class={["select-field", className]}>
     <label for={name}>{label}</label>
 
     <div class="select-container">
-        <button
-            class="cursor-pointer w-full h-full block text-left font-bold"
-            onclick={showList}
-        >
-            {value == ""
-                ? "Default"
-                : value.charAt(0).toUpperCase() + value.slice(1)}
-        </button>
+        {#if !active}
+            <button
+                class="cursor-pointer w-full h-full block text-left font-bold"
+                onclick={showList}
+            >
+                {value == ""
+                    ? "Enter " + label + " here"
+                    : formatLabel(
+                          value,
+                          options.filter(
+                              (option: any) => value == option.value,
+                          )[0].label,
+                      )}
+            </button>
+        {:else}
+            <input
+                type="text"
+                name="ignoreBruhISlap"
+                bind:this={filter_input}
+                bind:value={filter_value}
+                use:clickOutside
+                onClickOutside={showList}
+            />
+        {/if}
 
         {#if active}
             <div class="select-options" transition:slide>
-                {#each options as option}
+                {#each filtered_options(filter_value, options) as option}
                     <button
                         class="select-option"
-                        onclick={() => select(option.value)}
+                        onclick={(event: Event) => {
+                            select(option.value);
+                            event?.preventDefault();
+                        }}
+                        transition:slide
                     >
                         {formatLabel(option.value, option.label)}
                     </button>
@@ -76,7 +112,7 @@
 
     <select class="hidden" {name} {id} bind:value bind:this={select_field}>
         {#each options as option}
-            {@const label = formatLabel(option.value, option.label)}}
+            {@const label = formatLabel(option.value, option.label)}
             <option value={option.value}>
                 {label}
             </option>
@@ -101,11 +137,16 @@
 
     .select-container {
         @apply border 
-            border-gray-300
             rounded-md
-            px-4
-            py-2
             relative;
+        > button,
+        > input {
+            @apply px-4
+                py-2
+                border-gray-300
+                rounded-md
+                w-full;
+        }
     }
     .select-options {
         @apply absolute
@@ -119,7 +160,12 @@
             min-w-max
             max-w-full
             w-full
-            z-20;
+            z-20
+            left-0
+            top-full
+            translate-y-2
+            max-h-56
+            overflow-y-scroll;
     }
 
     .select-option {

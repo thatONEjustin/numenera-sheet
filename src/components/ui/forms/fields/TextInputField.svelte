@@ -1,12 +1,15 @@
-<script lang="ts">
-    import type { TextInput } from "@components/types.d";
+<script lang="ts" generics="CustomInputType extends 'input' | 'textarea'">
+    import type {
+        JustinTextInput,
+        SvelteHTMLElements,
+    } from "@components/types.d";
+
+    type TextInput = SvelteHTMLElements[CustomInputType] & JustinTextInput;
 
     type TextInputElement =
         | HTMLInputElement
         | HTMLTextAreaElement
         | HTMLSelectElement;
-
-    // import { fade } from "svelte/transition";
 
     let {
         name,

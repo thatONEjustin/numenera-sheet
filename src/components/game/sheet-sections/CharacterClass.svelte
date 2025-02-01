@@ -1,25 +1,17 @@
 <script lang="ts">
     import type { SheetSection as SheetProps } from "@components/types.d";
-    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
-    import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
+    import {
+        character_type_options,
+        character_focus_options,
+        character_descriptor_options,
+    } from "@game/mechanics/data";
 
+    import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import SelectField from "@ui/forms/fields/SelectField.svelte";
 
     let { class: className, sheet_data }: SheetProps = $props();
 
     let { characterClass } = sheet_data;
-
-    const character_type_options = [
-        {
-            value: "jack",
-        },
-        {
-            value: "nano",
-        },
-        {
-            value: "glaive",
-        },
-    ];
 </script>
 
 <SheetSection class={className}>
@@ -33,20 +25,20 @@
             required
         />
 
-        <TextInputField
+        <SelectField
             label="Descriptor"
-            type="text"
             name="characterClass_descriptor"
             id="characterClass_descriptor"
+            options={character_descriptor_options}
             value={characterClass?.descriptor}
             required
         />
 
-        <TextInputField
+        <SelectField
             label="Focus"
-            type="text"
             name="characterClass_focus"
             id="characterClass_focus"
+            options={character_focus_options}
             value={characterClass?.focus}
             required
         />

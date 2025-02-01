@@ -1,8 +1,8 @@
 import type { Component, Snippet } from "svelte";
-import type { ClassValue } from "svelte/elements"
+import type { ClassValue, SvelteHTMLElements } from "svelte/elements"
 
 // NOTE: Svelte Types
-export type { Component, Snippet, ClassValue };
+export type { Component, Snippet, ClassValue, SvelteHTMLElements };
 
 type Tab = {
     label: string;
@@ -30,14 +30,15 @@ type Form = {
 };
 
 type JustinTextInput = {
-    class?: ClassValue;
+    name: string;
+    type: string;
     hideLabel?: boolean;
     label?: string;
     labelTag?: Snippet;
-    rows?: number
-}
+    rows?: number;
+    placeholder?: string;
+};
 
-type TextInput = HTMLInputElement & HTMLTextAreaElement & JustinTextInput
 
 type SubmitButton = {
     name?: string;
@@ -73,4 +74,4 @@ type SheetSection = {
 
 
 // NOTE: Justins Types
-export type { Tab, Tabs, Accordion, SubmitButton, TextInput, Form, SheetSection }
+export type { Tab, Tabs, Accordion, SubmitButton, JustinTextInput, Form, SheetSection }

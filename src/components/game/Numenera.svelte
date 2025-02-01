@@ -3,7 +3,7 @@
 
     import Tabs from "@components/ui/Tabs.svelte";
     import CharacterSheet from "@game/CharacterSheet.svelte";
-    import Combat from "@game/Combat.svelte";
+    // import Combat from "@game/Combat.svelte";
 
     import { getSheetData } from "@components/utils";
 

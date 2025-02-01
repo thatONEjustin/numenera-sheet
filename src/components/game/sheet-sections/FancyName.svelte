@@ -5,6 +5,12 @@
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
     import { slide } from "svelte/transition";
 
+    import {
+        character_type_options,
+        character_descriptor_options,
+        character_focus_options,
+    } from "../mechanics/data";
+
     const { class: className, sheet_data }: SheetProps = $props();
 
     const is_fancy = $derived.by(() => {
@@ -37,6 +43,22 @@
 
         return false;
     }
+
+    function clean_label(key: string, options: any): string {
+        const option = options.filter((option: any) => option?.value == key);
+
+        if (option.length == 0) {
+            return "";
+        }
+
+        const { value, label } = option[0];
+
+        if (label != "" && label != undefined) {
+            return label;
+        }
+
+        return value.charAt(0).toUpperCase() + value.slice(1);
+    }
 </script>
 
 {#snippet userInputs(hidden: boolean = false)}
@@ -52,12 +74,19 @@
 
 <SheetSection name="fancy-name" class={className}>
     {#if has_fancy_name()}
+        {@const descriptor = sheet_data.characterClass?.descriptor}
+        {@const focus = sheet_data.characterClass?.focus}
+        {@const type = sheet_data.characterClass?.type}
         <div class="py-10 flex flex-row items-start" transition:slide>
             <h1 class="text-5xl">
-                {sheet_data.character.name} the {sheet_data.characterClass
-                    .descriptor}
-                {sheet_data.characterClass.type}, who {sheet_data.characterClass
-                    .focus}
+                {sheet_data.character.name} the {clean_label(
+                    descriptor,
+                    character_descriptor_options,
+                )}
+                {clean_label(type, character_type_options)}, who {clean_label(
+                    focus,
+                    character_focus_options,
+                )}
             </h1>
             <button
                 type="button"
