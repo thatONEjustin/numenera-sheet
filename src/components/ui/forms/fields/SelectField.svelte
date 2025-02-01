@@ -1,14 +1,24 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
 
-    /*
-     * TODO: write options array to have label be optional
-     * just make it so that when just an array of strings
-     * is passed we just capitalize the value for the label
-     **/
+    import type { ClassValue } from "@components/types";
+
+    type SelectOption = {
+        label?: string;
+        value: string;
+    };
+
+    type SelectField = {
+        options: Array<SelectOption>;
+        class?: ClassValue;
+        active?: boolean;
+        value?: string;
+    };
+
+    // type SelectField = HTMLSelectElement & HTMLOptionElement & JustinSelectField;
 
     let {
-        options = [],
+        options,
         value = $bindable(""),
         class: className = "",
         active = $bindable(false),
@@ -27,6 +37,14 @@
         value = option;
         active = false;
     }
+
+    function formatLabel(option_value: string, option_label: string) {
+        if (option_label == undefined) {
+            return option_value.charAt(0).toUpperCase() + option_value.slice(1);
+        }
+
+        return option_label;
+    }
 </script>
 
 <div class={["select-field", className]}>
@@ -37,14 +55,19 @@
             class="cursor-pointer w-full h-full block text-left font-bold"
             onclick={showList}
         >
-            {value == "" ? "Default" : value}
+            {value == ""
+                ? "Default"
+                : value.charAt(0).toUpperCase() + value.slice(1)}
         </button>
 
         {#if active}
             <div class="select-options" transition:slide>
-                {#each options as { value, label }}
-                    <button class="select-option" onclick={() => select(value)}>
-                        {label}
+                {#each options as option}
+                    <button
+                        class="select-option"
+                        onclick={() => select(option.value)}
+                    >
+                        {formatLabel(option.value, option.label)}
                     </button>
                 {/each}
             </div>
@@ -52,8 +75,11 @@
     </div>
 
     <select class="hidden" {name} {id} bind:value bind:this={select_field}>
-        {#each options as { value: option_value, label }}
-            <option value={option_value}>{label}</option>
+        {#each options as option}
+            {@const label = formatLabel(option.value, option.label)}}
+            <option value={option.value}>
+                {label}
+            </option>
         {/each}
     </select>
 </div>

@@ -29,24 +29,15 @@ type Form = {
     children?: Snippet;
 };
 
-/*
- * TODO: test and see if we can just **inherit** the 
- * HTMLInputElement type and add my extra needed 
- * props 
- **/
-type TextInput = {
-    name: string;
-    type: string;
-    id: string;
+type JustinTextInput = {
+    class?: ClassValue;
     hideLabel?: boolean;
     label?: string;
     labelTag?: Snippet;
-    required?: boolean;
-    class?: ClassValue;
-    rows?: number;
-    placeholder?: string;
-    value?: string;
-};
+    rows?: number
+}
+
+type TextInput = HTMLInputElement & HTMLTextAreaElement & JustinTextInput
 
 type SubmitButton = {
     name?: string;
@@ -56,6 +47,22 @@ type SubmitButton = {
     onclick?: any;
 };
 
+/*
+type SubmitButton = {
+    name?: string;
+    class?: ClassValue;
+    id?: string;
+    children?: Snippet;
+    onclick?: any;
+};
+
+type JustinSubmitButton = {
+    children?: Snippet;
+}
+
+type SubmitButton = HTMLButtonElement & JustinSubmitButton
+
+*/
 type SheetSection = {
     name?: string;
     class?: ClassValue;

@@ -12,10 +12,10 @@
             label: "Character Sheet",
             content: CharacterSheet as any,
         },
-        {
-            label: "Combat",
-            content: Combat as any,
-        },
+        // {
+        //     label: "Combat",
+        //     content: Combat as any,
+        // },
     ];
 </script>
 

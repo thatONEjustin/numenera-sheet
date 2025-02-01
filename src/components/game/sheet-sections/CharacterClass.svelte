@@ -11,15 +11,12 @@
 
     const character_type_options = [
         {
-            label: "Jack",
             value: "jack",
         },
         {
-            label: "Nano",
             value: "nano",
         },
         {
-            label: "Glaive",
             value: "glaive",
         },
     ];
@@ -29,7 +26,6 @@
     <div class="grid grid-cols-3 gap-x-6">
         <SelectField
             label="Type"
-            type="text"
             name="characterClass_type"
             id="characterClass_type"
             options={character_type_options}

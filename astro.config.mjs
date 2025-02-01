@@ -4,14 +4,14 @@ import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
 import netlify from '@astrojs/netlify';
 
-import tailwindcss from "@tailwindcss/vite"
+// import tailwindcss from "@tailwindcss/vite"
 
 // https://astro.build/config
 export default defineConfig({
     output: "static",
-    vite: {
-        plugins: [tailwindcss()],
-    },
+    // vite: {
+    //     plugins: [tailwindcss()],
+    // },
     integrations: [svelte()],
     adapter: netlify()
 });
