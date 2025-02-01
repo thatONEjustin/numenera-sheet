@@ -1,8 +1,21 @@
-<script lang="ts">
+<script lang="ts" generics="BaseInputTypes extends 'select'">
+    import type { SvelteHTMLElements, ClassValue } from "@components/types";
     import { clickOutside } from "@components/utils";
     import { slide } from "svelte/transition";
 
-    // import type { ClassValue } from "@components/types";
+    type SelectOption = {
+        label?: string;
+        value: string;
+    };
+
+    type SelectField = {
+        options: Array<SelectOption>;
+        class?: ClassValue;
+        active?: boolean;
+        value?: string;
+    };
+
+    type _SelectProps = SvelteHTMLElements[BaseInputTypes] & SelectField;
 
     /*
     type SelectOption = {
@@ -84,7 +97,7 @@
         {:else}
             <input
                 type="text"
-                name="ignoreBruhISlap"
+                name="ignore"
                 bind:this={filter_input}
                 bind:value={filter_value}
                 use:clickOutside
@@ -142,7 +155,7 @@
         > button,
         > input {
             @apply px-4
-                py-2
+                py-3
                 border-gray-300
                 rounded-md
                 w-full;

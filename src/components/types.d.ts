@@ -39,6 +39,21 @@ type JustinTextInput = {
     placeholder?: string;
 };
 
+type CharacterStat = {
+    name: string,
+    type: string,
+    id: string,
+    hideLabel?: boolean,
+    label?: string,
+    labelTag?: Snippet,
+    required: boolean,
+    class?: className,
+    rows?: number,
+    placeholder?: string,
+    value?: string,
+}
+
+type TextInputElement = HTMLInputElement | HTMLTextAreaElement;
 
 type SubmitButton = {
     name?: string;
@@ -74,4 +89,4 @@ type SheetSection = {
 
 
 // NOTE: Justins Types
-export type { Tab, Tabs, Accordion, SubmitButton, JustinTextInput, Form, SheetSection }
+export type { Tab, Tabs, Accordion, SubmitButton, JustinTextInput, Form, SheetSection, TextInputElement, CharacterStat }

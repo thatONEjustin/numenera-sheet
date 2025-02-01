@@ -31,7 +31,6 @@ function get_data_string(local_storage_key: string): any {
 }
 /** Dispatch event on click outside of node */
 export function clickOutside(node: any) {
-
     const handleClick = (event: any) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
             node.dispatchEvent(

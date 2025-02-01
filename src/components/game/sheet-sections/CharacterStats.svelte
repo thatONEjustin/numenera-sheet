@@ -22,7 +22,6 @@
         <h3 class="my-auto">Pool</h3>
         <CharacterStat
             label="Might"
-            hideLabel={true}
             type="number"
             name="stats_might"
             id="stats_might"
@@ -31,7 +30,6 @@
         />
         <CharacterStat
             label="Speed"
-            hideLabel={true}
             type="number"
             name="stats_speed"
             id="stats_speed"
@@ -40,7 +38,6 @@
         />
         <CharacterStat
             label="Intellect"
-            hideLabel={true}
             type="number"
             name="stats_intellect"
             id="stats_intellect"
@@ -51,7 +48,6 @@
     <div class="grid grid-cols-4 gap-x-6">
         <h3 class="my-auto">Edge</h3>
         <CharacterStat
-            hideLabel={true}
             type="number"
             name="stats_mightEdge"
             id="stats_mightEdge"
@@ -59,7 +55,6 @@
             required
         />
         <CharacterStat
-            hideLabel={true}
             type="number"
             name="stats_speedEdge"
             id="stats_speedEdge"
@@ -67,22 +62,10 @@
             required
         />
         <CharacterStat
-            hideLabel={true}
             type="number"
             name="stats_intellectEdge"
             id="stats_intellectEdge"
             value={stats?.intellectEdge}
-            required
-        />
-    </div>
-    <div class="grid grid-cols-4 gap-x-6">
-        <h3 class="my-auto">Effort</h3>
-        <CharacterStat
-            hideLabel={true}
-            type="number"
-            name="stats_mightEffort"
-            id="stats_mightEffort"
-            value={stats?.mightEffort}
             required
         />
     </div>

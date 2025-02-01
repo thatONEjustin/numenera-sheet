@@ -1,12 +1,18 @@
-<script lang="ts">
-    import type { TextInput } from "@components/types.d";
+<script lang="ts" generics="BaseInputTypes extends 'input' | 'textarea'">
+    // import type { CharacterStat as TextInput } from "@components/types.d";
     import TextInputField from "@forms/fields/TextInputField.svelte";
+    import type {
+        JustinTextInput,
+        SvelteHTMLElements,
+    } from "@components/types";
+
+    type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
 
     let {
         name,
         type,
         id,
-        hideLabel,
+        hideLabel = true,
         label,
         labelTag,
         required,

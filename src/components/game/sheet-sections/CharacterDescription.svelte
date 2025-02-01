@@ -11,7 +11,7 @@
 </script>
 
 <SheetSection name="character-info" class={className}>
-    <Accordion open={false}>
+    <Accordion open={true}>
         {#snippet title()}
             <h3 class="py-6">Character Background</h3>
         {/snippet}

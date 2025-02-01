@@ -1,15 +1,11 @@
-<script lang="ts" generics="CustomInputType extends 'input' | 'textarea'">
+<script lang="ts" generics="BaseInputTypes extends 'input' | 'textarea'">
     import type {
         JustinTextInput,
         SvelteHTMLElements,
+        TextInputElement,
     } from "@components/types.d";
 
-    type TextInput = SvelteHTMLElements[CustomInputType] & JustinTextInput;
-
-    type TextInputElement =
-        | HTMLInputElement
-        | HTMLTextAreaElement
-        | HTMLSelectElement;
+    type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
 
     let {
         name,
