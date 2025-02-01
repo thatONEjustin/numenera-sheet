@@ -1,3 +1,4 @@
+@import 'tailwindcss';
 /*
  * NOTE: External libraries
  */
@@ -16,8 +17,3 @@
  * NOTE: tailwind
  */
 @import './tailwind.css';
-
-/*
- * NOTE: pages/sections 
- */
-/* @import 'pages/about.css'; */
