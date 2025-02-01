@@ -10,7 +10,7 @@
 
 <fieldset name="characterStats">
     <div class="grid grid-cols-4 gap-x-6 mb-4">
-        <h2>Stats</h2>
+        <p class="text-4xl"><i class="nf nf-fa-dice_d20"></i></p>
 
         <h2>Might</h2>
         <h2>Speed</h2>
@@ -84,22 +84,6 @@
             name="stats_mightEffort"
             id="stats_mightEffort"
             value={stats?.mightEffort}
-            required
-        />
-        <CharacterStat
-            hideLabel={true}
-            type="number"
-            name="stats_speedEffort"
-            id="stats_speedEffort"
-            value={stats?.speedEffort}
-            required
-        />
-        <CharacterStat
-            hideLabel={true}
-            type="number"
-            name="stats_intellectEffort"
-            id="stats_intellectEffort"
-            value={stats?.intellectEffort}
             required
         />
     </div>
