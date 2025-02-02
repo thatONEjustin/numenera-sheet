@@ -12,7 +12,10 @@
     name="character-stats"
 >
     <div class="grid grid-cols-4 gap-x-6">
-        <p class="text-4xl"><i class="nf nf-fa-dice_d20"></i></p>
+        <div class="text-3xl flex flex-row items-center">
+            <i class="nf nf-fa-dice_d20"></i>
+            <h3 class="pl-2">Stats</h3>
+        </div>
 
         <h2 class="my-auto">Might</h2>
         <h2 class="my-auto">Speed</h2>

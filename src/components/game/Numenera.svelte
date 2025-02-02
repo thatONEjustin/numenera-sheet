@@ -24,14 +24,13 @@
         // },
     ];
 
-    function onclick(event: Event) {
-        localStorage.clear();
+    function onclick(_event: Event) {
+        // localStorage.clear();
+        if (localStorage.getItem("sheetData")) {
+            localStorage.removeItem("sheetData");
+        }
     }
 </script>
-
-<!-- {#await getSheetData() then sheet_data}
-    <Tabs {tabs} {sheet_data} />
-{/await} -->
 
 {#await getSheetData()}
     <div>Loading</div>

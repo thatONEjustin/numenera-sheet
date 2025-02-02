@@ -4,15 +4,17 @@
     import LZString from "lz-string";
     import { getSheetData, storageAvailable } from "@components/utils";
 
-    let { children }: FormProps = $props();
+    let { children, class: className }: FormProps = $props();
 
     let form: HTMLFormElement | undefined = $state() as
         | HTMLFormElement
         | undefined;
 
-    async function onsubmit(event: SubmitEvent) {
+    async function onsubmit(_event: SubmitEvent) {
         const form_data = new FormData(form);
         let json_data: any = await getSheetData().then((data) => data);
+
+        console.log(json_data);
 
         form_data.forEach(function (value: FormDataEntryValue, key: string) {
             if (key.includes("_") == false) {
@@ -38,6 +40,6 @@
     }
 </script>
 
-<form action="/" {onsubmit} bind:this={form}>
+<form class={className} action="/" {onsubmit} bind:this={form}>
     {@render children?.()}
 </form>

@@ -3,7 +3,7 @@
 
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import TextInputField from "@forms/fields/TextInputField.svelte";
-    import Accordion from "@ui/Accordion.svelte";
+    // import Accordion from "@ui/Accordion.svelte";
 
     let { class: className, sheet_data }: SheetProps = $props();
 
@@ -11,6 +11,24 @@
 </script>
 
 <SheetSection name="character-info" class={className}>
+    <TextInputField
+        type="textarea"
+        label="Description"
+        rows={4}
+        name="character_description"
+        id="character_description"
+        value={character?.description}
+    />
+
+    <TextInputField
+        type="textarea"
+        label="Backstory"
+        rows={10}
+        name="character_backstory"
+        id="character_backstory"
+        value={character?.backstory}
+    />
+    <!--
     <Accordion open={true}>
         {#snippet title()}
             <h3 class="py-6">Character Background</h3>
@@ -36,4 +54,5 @@
             />
         </div>
     </Accordion>
+    -->
 </SheetSection>

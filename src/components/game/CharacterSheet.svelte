@@ -7,7 +7,8 @@
     // import CharacterDescription from "@game/sheet-sections/CharacterDescription.svelte";
     import CharacterStats from "@game/sheet-sections/CharacterStats.svelte";
     import FancyName from "@game/sheet-sections/FancyName.svelte";
-    import CharacterAdvancement from "./sheet-sections/CharacterAdvancement.svelte";
+    import CharacterAdvancement from "@game/sheet-sections/CharacterAdvancement.svelte";
+    import RecoveryAvailable from "@game/sheet-sections/RecoveryAvailable.svelte";
 
     let { sheet_data }: SheetSection = $props();
 </script>
@@ -15,9 +16,19 @@
 <Form>
     <FancyName {sheet_data} />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
-        <CharacterStats {sheet_data} />
-        <CharacterAdvancement {sheet_data} />
+    <div class="flex flex-col md:flex-row">
+        <div class="grid grid-cols-1 gap-x-6 w-full md:w-4/5">
+            <CharacterStats {sheet_data} />
+            <CharacterAdvancement {sheet_data} />
+            <RecoveryAvailable {sheet_data} />
+        </div>
+        <!--
+        <div class="w-2/5">
+                TODO: need to make
+                <CharacterSkills {sheet_data} />
+                <CharacterEquipment {sheet_data} /> 
+        </div>
+            -->
     </div>
 
     <SubmitButton />

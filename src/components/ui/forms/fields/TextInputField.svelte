@@ -113,8 +113,7 @@
             @apply cursor-pointer
                 text-black
                 rounded-md
-                px-4
-                py-2
+                p-3
                 border
                 border-gray-300
                 text-left;

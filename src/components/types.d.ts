@@ -26,6 +26,7 @@ type Accordion = {
 };
 
 type Form = {
+    class?: ClassValue;
     children?: Snippet;
 };
 
@@ -82,7 +83,7 @@ type SubmitButton = HTMLButtonElement & JustinSubmitButton
 type SheetSection = {
     name?: string;
     class?: ClassValue;
-    sheet_data?: any;
+    sheet_data?: Object<>;
     children?: Snippet;
 }
 
