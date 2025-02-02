@@ -80,14 +80,13 @@ type JustinSubmitButton = {
 type SubmitButton = HTMLButtonElement & JustinSubmitButton
 
 */
+
 type SheetSection = {
     name?: string;
     class?: ClassValue;
     sheet_data?: Object<>;
     children?: Snippet;
 }
-
-
 
 // NOTE: Justins Types
 export type { Tab, Tabs, Accordion, SubmitButton, JustinTextInput, Form, SheetSection, TextInputElement, CharacterStat }

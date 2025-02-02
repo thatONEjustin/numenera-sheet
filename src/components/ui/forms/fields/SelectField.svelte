@@ -44,6 +44,19 @@
     let { name, label, id } = input;
     let select_field;
 
+    let filter_input: any = $state() as HTMLInputElement;
+    let filter_value: string = $state("");
+
+    let filtered_options = (input: string, options: any) => {
+        if (input == "" || input.length < 2) {
+            return options;
+        }
+
+        return options.filter((item: any) =>
+            item?.value.includes(input.toLowerCase()),
+        );
+    };
+
     function showList(event: Event) {
         active = !active;
         event.preventDefault();
@@ -61,19 +74,6 @@
 
         return option_label;
     }
-
-    let filter_input: any = $state() as HTMLInputElement;
-    let filter_value: string = $state("");
-
-    let filtered_options = (input: string, options: any) => {
-        if (input == "" || input.length < 2) {
-            return options;
-        }
-
-        return options.filter((item: any) =>
-            item?.value.includes(input.toLowerCase()),
-        );
-    };
 </script>
 
 <div class={["select-field", className]}>

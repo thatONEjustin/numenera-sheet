@@ -23,8 +23,6 @@
 
             const [category_key, field_key] = key.split("_");
 
-            // console.log(json_data[category_key]);
-
             json_data[category_key] = {
                 ...json_data[category_key],
                 [field_key]: value,
