@@ -62,6 +62,11 @@
         event.preventDefault();
     }
 
+    function hideList(event: Event) {
+        active = false;
+        event.preventDefault();
+    }
+
     function select(option: string) {
         value = option;
         active = false;
@@ -100,21 +105,19 @@
                 name="ignore"
                 bind:this={filter_input}
                 bind:value={filter_value}
-                use:clickOutside
-                onClickOutside={showList}
             />
         {/if}
 
-        {#if active}
+        {#if active && filtered_options(filter_value, options).length}
             <div class="select-options" transition:slide>
                 {#each filtered_options(filter_value, options) as option}
                     <button
                         class="select-option"
-                        onclick={(event: Event) => {
+                        onclick={(_event: Event) => {
                             select(option.value);
-                            event?.preventDefault();
                         }}
                         transition:slide
+                        use:clickOutside={() => hideList}
                     >
                         {formatLabel(option.value, option.label)}
                     </button>

@@ -30,7 +30,7 @@ function get_data_string(local_storage_key: string): any {
     return localStorage.getItem(local_storage_key);
 }
 /** Dispatch event on click outside of node */
-export function clickOutside(node: any) {
+export function clickOutside(node: any, callbackFunction: any) {
     const handleClick = (event: any) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
             node.dispatchEvent(
@@ -42,7 +42,9 @@ export function clickOutside(node: any) {
     document.addEventListener('click', handleClick, true);
 
     return {
-        destroy() {
+        update(newCallBackFunction: any) {
+            callbackFunction = newCallBackFunction
+        }, destroy() {
             document.removeEventListener('click', handleClick, true);
         }
     }

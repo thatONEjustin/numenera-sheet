@@ -25,7 +25,6 @@
     ];
 
     function onclick(_event: Event) {
-        // localStorage.clear();
         if (localStorage.getItem("sheetData")) {
             localStorage.removeItem("sheetData");
         }

@@ -37,15 +37,9 @@
         {/if}
     </button>
 
-    {#if open}
-        <div class="accordion" transition:slide>
-            {@render children?.()}
-        </div>
-    {:else}
-        <div class="hidden">
-            {@render children?.()}
-        </div>
-    {/if}
+    <div class="accordion" class:hidden={open} transition:slide>
+        {@render children?.()}
+    </div>
 </div>
 
 <style lang="postcss">

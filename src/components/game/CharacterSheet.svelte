@@ -17,7 +17,7 @@
     <FancyName {sheet_data} />
 
     <div class="flex flex-col md:flex-row">
-        <div class="grid grid-cols-1 gap-x-6 w-full md:w-4/5">
+        <div class="grid grid-cols-1 gap-x-6 w-full lg:w-4/5">
             <CharacterStats {sheet_data} />
             <CharacterAdvancement {sheet_data} />
             <RecoveryAvailable {sheet_data} />

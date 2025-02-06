@@ -28,6 +28,7 @@
             name="stats_might"
             id="stats_might"
             value={stats?.might}
+            max={35}
             required
         />
         <CharacterStat
@@ -35,6 +36,7 @@
             name="stats_speed"
             id="stats_speed"
             value={stats?.speed}
+            max={35}
             required
         />
         <CharacterStat
@@ -42,6 +44,7 @@
             name="stats_intellect"
             id="stats_intellect"
             value={stats?.intellect}
+            max={35}
             required
         />
     </div>

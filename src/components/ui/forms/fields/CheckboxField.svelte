@@ -33,8 +33,10 @@
 </script>
 
 <div class={["checkbox-input", className]}>
-    <label for={id} class="flex">
-        {label}
-        <input class="pl-2" {type} {name} {id} {value} {checked} />
-    </label>
+    {#key value}
+        <label for={id} class="flex">
+            {label}
+            <input class="pl-2" {type} {name} {id} {value} {checked} />
+        </label>
+    {/key}
 </div>

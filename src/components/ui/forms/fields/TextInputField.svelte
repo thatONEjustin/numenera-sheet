@@ -4,6 +4,7 @@
         SvelteHTMLElements,
         TextInputElement,
     } from "@components/types.d";
+    import { fly } from "svelte/transition";
 
     type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
 
@@ -32,12 +33,11 @@
         return raw_placeholder != "" ? raw_placeholder : `Enter ${label} here`;
     });
 
-    function onclick(_: Event) {
-        editing = !editing;
-
+    function editOnClick(event: Event) {
         if (editing) return;
 
-        value = input_element.value;
+        editing = !editing;
+        event.preventDefault();
     }
 </script>
 
@@ -48,104 +48,102 @@
         <label for={name}>{label}</label>
     {/if}
 
-    {#if !editing && value != ""}
-        <button
-            type="button"
-            class={[
-                value != "" ? "has-value" : "",
-                type == "textarea" ? "max-h-16 overflow-y-hidden" : "",
-            ]}
-            {onclick}
-        >
-            {value}
-        </button>
-    {/if}
+    <div class="input-grid">
+        <div class="input-ux">
+            {#if type != "textarea"}
+                <input
+                    {name}
+                    {type}
+                    {id}
+                    {value}
+                    {required}
+                    {placeholder}
+                    class={["transition-all", !editing ? "cursor-pointer" : ""]}
+                    onclick={editOnClick}
+                    bind:this={input_element}
+                />
+            {/if}
 
-    {#if type != "textarea"}
-        <input
-            {name}
-            {type}
-            {id}
-            {value}
-            {required}
-            {placeholder}
-            class={!editing && value != "" ? "hidden" : ""}
-            bind:this={input_element}
-        />
-    {/if}
+            {#if type == "textarea"}
+                <textarea
+                    {name}
+                    {id}
+                    {rows}
+                    {required}
+                    {placeholder}
+                    class="transition-all"
+                    bind:this={input_element}>{value}</textarea
+                >
+            {/if}
 
-    {#if type == "textarea"}
-        <textarea
-            {name}
-            {id}
-            {rows}
-            {required}
-            {placeholder}
-            class={!editing && value != "" ? "hidden" : ""}
-            bind:this={input_element}>{value}</textarea
-        >
-    {/if}
-
-    {#if editing || value != ""}
-        <button
-            class={[!editing || value == "" ? "hidden" : "", "edit"]}
-            type="submit"
-            {onclick}
-        >
-            Save
-        </button>
-    {/if}
+            {#if editing}
+                <button
+                    class={["input-edit-button"]}
+                    type="submit"
+                    onclick={(_: Event) => (editing = !editing)}
+                    in:fly={{ x: "100%", y: 0 }}
+                    out:fly={{ x: "100%", y: 0 }}
+                >
+                    save
+                </button>
+            {/if}
+        </div>
+    </div>
 </div>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
     .input-field {
         @apply flex
-            flex-col
+            flex-wrap
             my-3;
 
         > label {
             @apply pb-1
-                mb-3;
+                mb-3
+                w-full;
         }
+    }
 
-        > button {
-            @apply cursor-pointer
-                text-black
-                rounded-md
-                p-3
-                border
-                border-gray-300
-                text-left;
+    .input-grid {
+        @apply grid;
+        grid-template-areas: "stack";
 
-            &.has-value {
+        @apply w-full;
+
+        > .input-ux {
+            grid-area: stack;
+
+            @apply flex;
+
+            > input,
+            > textarea {
                 @apply text-black
-                decoration-dotted
-                font-bold;
+                    rounded-md
+                    p-3
+                    border
+                    border-gray-300
+                    text-left
+                    transition-all
+                    w-full;
             }
 
-            &.edit {
-                @apply bg-cyan-300
+            > .input-edit-button {
+                @apply flex-none;
+                @apply transition-all;
+
+                @apply rounded-md
+                    p-3
+                    ml-4
+                    border
+                    border-gray-300
+                    text-left
+                    bg-cyan-300
                     text-white
-                    border-black
-                    mt-2
                     cursor-pointer
-                    w-max
+                    w-full
                     max-w-max;
             }
-        }
-
-        > input,
-        > textarea {
-            @apply w-full;
-
-            @apply w-full
-                bg-white
-                text-black
-                border
-                border-black
-                rounded-md
-                p-3;
         }
     }
 </style>

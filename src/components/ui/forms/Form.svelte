@@ -10,7 +10,8 @@
         | HTMLFormElement
         | undefined;
 
-    async function onsubmit(_event: SubmitEvent) {
+    async function onsubmit(event: SubmitEvent) {
+        event.preventDefault();
         const form_data = new FormData(form);
         let json_data: any = await getSheetData().then((data) => data);
 
@@ -38,6 +39,6 @@
     }
 </script>
 
-<form class={className} action="/" {onsubmit} bind:this={form}>
+<form class={className} action="/" method="POST" {onsubmit} bind:this={form}>
     {@render children?.()}
 </form>

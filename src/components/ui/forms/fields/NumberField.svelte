@@ -1,5 +1,6 @@
 <script lang="ts" generics="BaseInputTypes extends 'input'">
     import type { SvelteHTMLElements, Snippet } from "@components/types";
+    import { fly, scale } from "svelte/transition";
 
     type JustinNumberField = {
         name: string;
@@ -38,12 +39,10 @@
         return raw_placeholder != "" ? raw_placeholder : `Enter ${label} here`;
     });
 
-    function onclick(_: Event) {
-        editing = !editing;
-
+    function editOnClick(event: Event) {
         if (editing) return;
-
-        value = element?.value;
+        editing = !editing;
+        event.preventDefault();
     }
 </script>
 
@@ -54,88 +53,86 @@
         <label for={name}>{label}</label>
     {/if}
 
-    {#if !editing && value != ""}
-        <button
-            type="button"
-            class={[value != "" ? "has-value" : ""]}
-            {onclick}
-        >
-            {value}
-        </button>
-    {/if}
-
-    <input
-        {name}
-        type="number"
-        {id}
-        {value}
-        {required}
-        {placeholder}
-        {min}
-        {max}
-        class={!editing && value != "" ? "hidden" : ""}
-        bind:this={element}
-    />
-
-    {#if editing || value != ""}
-        <button
-            class={[!editing || value == "" ? "hidden" : "", "edit"]}
-            type="submit"
-            {onclick}
-        >
-            Save
-        </button>
-    {/if}
+    <div class="input-grid">
+        <div class="input-ux">
+            <input
+                {name}
+                type="number"
+                {id}
+                {value}
+                {required}
+                {placeholder}
+                {min}
+                {max}
+                class={["transition-all", !editing ? "cursor-pointer" : ""]}
+                onclick={editOnClick}
+                bind:this={element}
+            />
+            {#if editing}
+                <button
+                    class={["input-edit-button"]}
+                    type="submit"
+                    onclick={(_: Event) => (editing = !editing)}
+                    in:fly={{ x: "100%", y: 0 }}
+                    out:fly={{ x: "100%", y: 0 }}
+                >
+                    save
+                </button>
+            {/if}
+        </div>
+    </div>
 </div>
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
     .number-field {
         @apply flex
-            flex-col
             my-3;
 
         > label {
             @apply pb-1
-                mb-3;
+                mb-3
+                w-full;
         }
+    }
 
-        > button {
-            @apply cursor-pointer
-                text-black
-                rounded-md
-                p-3
-                border
-                border-gray-300
-                text-left;
+    .input-grid {
+        @apply grid;
+        grid-template-areas: "stack";
 
-            &.has-value {
+        @apply w-full;
+
+        > .input-ux {
+            grid-area: stack;
+
+            @apply flex;
+
+            > input {
                 @apply text-black
-                decoration-dotted
-                font-bold;
+                    rounded-md
+                    p-3
+                    border
+                    border-gray-300
+                    text-left
+                    transition-all
+                    w-[76px];
             }
 
-            &.edit {
-                @apply bg-cyan-300
+            > .input-edit-button {
+                @apply flex-none;
+                @apply transition-all;
+
+                @apply rounded-md
+                    p-3
+                    ml-4
+                    border
+                    border-gray-300
+                    text-left
+                    bg-cyan-300
                     text-white
-                    border-black
-                    mt-2
                     cursor-pointer
-                    w-max
-                    max-w-max;
+                    w-[76px];
             }
-        }
-
-        > input {
-            @apply w-full;
-
-            @apply w-full
-                bg-white
-                text-black
-                border
-                border-black
-                rounded-md
-                p-3;
         }
     }
 </style>
