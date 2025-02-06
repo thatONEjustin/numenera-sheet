@@ -11,8 +11,8 @@
         character_focus_options,
     } from "../mechanics/data";
 
-    const { class: className, sheet_data }: SheetProps = $props();
-
+    const { class: className, sheet_data = $bindable({}) }: SheetProps =
+        $props();
     const is_fancy = $derived.by(() => {
         const check_sheet = Object.keys(sheet_data).filter((key) => {
             return key == "character" || key == "characterClass";
@@ -28,6 +28,10 @@
             sheet_data.characterClass.type != "" &&
             sheet_data.characterClass.focus != ""
         );
+    });
+
+    $effect(() => {
+        console.log(is_fancy);
     });
 
     let hide_name_generator = $state(false);

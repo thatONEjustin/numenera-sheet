@@ -10,14 +10,19 @@
     import CharacterAdvancement from "@game/sheet-sections/CharacterAdvancement.svelte";
     import RecoveryAvailable from "@game/sheet-sections/RecoveryAvailable.svelte";
 
-    let { sheet_data }: SheetSection = $props();
+    import { getSheetData } from "@components/utils";
+    let { sheet_data: passed_data }: SheetSection = $props();
+
+    let sheet_data = $state(passed_data);
 </script>
 
 <Form>
-    <FancyName {sheet_data} />
+    {#key sheet_data}
+        <FancyName {sheet_data} />
+    {/key}
 
     <div class="flex flex-col md:flex-row">
-        <div class="grid grid-cols-1 gap-x-6 w-full lg:w-4/5">
+        <div class="grid grid-cols-1 gap-x-6 w-full md:w-4/5">
             <CharacterStats {sheet_data} />
             <CharacterAdvancement {sheet_data} />
             <RecoveryAvailable {sheet_data} />

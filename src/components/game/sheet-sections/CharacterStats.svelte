@@ -53,19 +53,19 @@
         <CharacterStat
             name="stats_mightEdge"
             id="stats_mightEdge"
-            value={stats?.mightEdge}
+            value={stats?.mightEdge ? stats?.mightEdge : "0"}
             required
         />
         <CharacterStat
             name="stats_speedEdge"
             id="stats_speedEdge"
-            value={stats?.speedEdge}
+            value={stats?.speedEdge ? stats?.speedEdge : "0"}
             required
         />
         <CharacterStat
             name="stats_intellectEdge"
             id="stats_intellectEdge"
-            value={stats?.intellectEdge}
+            value={stats?.intellectEdge ? stats?.intellectEdge : "0"}
             required
         />
     </div>
