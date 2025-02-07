@@ -1,13 +1,13 @@
 <script lang="ts">
+    import type { ClassValue } from "@components/types";
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
-    import CharacterSkill from "@mechanics/CharacterSkill.svelte";
+    import CharacterSkill from "@game/mechanics/CharacterSkill.svelte";
     import {
         character_type_options,
         character_descriptor_options,
         character_focus_options,
     } from "@game/data.svelte";
     import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
-    import Accordion from "@components/ui/Accordion.svelte";
 
     const data_array = [
         {
@@ -20,9 +20,15 @@
     let input_value = $state("new");
 
     let new_skill_name = $state("");
+
+    type SkillsTabProps = {
+        class?: ClassValue;
+    };
+
+    let { class: className }: SkillsTabProps = $props();
 </script>
 
-<SheetSection name="character-skill">
+<SheetSection name="character-skill" class={className}>
     <div class="text-3xl flex flex-row items-center">
         <i class="nf nf-fa-dice_d20"></i>
         <h3 class="pl-2">Skills</h3>
@@ -44,5 +50,7 @@
             </div>
             -->
         {/each}
+
+        <CharacterSkill />
     </div>
 </SheetSection>

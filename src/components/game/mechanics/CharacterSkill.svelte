@@ -47,9 +47,13 @@
     import { sheet_data } from "@game/data.svelte";
 
     let tags_array = $derived.by(() => {
-        if (isEmptyObject(sheet_data.skills)) return [];
+        if (isEmptyObject(skill)) return [];
 
-        return sheet_data.skills.split(",");
+        if (skill.tags == undefined) {
+            return [];
+        }
+
+        return skill.tags;
     });
 </script>
 

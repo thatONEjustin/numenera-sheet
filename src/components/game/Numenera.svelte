@@ -4,6 +4,7 @@
     import Tabs from "@components/ui/Tabs.svelte";
     import CharacterSheet from "@game/CharacterSheet.svelte";
     import Background from "@game/Background.svelte";
+    import Skills from "@game/Skills.svelte";
     import Form from "@components/ui/forms/Form.svelte";
 
     // import Combat from "@game/Combat.svelte";
@@ -15,13 +16,13 @@
             content: CharacterSheet as any,
         },
         {
+            label: "Skills",
+            content: Skills as any,
+        },
+        {
             label: "Background",
             content: Background as any,
         },
-        // {
-        //     label: "Combat",
-        //     content: Combat as any,
-        // },
     ];
 
     function onclick(_event: Event) {
