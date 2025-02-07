@@ -5,7 +5,9 @@
     import TextInputField from "@forms/fields/TextInputField.svelte";
     // import Accordion from "@ui/Accordion.svelte";
 
-    let { class: className, sheet_data }: SheetProps = $props();
+    let { class: className }: SheetProps = $props();
+
+    import { sheet_data } from "@components/data.svelte";
 
     let { character } = sheet_data;
 </script>

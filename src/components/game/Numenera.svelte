@@ -5,9 +5,9 @@
     import CharacterSheet from "@game/CharacterSheet.svelte";
     import Background from "@game/Background.svelte";
     import Form from "@components/ui/forms/Form.svelte";
-    // import Combat from "@game/Combat.svelte";
 
-    import { getSheetData } from "@components/utils";
+    // import Combat from "@game/Combat.svelte";
+    // import { getSheetData } from "@components/utils";
 
     const tabs: Array<Tab> = [
         {
@@ -29,9 +29,13 @@
             localStorage.removeItem("sheetData");
         }
     }
+
+    import { sheet_data } from "@components/data.svelte";
 </script>
 
-{#await getSheetData()}
+<!-- <Tabs {tabs} {sheet_data} /> -->
+
+{#await sheet_data}
     <div>Loading</div>
 {:then sheet_data}
     <Tabs {tabs} {sheet_data} />

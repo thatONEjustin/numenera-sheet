@@ -19,16 +19,6 @@ export function storageAvailable(type: any) {
     }
 }
 
-function get_data_string(local_storage_key: string): any {
-    if (
-        storageAvailable("localStorage") == false ||
-        localStorage.getItem(local_storage_key) == null
-    ) {
-        return "";
-    }
-
-    return localStorage.getItem(local_storage_key);
-}
 /** Dispatch event on click outside of node */
 export function clickOutside(node: any, callbackFunction: any) {
     const handleClick = (event: any) => {
@@ -50,8 +40,19 @@ export function clickOutside(node: any, callbackFunction: any) {
     }
 }
 
+function get_data_string(local_storage_key: string): any {
+    if (
+        storageAvailable("localStorage") == false ||
+        localStorage.getItem(local_storage_key) == null
+    ) {
+        return "";
+    }
+
+    return localStorage.getItem(local_storage_key);
+}
+
 export function getSheetData() {
-    return new Promise((resolve, _reject) => {
+    return new Promise((resolve, reject) => {
         const data_string = get_data_string("sheetData")
 
         if (data_string == "") {
@@ -59,7 +60,11 @@ export function getSheetData() {
             return
         }
 
-        const decompress = LZString.decompressFromEncodedURIComponent(data_string);
-        resolve(JSON.parse(decompress))
+        try {
+            const decompress = LZString.decompressFromEncodedURIComponent(data_string);
+            resolve(JSON.parse(decompress))
+        } catch (error) {
+            reject(error)
+        }
     })
 }

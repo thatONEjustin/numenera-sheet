@@ -3,7 +3,9 @@
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import TextInputField from "@forms/fields/TextInputField.svelte";
 
-    const { class: className, sheet_data }: SheetProps = $props();
+    const { class: className }: SheetProps = $props();
+
+    import { sheet_data } from "@components/data.svelte";
 
     let { character } = sheet_data;
 </script>

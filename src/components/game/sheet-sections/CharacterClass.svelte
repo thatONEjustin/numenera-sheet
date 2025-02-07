@@ -9,8 +9,9 @@
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import SelectField from "@ui/forms/fields/SelectField.svelte";
 
-    let { class: className, sheet_data }: SheetProps = $props();
+    let { class: className }: SheetProps = $props();
 
+    import { sheet_data } from "@components/data.svelte";
     let { characterClass } = sheet_data;
 </script>
 

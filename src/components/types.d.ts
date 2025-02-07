@@ -84,7 +84,6 @@ type SubmitButton = HTMLButtonElement & JustinSubmitButton
 type SheetSection = {
     name?: string;
     class?: ClassValue;
-    sheet_data?: Object<>;
     children?: Snippet;
 }
 

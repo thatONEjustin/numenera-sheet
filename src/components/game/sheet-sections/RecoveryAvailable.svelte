@@ -1,7 +1,9 @@
 <script lang="ts">
     import type { SheetSection as SheetProps } from "@components/types.d";
     import CheckboxField from "@components/ui/forms/fields/CheckboxField.svelte";
-    const { class: className, sheet_data }: SheetProps = $props();
+    const { class: className }: SheetProps = $props();
+
+    import { sheet_data } from "@components/data.svelte";
     const { recovery } = sheet_data;
 </script>
 

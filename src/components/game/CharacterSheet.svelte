@@ -9,23 +9,16 @@
     import FancyName from "@game/sheet-sections/FancyName.svelte";
     import CharacterAdvancement from "@game/sheet-sections/CharacterAdvancement.svelte";
     import RecoveryAvailable from "@game/sheet-sections/RecoveryAvailable.svelte";
-
-    import { getSheetData } from "@components/utils";
-    let { sheet_data: passed_data }: SheetSection = $props();
-
-    let sheet_data = $state(passed_data);
 </script>
 
 <Form>
-    {#key sheet_data}
-        <FancyName {sheet_data} />
-    {/key}
+    <FancyName />
 
     <div class="flex flex-col md:flex-row">
         <div class="grid grid-cols-1 gap-x-6 w-full md:w-4/5">
-            <CharacterStats {sheet_data} />
-            <CharacterAdvancement {sheet_data} />
-            <RecoveryAvailable {sheet_data} />
+            <CharacterStats />
+            <CharacterAdvancement />
+            <RecoveryAvailable />
         </div>
         <!--
         <div class="w-2/5">

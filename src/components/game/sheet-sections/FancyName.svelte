@@ -5,48 +5,27 @@
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
     import { slide } from "svelte/transition";
 
+    import { sheet_data } from "@components/data.svelte";
+
     import {
         character_type_options,
         character_descriptor_options,
         character_focus_options,
     } from "../mechanics/data";
 
-    const { class: className, sheet_data = $bindable({}) }: SheetProps =
-        $props();
-    const is_fancy = $derived.by(() => {
-        const check_sheet = Object.keys(sheet_data).filter((key) => {
-            return key == "character" || key == "characterClass";
-        });
+    const { class: className }: SheetProps = $props();
 
-        if (check_sheet.length != 2) {
-            return false;
-        }
-
-        return (
-            sheet_data.character.name != "" &&
-            sheet_data.characterClass.descriptor != "" &&
-            sheet_data.characterClass.type != "" &&
-            sheet_data.characterClass.focus != ""
-        );
-    });
+    let hide_name_generator = $state();
 
     $effect(() => {
-        console.log(is_fancy);
+        const status =
+            sheet_data.character.name == undefined &&
+            sheet_data.characterClass.descriptor == undefined &&
+            sheet_data.characterClass.type == undefined &&
+            sheet_data.characterClass.focus == undefined;
+
+        hide_name_generator = status;
     });
-
-    let hide_name_generator = $state(false);
-
-    function show_name_generator(_: Event) {
-        hide_name_generator = !hide_name_generator;
-    }
-
-    function has_fancy_name(): boolean {
-        if (is_fancy && !hide_name_generator) {
-            return true;
-        }
-
-        return false;
-    }
 
     function clean_label(key: string, options: any): string {
         const option = options.filter((option: any) => option?.value == key);
@@ -71,43 +50,45 @@
         class="grid grid-cols-1 md:grid-cols-12 gap-x-6"
         transition:slide
     >
-        <PlayerInfo class="col-span-5" {sheet_data} />
-        <CharacterClass class="col-span-7" {sheet_data} />
+        <PlayerInfo class="col-span-5" />
+        <CharacterClass class="col-span-7" />
     </div>
 {/snippet}
 
-<SheetSection name="fancy-name" class={className}>
-    {#if has_fancy_name()}
-        {@const descriptor = sheet_data.characterClass?.descriptor}
-        {@const focus = sheet_data.characterClass?.focus}
-        {@const type = sheet_data.characterClass?.type}
-        <div class="py-10 flex flex-row items-start" transition:slide>
-            <h1 class="text-5xl">
-                {sheet_data.character.name} a {clean_label(
-                    descriptor,
-                    character_descriptor_options,
-                )}
-                {clean_label(type, character_type_options)}, who {clean_label(
-                    focus,
-                    character_focus_options,
-                )}
-            </h1>
-            <button
-                type="button"
-                class="edit-button"
-                aria-labelledby="reset_name"
-                onclick={show_name_generator}
-            >
-                edit
-                <i aria-label="reset_name" class="nf nf-fa-pencil"></i>
-            </button>
-        </div>
+{#await sheet_data then sheet_data}
+    <SheetSection name="fancy-name" class={className}>
+        {#if !hide_name_generator}
+            {@const descriptor = sheet_data.characterClass?.descriptor}
+            {@const focus = sheet_data.characterClass?.focus}
+            {@const type = sheet_data.characterClass?.type}
+            <div class="py-10 flex flex-row items-start" transition:slide>
+                <h1 class="text-5xl">
+                    {sheet_data.character.name} a {clean_label(
+                        descriptor,
+                        character_descriptor_options,
+                    )}
+                    {clean_label(type, character_type_options)}, who {clean_label(
+                        focus,
+                        character_focus_options,
+                    )}
+                </h1>
+                <button
+                    type="button"
+                    class="edit-button"
+                    aria-labelledby="reset_name"
+                    onclick={() => (hide_name_generator = true)}
+                >
+                    edit
+                    <i aria-label="reset_name" class="nf nf-fa-pencil"></i>
+                </button>
+            </div>
 
-        {@render userInputs(true)}
-    {:else}
-        {@render userInputs()}
-    {/if}
-</SheetSection>
+            {@render userInputs(true)}
+        {:else}
+            {@render userInputs()}
+        {/if}
+    </SheetSection>
+{/await}
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
