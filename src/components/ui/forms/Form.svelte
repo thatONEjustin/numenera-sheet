@@ -16,8 +16,6 @@
 
         const form_data = new FormData(form);
         let json_data: any = sheet_data;
-        // console.log("sheet_data", $state.snapshot(sheet_data));
-        console.log("json_data", $state.snapshot(json_data));
 
         form_data.forEach(function (value: FormDataEntryValue, key: string) {
             if (key.includes("_") == false) {
@@ -30,6 +28,14 @@
                 [field_key]: value,
             };
         });
+
+        // let json_data: any = sheet_data;
+        /*
+        console.log("json_data", $state.snapshot(sheet_data));
+
+        if (sheet_data.stats.speed != undefined) {
+            console.log(sheet_data.stats.speed);
+        }*/
 
         if (storageAvailable("localStorage") == false) return;
 
