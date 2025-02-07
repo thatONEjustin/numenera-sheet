@@ -38,6 +38,7 @@ type JustinTextInput = {
     labelTag?: Snippet;
     rows?: number;
     placeholder?: string;
+    class?: ClassValue;
 };
 
 type CharacterStat = {

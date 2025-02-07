@@ -1,5 +1,15 @@
 import LZString from "lz-string";
 
+export function isEmptyObject(obj: object) {
+    for (const prop in obj) {
+        if (Object.hasOwn(obj, prop)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export function storageAvailable(type: any) {
     let storage;
     try {
@@ -20,7 +30,7 @@ export function storageAvailable(type: any) {
 }
 
 /** Dispatch event on click outside of node */
-export function clickOutside(node: any, callbackFunction: any) {
+export function clickOutside(node: any, callbackFunction: () => {}) {
     const handleClick = (event: any) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
             node.dispatchEvent(
