@@ -32,6 +32,9 @@
             "@game/*": [
                 "src/components/game/*"
             ],
+            "@mechanics/*": [
+                "src/components/game/mechanics/*"
+            ],
             "@ui/*": [
                 "src/components/ui/*"
             ],

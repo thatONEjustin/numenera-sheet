@@ -7,11 +7,17 @@
 
     let { id: raw_id, name: raw_name } = input;
 
+    /*
     let id = $derived.by(() => {
         return raw_id != "" ? raw_id : name;
     });
 
     // HACK: this is *just* a placeholder while I'm working out logic
+    let attribute_name = $derived.by(() => {
+        return raw_name;
+    });
+    */
+
     let attribute_name = $derived.by(() => {
         return raw_name;
     });
@@ -36,7 +42,6 @@
         }
 
         return false;
-        // return isEmptyObject(skill);
     });
 
     import { sheet_data } from "@game/data.svelte";

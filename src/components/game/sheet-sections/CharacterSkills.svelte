@@ -1,10 +1,11 @@
 <script lang="ts">
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
+    import CharacterSkill from "@mechanics/CharacterSkill.svelte";
     import {
         character_type_options,
         character_descriptor_options,
         character_focus_options,
-    } from "../mechanics/data";
+    } from "@game/data.svelte";
     import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
     import Accordion from "@components/ui/Accordion.svelte";
 
@@ -28,12 +29,12 @@
     </div>
 
     <div class="skills-list">
-        {#each data_array as { name, description, tags }}
+        {#each data_array as skill}
+            <CharacterSkill {skill} />
             <!--
                 TODO: this needs to be its own component or at least snippet 
                 basically we need UX to replace the "form" of adding new
                 <CharacterSkill />'s 
-            -->
             <div class="skill">
                 <h4>{name}</h4>
                 <p>{description}</p>
@@ -41,6 +42,7 @@
                     <small>{tag}</small>
                 {/each}
             </div>
+            -->
         {/each}
     </div>
 </SheetSection>
