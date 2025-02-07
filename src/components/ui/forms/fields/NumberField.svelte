@@ -64,50 +64,30 @@
                 {placeholder}
                 {min}
                 {max}
-                class={["transition-all", !editing ? "cursor-pointer" : ""]}
-                onclick={editOnClick}
+                class={["transition-all"]}
                 bind:this={element}
             />
             <div
-                class="number-field-arrows absolute flex flex-col justify-around max-w-max w-full text-black right-0 top-1/2 -translate-1/2"
+                class="number-field-arrows absolute grid grid-cols-1 max-w-max w-full text-black right-0 top-1/2 -translate-1/2"
             >
                 <button
-                    type="button"
-                    onclick={(event: Event) => {
-                        event.preventDefault();
-                        element?.stepUp();
-                    }}
+                    type="submit"
+                    onclick={() => element?.stepUp()}
                     class="cursor-pointer"
                 >
-                    <i class="nf nf-cod-arrow_up text-sm"></i>
+                    <i class="nf nf-cod-arrow_up text-sm text-center"></i>
                     <span class="sr-only">Up</span>
                 </button>
 
                 <button
-                    type="button"
-                    onclick={(event: Event) => {
-                        event.preventDefault();
-                        element?.stepDown();
-                    }}
+                    type="submit"
+                    onclick={() => element?.stepDown()}
                     class="cursor-pointer"
                 >
-                    <i class="nf nf-cod-arrow_down text-sm cursor-pointer"></i>
+                    <i class="nf nf-cod-arrow_down text-sm text-center"></i>
                     <span class="sr-only">Down</span>
                 </button>
             </div>
-            <!--
-            {#if editing}
-                <button
-                    class={["input-edit-button"]}
-                    type="submit"
-                    onclick={(_: Event) => (editing = !editing)}
-                    in:fly={{ x: "100%", y: 0 }}
-                    out:fly={{ x: "100%", y: 0 }}
-                >
-                    save
-                </button>
-            {/if}
-            -->
         </div>
     </div>
 </div>

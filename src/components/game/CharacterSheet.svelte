@@ -22,8 +22,12 @@
             <CharacterAdvancement />
             <RecoveryAvailable />
         </div>
-        <div class="w-full md:w-2/5">
-            <CharacterSkills />
+        <div class="w-1/5">
+            <h3>Hints</h3>
+            <p>
+                Basically lets use this space for "todos" for the user, like
+                guided char creation
+            </p>
         </div>
         <!--
         <div class="w-2/5">
