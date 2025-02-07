@@ -51,9 +51,13 @@
 </script>
 
 {#snippet userInputs(hidden: boolean = false)}
-    <div class:hidden class="flex flex-row justify-between" transition:slide>
-        <PlayerInfo class="w-full mr-2" />
-        <CharacterClass class="max-w-fit w-full" />
+    <div
+        class:hidden
+        class="flex flex-col md:flex-row justify-between"
+        transition:slide
+    >
+        <PlayerInfo class="w-full md:mr-2" />
+        <CharacterClass class="max-w-full md:max-w-fit w-full" />
     </div>
 {/snippet}
 

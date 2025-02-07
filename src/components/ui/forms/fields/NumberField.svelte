@@ -23,7 +23,7 @@
         max,
         hideLabel,
         labelTag,
-        value = "",
+        value = $bindable(""),
         required = false,
         placeholder: raw_placeholder = "",
     }: NumberField = $props();

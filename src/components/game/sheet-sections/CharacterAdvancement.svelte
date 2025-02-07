@@ -14,8 +14,10 @@
     class={[className, "border-b border-gray-200 py-4 my-4"]}
     name="character-advancement"
 >
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6">
-        <div class="text-3xl flex flex-row items-start">
+    <div class="grid grid-cols-3 md:grid-cols-4 gap-x-6">
+        <div
+            class="text-3xl flex flex-row items-start col-span-3 md:col-span-1"
+        >
             <i class="nf nf-md-sort_clock_descending"></i>
             <h3 class="pl-2">Character Advancement</h3>
         </div>
@@ -82,7 +84,7 @@
         />
         <CheckboxField
             name="advancemntSteps_skillTraining"
-            class="col-start-2"
+            class="md:col-start-2"
             id="skillTraining"
             label="Skill Training"
             value="true"

@@ -9,24 +9,30 @@
     import FancyName from "@game/sheet-sections/FancyName.svelte";
     import CharacterAdvancement from "@game/sheet-sections/CharacterAdvancement.svelte";
     import RecoveryAvailable from "@game/sheet-sections/RecoveryAvailable.svelte";
+    import CharacterSkills from "@game/sheet-sections/CharacterSkills.svelte";
 </script>
 
 <Form>
     <FancyName />
 
     <div class="flex flex-col md:flex-row">
-        <div class="grid grid-cols-1 gap-x-6 w-full md:w-4/5">
+        <div class="w-full">
             <CharacterStats />
+
             <CharacterAdvancement />
             <RecoveryAvailable />
         </div>
+        <div class="w-full md:w-2/5">
+            <CharacterSkills />
+        </div>
         <!--
         <div class="w-2/5">
-                TODO: need to make
-                <CharacterSkills {sheet_data} />
-                <CharacterEquipment {sheet_data} /> 
+
+            TODO: need to make
+            <CharacterEquipment {sheet_data} /> 
+
         </div>
-            -->
+        -->
     </div>
 
     <SubmitButton />

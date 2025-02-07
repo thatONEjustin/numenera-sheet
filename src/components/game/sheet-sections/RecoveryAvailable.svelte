@@ -8,7 +8,7 @@
 </script>
 
 <fieldset class={className} name="recovery-available">
-    <div class="grid md:grid-cols-4 grid-cols-subgrid gap-x-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6">
         <div class="text-3xl flex flex-row items-center">
             <i class="nf nf-md-timer_refresh"></i>
             <h3 class="pl-2">Recovery</h3>
@@ -36,7 +36,7 @@
         />
         <CheckboxField
             name="recovery_available"
-            class="col-start-2"
+            class="md:col-start-2"
             id="10hours"
             label="10 hours"
             value="10hours"

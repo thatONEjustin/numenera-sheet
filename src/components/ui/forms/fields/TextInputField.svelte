@@ -9,11 +9,11 @@
     type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
 
     let {
-        name,
+        name = $bindable(""),
         type,
-        id,
+        id = $bindable(""),
         hideLabel = false,
-        label: raw_label = "",
+        label: raw_label = $bindable(""),
         labelTag,
         required = false,
         class: className,

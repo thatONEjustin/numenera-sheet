@@ -3,7 +3,7 @@
 
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import TextInputField from "@forms/fields/TextInputField.svelte";
-    // import Accordion from "@ui/Accordion.svelte";
+    import Accordion from "@ui/Accordion.svelte";
 
     let { class: className }: SheetProps = $props();
 

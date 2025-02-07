@@ -23,7 +23,7 @@
         required,
         class: className,
         placeholder,
-        value = "1",
+        value = $bindable("1"),
     }: NumberProps = $props();
 </script>
 
