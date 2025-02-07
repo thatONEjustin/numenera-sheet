@@ -29,10 +29,17 @@
     }
 
     let is_new = $derived.by(() => {
-        return isEmptyObject(skill);
+        if (isEmptyObject(skill)) return true;
+
+        if (skill.name == undefined || skill.tags.length == 0) {
+            return true;
+        }
+
+        return false;
+        // return isEmptyObject(skill);
     });
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
 
     let tags_array = $derived.by(() => {
         if (isEmptyObject(sheet_data.skills)) return [];
@@ -41,8 +48,8 @@
     });
 </script>
 
-<div class="character-skill">
-    <div class:hidden={!is_new}>
+{#snippet input_fields(hide: boolean = false)}
+    <div class:hidden={hide}>
         <TextInputField
             name={skill_data_key_generator("", "name")}
             id={skill_data_key_generator("", "name")}
@@ -63,7 +70,9 @@
             type="text"
         />
     </div>
-    {#if !is_new && !isEmptyObject(skill)}
+{/snippet}
+<div class="character-skill">
+    {#if !is_new}
         <!-- content here -->
         <div>
             <h4>{skill.name}</h4>
@@ -71,6 +80,10 @@
             {#each tags_array as tag}
                 <small>{tag}</small>
             {/each}
+
+            {@render input_fields(true)}
         </div>
+    {:else}
+        {@render input_fields()}
     {/if}
 </div>

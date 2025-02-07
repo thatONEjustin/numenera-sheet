@@ -3,7 +3,7 @@
     import CheckboxField from "@components/ui/forms/fields/CheckboxField.svelte";
     const { class: className }: SheetProps = $props();
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
     const { recovery } = sheet_data;
 </script>
 

@@ -30,7 +30,7 @@
         }
     }
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
 </script>
 
 <!-- <Tabs {tabs} {sheet_data} /> -->

@@ -7,7 +7,7 @@
 
     let { class: className }: SheetProps = $props();
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
 
     let { character } = sheet_data;
 </script>

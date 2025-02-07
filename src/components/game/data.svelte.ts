@@ -1,3 +1,6 @@
+import { getSheetData } from "@components/utils"
+
+let sheet_data: any = $state(await getSheetData())
 
 const character_type_options = [
     {
@@ -166,4 +169,9 @@ const character_focus_options = [
     },
 ];
 
-export { character_type_options, character_focus_options, character_descriptor_options }
+export {
+    character_type_options,
+    character_focus_options,
+    character_descriptor_options,
+    sheet_data
+}

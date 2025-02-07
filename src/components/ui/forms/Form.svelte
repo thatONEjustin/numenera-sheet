@@ -2,8 +2,8 @@
     import type { Form as FormProps } from "@components/types.d";
 
     import LZString from "lz-string";
-    import { getSheetData, storageAvailable } from "@components/utils";
-    import { sheet_data } from "@components/data.svelte";
+    import { storageAvailable, getSheetData } from "@components/utils";
+    import { sheet_data } from "@game/data.svelte";
 
     let { children, class: className }: FormProps = $props();
 
@@ -11,25 +11,13 @@
         | HTMLFormElement
         | undefined;
 
-    function get_diffs(obj1: any, data: any) {
-        var result: any = {};
-        var keys = Object.keys(obj1);
-
-        for (var key in data) {
-            if (!keys.includes(key)) {
-                result[key] = data[key];
-            }
-        }
-        return result;
-    }
-
     async function onsubmit(event: SubmitEvent) {
         event.preventDefault();
-        // console.log("maybe just get rid of this entirely");
 
         const form_data = new FormData(form);
-
-        console.log("sheet_data", $state.snapshot(sheet_data));
+        let json_data: any = sheet_data;
+        // console.log("sheet_data", $state.snapshot(sheet_data));
+        console.log("json_data", $state.snapshot(json_data));
 
         form_data.forEach(function (value: FormDataEntryValue, key: string) {
             if (key.includes("_") == false) {
@@ -37,8 +25,8 @@
             }
 
             const [category_key, field_key] = key.split("_");
-            sheet_data[category_key] = {
-                ...sheet_data[category_key],
+            json_data[category_key] = {
+                ...json_data[category_key],
                 [field_key]: value,
             };
         });
@@ -47,7 +35,7 @@
 
         localStorage.setItem(
             "sheetData",
-            LZString.compressToEncodedURIComponent(JSON.stringify(sheet_data)),
+            LZString.compressToEncodedURIComponent(JSON.stringify(json_data)),
         );
     }
 </script>

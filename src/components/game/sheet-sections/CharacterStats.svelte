@@ -4,7 +4,7 @@
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
 
     const { class: className }: SheetProps = $props();
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
     const { stats } = sheet_data;
 </script>
 

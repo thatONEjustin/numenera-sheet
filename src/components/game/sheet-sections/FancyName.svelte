@@ -5,13 +5,13 @@
     import CharacterClass from "@game/sheet-sections/CharacterClass.svelte";
     import { slide } from "svelte/transition";
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
 
     import {
         character_type_options,
         character_descriptor_options,
         character_focus_options,
-    } from "../mechanics/data";
+    } from "@game/data.svelte";
 
     const { class: className }: SheetProps = $props();
 

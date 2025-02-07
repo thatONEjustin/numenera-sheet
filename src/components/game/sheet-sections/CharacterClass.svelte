@@ -4,14 +4,14 @@
         character_type_options,
         character_focus_options,
         character_descriptor_options,
-    } from "@game/mechanics/data";
+    } from "@game/data.svelte";
 
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import SelectField from "@ui/forms/fields/SelectField.svelte";
 
     let { class: className }: SheetProps = $props();
 
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
     let { characterClass } = sheet_data;
 </script>
 

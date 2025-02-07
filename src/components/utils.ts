@@ -10,6 +10,18 @@ export function isEmptyObject(obj: object) {
     return true;
 }
 
+export function getObjectDiffs(obj1: object, obj2: any): object {
+    var result: any = {};
+    var keys = Object.keys(obj1);
+
+    for (var key in obj2) {
+        if (!keys.includes(key)) {
+            result[key] = obj2[key];
+        }
+    }
+    return result;
+}
+
 export function storageAvailable(type: any) {
     let storage;
     try {

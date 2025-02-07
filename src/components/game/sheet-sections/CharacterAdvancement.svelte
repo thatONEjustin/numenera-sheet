@@ -6,7 +6,7 @@
     import CharacterStat from "@game/mechanics/CharacterStat.svelte";
 
     const { class: className }: SheetProps = $props();
-    import { sheet_data } from "@components/data.svelte";
+    import { sheet_data } from "@game/data.svelte";
     const { advancement, advancementSteps } = sheet_data;
 </script>
 
