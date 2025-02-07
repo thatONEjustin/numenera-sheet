@@ -16,11 +16,12 @@
 </script>
 
 <SheetSection class={className}>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6">
+    <div class="flex items-between">
         <SelectField
             label="Type"
             name="characterClass_type"
             id="characterClass_type"
+            class="w-[76px]"
             options={character_type_options}
             value={characterClass?.type}
             required
@@ -30,6 +31,7 @@
             label="Descriptor"
             name="characterClass_descriptor"
             id="characterClass_descriptor"
+            class="w-[126px] mx-2"
             options={character_descriptor_options}
             value={characterClass?.descriptor}
             required
@@ -39,6 +41,7 @@
             label="Focus"
             name="characterClass_focus"
             id="characterClass_focus"
+            class="w-fit"
             options={character_focus_options}
             value={characterClass?.focus}
             required

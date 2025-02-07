@@ -4,12 +4,10 @@
     import SubmitButton from "@components/ui/forms/fields/SubmitButton.svelte";
 
     import CharacterDescription from "@game/sheet-sections/CharacterDescription.svelte";
-
-    let { sheet_data }: SheetSection = $props();
 </script>
 
 <Form>
-    <CharacterDescription class="py-6" {sheet_data} />
+    <CharacterDescription class="py-6" />
 
     <SubmitButton />
 </Form>

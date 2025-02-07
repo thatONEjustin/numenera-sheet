@@ -45,8 +45,6 @@
 
         if (storageAvailable("localStorage") == false) return;
 
-        console.log("form_data", $state.snapshot(sheet_data));
-
         localStorage.setItem(
             "sheetData",
             LZString.compressToEncodedURIComponent(JSON.stringify(sheet_data)),

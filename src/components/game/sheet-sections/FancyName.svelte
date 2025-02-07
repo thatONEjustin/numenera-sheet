@@ -15,16 +15,22 @@
 
     const { class: className }: SheetProps = $props();
 
-    let hide_name_generator = $state();
-
+    let show_fancy_name = $state(false);
     $effect(() => {
-        const status =
-            sheet_data.character.name == undefined &&
-            sheet_data.characterClass.descriptor == undefined &&
-            sheet_data.characterClass.type == undefined &&
-            sheet_data.characterClass.focus == undefined;
+        if (
+            "character" in sheet_data == false ||
+            "characterClass" in sheet_data == false
+        ) {
+            show_fancy_name = false;
+            return;
+        }
 
-        hide_name_generator = status;
+        const status =
+            sheet_data.character.name != undefined &&
+            sheet_data.characterClass.descriptor != undefined &&
+            sheet_data.characterClass.type != undefined &&
+            sheet_data.characterClass.focus != undefined;
+        show_fancy_name = status;
     });
 
     function clean_label(key: string, options: any): string {
@@ -45,25 +51,21 @@
 </script>
 
 {#snippet userInputs(hidden: boolean = false)}
-    <div
-        class:hidden
-        class="grid grid-cols-1 md:grid-cols-12 gap-x-6"
-        transition:slide
-    >
-        <PlayerInfo class="col-span-5" />
-        <CharacterClass class="col-span-7" />
+    <div class:hidden class="flex flex-row justify-between" transition:slide>
+        <PlayerInfo class="w-full mr-2" />
+        <CharacterClass class="max-w-fit w-full" />
     </div>
 {/snippet}
 
 {#await sheet_data then sheet_data}
     <SheetSection name="fancy-name" class={className}>
-        {#if !hide_name_generator}
+        {#if show_fancy_name}
             {@const descriptor = sheet_data.characterClass?.descriptor}
             {@const focus = sheet_data.characterClass?.focus}
             {@const type = sheet_data.characterClass?.type}
             <div class="py-10 flex flex-row items-start" transition:slide>
                 <h1 class="text-5xl">
-                    {sheet_data.character.name} a {clean_label(
+                    {sheet_data.character?.name} a {clean_label(
                         descriptor,
                         character_descriptor_options,
                     )}
@@ -76,7 +78,7 @@
                     type="button"
                     class="edit-button"
                     aria-labelledby="reset_name"
-                    onclick={() => (hide_name_generator = true)}
+                    onclick={() => (show_fancy_name = false)}
                 >
                     edit
                     <i aria-label="reset_name" class="nf nf-fa-pencil"></i>

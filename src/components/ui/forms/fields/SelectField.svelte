@@ -1,6 +1,7 @@
 <script lang="ts" generics="BaseInputTypes extends 'select'">
     import type { SvelteHTMLElements, ClassValue } from "@components/types";
     import { clickOutside } from "@components/utils";
+    import { preventDefault } from "svelte/legacy";
     import { slide } from "svelte/transition";
 
     type SelectOption = {
@@ -43,6 +44,7 @@
 
     let { name, label, id } = input;
     let select_field;
+    let options_element: any = $state() as HTMLDivElement;
 
     let filter_input: any = $state() as HTMLInputElement;
     let filter_value: string = $state("");
@@ -79,37 +81,42 @@
 
         return option_label;
     }
+
+    let width_width = $state(() => {
+        return options_element.getBoundingClientRect().width;
+    });
 </script>
 
 <div class={["select-field", className]}>
     <label for={name}>{label}</label>
 
     <div class="select-container">
-        {#if !active}
-            <button
-                class="cursor-pointer w-full h-full block text-left font-bold"
-                onclick={showList}
-            >
-                {value == ""
-                    ? "Enter " + label + " here"
-                    : formatLabel(
-                          value,
-                          options.filter(
-                              (option: any) => value == option.value,
-                          )[0].label,
-                      )}
-            </button>
-        {:else}
-            <input
-                type="text"
-                name="ignore"
-                bind:this={filter_input}
-                bind:value={filter_value}
-            />
-        {/if}
+        <input
+            type="text"
+            name="ignore"
+            bind:this={filter_input}
+            bind:value={filter_value}
+            onclick={(event) => {
+                if (active) return;
+                active = !active;
+                event.preventDefault();
+            }}
+            class={!active ? "cursor-pointer" : ""}
+            placeholder={value == ""
+                ? "Choose"
+                : formatLabel(
+                      value,
+                      options.filter((option: any) => value == option.value)[0]
+                          .label,
+                  )}
+        />
 
         {#if active && filtered_options(filter_value, options).length}
-            <div class="select-options" transition:slide>
+            <div
+                class="select-options"
+                transition:slide
+                bind:this={options_element}
+            >
                 {#each filtered_options(filter_value, options) as option}
                     <button
                         class="select-option"
@@ -154,14 +161,16 @@
     .select-container {
         @apply border 
             rounded-md
-            relative;
+            relative
+            flex-1;
         > button,
         > input {
             @apply px-4
                 py-3
                 border-gray-300
                 rounded-md
-                w-full;
+                w-full
+                max-w-fit;
         }
     }
     .select-options {
@@ -173,8 +182,7 @@
             rounded-md
             border 
             border-gray-400
-            min-w-max
-            max-w-full
+            max-w-max
             w-full
             z-20
             left-0
