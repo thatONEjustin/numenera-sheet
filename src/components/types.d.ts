@@ -7,12 +7,10 @@ export type { Component, Snippet, ClassValue, SvelteHTMLElements };
 type Tab = {
     label: string;
     content?: Snippet;
-    sheetData?: any;
 }
 
 type Tabs = {
     tabs: Array<Tab>;
-    sheet_data?: any;
     children?: Snippet;
     active?: number;
 };

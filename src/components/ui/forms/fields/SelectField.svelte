@@ -1,7 +1,7 @@
 <script lang="ts" generics="BaseInputTypes extends 'select'">
     import type { SvelteHTMLElements, ClassValue } from "@components/types";
-    import { clickOutside } from "@components/utils";
-    import { preventDefault } from "svelte/legacy";
+    import { clickOutside, updateSheetData } from "@components/utils";
+    import { sheet_data } from "@components/game/data.svelte";
     import { slide } from "svelte/transition";
 
     type SelectOption = {
@@ -14,9 +14,10 @@
         class?: ClassValue;
         active?: boolean;
         value?: string;
+        label?: string;
     };
 
-    type _SelectProps = SvelteHTMLElements[BaseInputTypes] & SelectField;
+    type SelectProps = SvelteHTMLElements[BaseInputTypes] & SelectField;
 
     /*
     type SelectOption = {
@@ -40,7 +41,7 @@
         class: className = "",
         active = $bindable(false),
         ...input
-    } = $props();
+    }: SelectProps = $props();
 
     let { name, label, id } = input;
     let select_field;
@@ -59,32 +60,48 @@
         );
     };
 
-    function showList(event: Event) {
-        active = !active;
-        event.preventDefault();
+    function hideList() {
+        active = false;
     }
 
-    function hideList(event: Event) {
-        active = false;
-        event.preventDefault();
-    }
+    // const [category_key, field_key] = name?.split("_");
+    const category_key = $derived.by(() => {
+        if (name == undefined) {
+            return "";
+        }
+
+        return name.split("_")[0];
+    });
+
+    const field_key = $derived.by(() => {
+        if (name == undefined) {
+            return "";
+        }
+
+        return name.split("_")[1];
+    });
 
     function select(option: string) {
         value = option;
         active = false;
+        sheet_data[category_key] = updateSheetData(
+            sheet_data,
+            category_key,
+            field_key,
+            value,
+        );
     }
 
-    function formatLabel(option_value: string, option_label: string) {
+    function formatLabel(
+        option_value: string,
+        option_label: string | undefined,
+    ) {
         if (option_label == undefined) {
             return option_value.charAt(0).toUpperCase() + option_value.slice(1);
         }
 
         return option_label;
     }
-
-    let width_width = $state(() => {
-        return options_element.getBoundingClientRect().width;
-    });
 </script>
 
 <div class={["select-field", className]}>
@@ -101,12 +118,12 @@
                 active = !active;
                 event.preventDefault();
             }}
-            class={!active ? "cursor-pointer" : ""}
+            class={["select-filter", !active ? "cursor-pointer" : ""]}
             placeholder={value == ""
                 ? "Choose"
                 : formatLabel(
                       value,
-                      options.filter((option: any) => value == option.value)[0]
+                      options.filter((option) => value == option.value)[0]
                           .label,
                   )}
         />
@@ -120,11 +137,13 @@
                 {#each filtered_options(filter_value, options) as option}
                     <button
                         class="select-option"
-                        onclick={(_event: Event) => {
+                        onclick={(event: Event) => {
+                            event.preventDefault();
                             select(option.value);
                         }}
                         transition:slide
-                        use:clickOutside={() => hideList}
+                        use:clickOutside
+                        onClickOutside={hideList}
                     >
                         {formatLabel(option.value, option.label)}
                     </button>
@@ -158,16 +177,22 @@
         }
     }
 
+    .select-filter {
+        &::placeholder {
+            @apply text-black;
+        }
+    }
+
     .select-container {
         @apply border 
             rounded-md
             relative
             flex-1;
-        > button,
+
         > input {
             @apply px-4
                 py-3
-                border-gray-300
+                border-gray-400
                 rounded-md
                 w-full
                 max-w-fit;

@@ -18,21 +18,21 @@
             id="1action"
             label="1 action"
             value="1action"
-            checked={recovery?.oneAction == "1action"}
+            checked={recovery?.oneAction}
         />
         <CheckboxField
             name="recovery_tenMin"
             id="10min"
             label="10 minutes"
             value="10min"
-            checked={recovery?.tenMin == "10min"}
+            checked={recovery?.tenMin}
         />
         <CheckboxField
             name="recovery_oneHour"
             id="1hour"
             label="1 hour"
             value="1hour"
-            checked={recovery?.oneHour == "1hour"}
+            checked={recovery?.oneHour}
         />
         <CheckboxField
             name="recovery_available"
@@ -40,7 +40,7 @@
             id="10hours"
             label="10 hours"
             value="10hours"
-            checked={recovery?.available == "10hours"}
+            checked={recovery?.available}
         />
     </div>
 </fieldset>

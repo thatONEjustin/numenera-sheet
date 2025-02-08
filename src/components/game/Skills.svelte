@@ -9,5 +9,5 @@
 <Form>
     <CharacterSkills class="py-6" />
 
-    <SubmitButton />
+    <!-- <SubmitButton /> -->
 </Form>

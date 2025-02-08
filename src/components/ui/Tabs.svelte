@@ -3,7 +3,7 @@
 
     import { fly } from "svelte/transition";
 
-    let { tabs, sheet_data, children, active = $bindable(0) }: Tabs = $props();
+    let { tabs, children, active = $bindable(0) }: Tabs = $props();
 
     function show_tab(index: number): void {
         active = index;
@@ -35,7 +35,7 @@
                 in:fly={{ x: "100%", y: 0, delay: 350 }}
                 out:fly={{ x: "-100%", y: 0, duration: 250 }}
             >
-                <Content {sheet_data} />
+                <Content />
             </section>
         {/if}
     {/each}

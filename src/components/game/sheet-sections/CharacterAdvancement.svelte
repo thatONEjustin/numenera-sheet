@@ -65,29 +65,25 @@
             name="advancementSteps_statBonus"
             id="statBonus"
             label="Increase Capabilities"
-            value="true"
             checked={advancementSteps?.statBonus}
         />
         <CheckboxField
             name="advancementSteps_xtraEffort"
             id="extraEffort"
             label="Extra Effort"
-            value="true"
             checked={advancementSteps?.xtraEffort}
         />
         <CheckboxField
             name="advancementSteps_edge"
             id="edge"
             label="Move towards perfection"
-            value="true"
             checked={advancementSteps?.edge}
         />
         <CheckboxField
-            name="advancemntSteps_skillTraining"
+            name="advancementSteps_skillTraining"
             class="md:col-start-2"
             id="skillTraining"
             label="Skill Training"
-            value="true"
             checked={advancementSteps?.skillTraining}
         />
     </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types";
+    // import type { SheetSection } from "@components/types";
     import Form from "@components/ui/forms/Form.svelte";
     import SubmitButton from "@components/ui/forms/fields/SubmitButton.svelte";
 

@@ -7,8 +7,9 @@
     import Skills from "@game/Skills.svelte";
     import Form from "@components/ui/forms/Form.svelte";
 
-    // import Combat from "@game/Combat.svelte";
-    // import { getSheetData } from "@components/utils";
+    import { sheet_data } from "@game/data.svelte";
+    import { getSheetData } from "@components/utils";
+    import Error from "@components/ui/Error.svelte";
 
     const tabs: Array<Tab> = [
         {
@@ -24,22 +25,11 @@
             content: Background as any,
         },
     ];
-
-    function onclick(_event: Event) {
-        if (localStorage.getItem("sheetData")) {
-            localStorage.removeItem("sheetData");
-        }
-    }
-
-    import { sheet_data } from "@game/data.svelte";
 </script>
 
-<!-- <Tabs {tabs} {sheet_data} /> -->
-
-{#await sheet_data}
-    <div>Loading</div>
-{:then sheet_data}
-    <Tabs {tabs} {sheet_data} />
+<!-- 
+{#await import("@ui/Tabs.svelte") then { default: Tabs }}
+    <Tabs {tabs} />
 {:catch error}
     <Form class="flex flex-column items-start justify-center">
         <h1>{error}</h1>
@@ -48,8 +38,15 @@
     </Form>
 {/await}
 
+-->
+{#await sheet_data then { character, characterClass, skills, advancementSteps, recovery }}
+    <Tabs {tabs} />
+{:catch error}
+    <Error {error} />
+{/await}
+
 <style lang="postcss">
-    @import "tailwindcss/theme" theme(reference);
+    @import "tailwindcss/theme" theme(w);
     .reset-button {
         @apply max-w-fit w-full py-4 px-6 text-xl;
         @apply my-6 mx-auto cursor-pointer;

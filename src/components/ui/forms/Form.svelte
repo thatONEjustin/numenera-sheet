@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { Form as FormProps } from "@components/types.d";
-
     import LZString from "lz-string";
-    import { storageAvailable, getSheetData } from "@components/utils";
+
+    import { storageAvailable } from "@components/utils";
     import { sheet_data } from "@game/data.svelte";
 
     let { children, class: className }: FormProps = $props();
@@ -13,37 +13,19 @@
 
     async function onsubmit(event: SubmitEvent) {
         event.preventDefault();
+    }
 
-        const form_data = new FormData(form);
-        let json_data: any = sheet_data;
-
-        form_data.forEach(function (value: FormDataEntryValue, key: string) {
-            if (key.includes("_") == false) {
-                return;
-            }
-
-            const [category_key, field_key] = key.split("_");
-            json_data[category_key] = {
-                ...json_data[category_key],
-                [field_key]: value,
-            };
-        });
-
-        // let json_data: any = sheet_data;
-        /*
-        console.log("json_data", $state.snapshot(sheet_data));
-
-        if (sheet_data.stats.speed != undefined) {
-            console.log(sheet_data.stats.speed);
-        }*/
-
+    $effect(() => {
+        // if (isEmptyObject(sheet_data)) return;
+        // console.log(isEmptyObject(sheet_data));
+        console.log($state.snapshot(sheet_data));
         if (storageAvailable("localStorage") == false) return;
 
         localStorage.setItem(
             "sheetData",
-            LZString.compressToEncodedURIComponent(JSON.stringify(json_data)),
+            LZString.compressToEncodedURIComponent(JSON.stringify(sheet_data)),
         );
-    }
+    });
 </script>
 
 <form class={className} action="/" method="POST" {onsubmit} bind:this={form}>

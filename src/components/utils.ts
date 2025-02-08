@@ -41,7 +41,13 @@ export function storageAvailable(type: any) {
     }
 }
 
-/** Dispatch event on click outside of node */
+
+/** 
+ * BUG:
+ * this is supposed to dispatch event on click outside of node
+ * but I think the example I found was older because it uses 
+ * custom events rather than the actions patterns
+ *
 export function clickOutside(node: any, callbackFunction: () => {}) {
     const handleClick = (event: any) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
@@ -55,12 +61,40 @@ export function clickOutside(node: any, callbackFunction: () => {}) {
 
     return {
         update(newCallBackFunction: any) {
+            console.log('update?')
             callbackFunction = newCallBackFunction
         }, destroy() {
             document.removeEventListener('click', handleClick, true);
         }
     }
-}
+} */
+import type { Action } from "svelte/action";
+export const clickOutside: Action<
+    HTMLElement,
+    undefined,
+    {
+        onClickOutside: (event: Event) => void;
+    }
+> = (node: Node) => {
+    const handleClick = (event: any) => {
+        if (
+            node &&
+            !node.contains(event.target) &&
+            !event.defaultPrevented
+        ) {
+            // NOTE: Process outside click
+            node.dispatchEvent(new CustomEvent("ClickOutside"));
+        }
+    };
+
+    document.addEventListener("click", handleClick, true);
+
+    return {
+        destroy() {
+            document.removeEventListener("click", handleClick, true);
+        },
+    };
+};
 
 function get_data_string(local_storage_key: string): any {
     if (
@@ -89,4 +123,11 @@ export function getSheetData() {
             reject(error)
         }
     })
+}
+
+export function updateSheetData(sheet: any, category_key: string, field_key: string, value: any): object {
+    return {
+        ...sheet[category_key],
+        [field_key]: value
+    }
 }

@@ -1,15 +1,15 @@
 <script lang="ts">
-    import type { SheetSection } from "@components/types";
+    // import type { SheetSection } from "@components/types";
 
     import Form from "@forms/Form.svelte";
-    import SubmitButton from "@forms/fields/SubmitButton.svelte";
+    // import SubmitButton from "@forms/fields/SubmitButton.svelte";
 
     // import CharacterDescription from "@game/sheet-sections/CharacterDescription.svelte";
     import CharacterStats from "@game/sheet-sections/CharacterStats.svelte";
     import FancyName from "@game/sheet-sections/FancyName.svelte";
     import CharacterAdvancement from "@game/sheet-sections/CharacterAdvancement.svelte";
     import RecoveryAvailable from "@game/sheet-sections/RecoveryAvailable.svelte";
-    import CharacterSkills from "@game/sheet-sections/CharacterSkills.svelte";
+    // import CharacterSkills from "@game/sheet-sections/CharacterSkills.svelte";
 </script>
 
 <Form>
@@ -39,5 +39,5 @@
         -->
     </div>
 
-    <SubmitButton />
+    <!-- <SubmitButton /> -->
 </Form>

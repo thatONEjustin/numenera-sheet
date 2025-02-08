@@ -1,6 +1,7 @@
 <script lang="ts" generics="BaseInputTypes extends 'input'">
     import type { SvelteHTMLElements, Snippet } from "@components/types";
-    import { fly } from "svelte/transition";
+    import { sheet_data } from "@components/game/data.svelte";
+    import { updateSheetData } from "@components/utils";
 
     type JustinNumberField = {
         name: string;
@@ -23,13 +24,13 @@
         max,
         hideLabel,
         labelTag,
-        value = $bindable(""),
+        value = $bindable(),
         required = false,
         placeholder: raw_placeholder = "",
     }: NumberField = $props();
 
     let element: NumberInputElement = $state() as NumberInputElement;
-    let editing: boolean = $state(false);
+    // let editing: boolean = $state(false);
 
     const label: string = $derived.by(() => {
         return raw_label.trim() != "" ? raw_label : name.replaceAll("_", " ");
@@ -39,10 +40,15 @@
         return raw_placeholder != "" ? raw_placeholder : `Enter ${label} here`;
     });
 
-    function editOnClick(event: Event) {
-        if (editing) return;
-        editing = !editing;
-        event.preventDefault();
+    const [category_key, field_key] = name.split("_");
+
+    function update_number() {
+        sheet_data[category_key] = updateSheetData(
+            sheet_data,
+            category_key,
+            field_key,
+            element?.value,
+        );
     }
 </script>
 
@@ -59,12 +65,15 @@
                 {name}
                 type="number"
                 {id}
-                {value}
+                bind:value
                 {required}
                 {placeholder}
                 {min}
                 {max}
-                class={["transition-all"]}
+                oninput={(event: Event) => {
+                    event.preventDefault();
+                    update_number();
+                }}
                 bind:this={element}
             />
             <div
@@ -72,7 +81,11 @@
             >
                 <button
                     type="submit"
-                    onclick={() => element?.stepUp()}
+                    onclick={(event: Event) => {
+                        event.preventDefault();
+                        element?.stepUp();
+                        update_number();
+                    }}
                     class="cursor-pointer"
                 >
                     <i class="nf nf-cod-arrow_up text-sm text-center"></i>
@@ -81,7 +94,11 @@
 
                 <button
                     type="submit"
-                    onclick={() => element?.stepDown()}
+                    onclick={(event: Event) => {
+                        event.preventDefault();
+                        element?.stepDown();
+                        update_number();
+                    }}
                     class="cursor-pointer"
                 >
                     <i class="nf nf-cod-arrow_down text-sm text-center"></i>
@@ -116,10 +133,12 @@
             > input {
                 @apply text-black
                     rounded-md
-                    p-3
+                    py-3
+                    pl-3
+                    pr-5.5
                     border
                     border-gray-300
-                    text-left
+                    text-center
                     transition-all
                     w-[76px];
 
@@ -129,30 +148,6 @@
                 &::-webkit-outer-spin-button {
                     -webkit-appearance: none;
                 }
-
-                /*
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        @apply appearance-none;
-        -moz-appearance: textfield;
-    }
-                */
-            }
-
-            > .input-edit-button {
-                @apply flex-none;
-                @apply transition-all;
-
-                @apply rounded-md
-                    p-3
-                    ml-4
-                    border
-                    border-gray-300
-                    text-left
-                    bg-cyan-300
-                    text-white
-                    cursor-pointer
-                    w-[76px];
             }
         }
     }

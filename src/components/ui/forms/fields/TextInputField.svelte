@@ -1,9 +1,11 @@
 <script lang="ts" generics="BaseInputTypes extends 'input' | 'textarea'">
+    import { sheet_data } from "@components/game/data.svelte";
     import type {
         JustinTextInput,
         SvelteHTMLElements,
         TextInputElement,
     } from "@components/types.d";
+    import { clickOutside, updateSheetData } from "@components/utils";
     import { fly } from "svelte/transition";
 
     type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
@@ -22,7 +24,7 @@
         value = $bindable(""),
     }: TextInput = $props();
 
-    let input_element: TextInputElement = $state() as TextInputElement;
+    let element: TextInputElement = $state() as TextInputElement;
     let editing: boolean = $state(false);
 
     const label: string = $derived.by(() => {
@@ -34,10 +36,21 @@
     });
 
     function editOnClick(event: Event) {
-        if (editing) return;
-
         editing = !editing;
         event.preventDefault();
+    }
+
+    const [category_key, field_key] = name.split("_");
+    function onclick(event?: Event) {
+        event?.preventDefault();
+        sheet_data[category_key] = updateSheetData(
+            sheet_data,
+            category_key,
+            field_key,
+            element.value,
+        );
+
+        editing = false;
     }
 </script>
 
@@ -60,7 +73,9 @@
                     {placeholder}
                     class={["transition-all", !editing ? "cursor-pointer" : ""]}
                     onclick={editOnClick}
-                    bind:this={input_element}
+                    use:clickOutside
+                    onClickOutside={() => (editing = false)}
+                    bind:this={element}
                 />
             {/if}
 
@@ -72,15 +87,15 @@
                     {required}
                     {placeholder}
                     class="transition-all"
-                    bind:this={input_element}>{value}</textarea
+                    bind:this={element}>{value}</textarea
                 >
             {/if}
 
             {#if editing}
                 <button
                     class={["input-edit-button"]}
-                    type="submit"
-                    onclick={(_: Event) => (editing = !editing)}
+                    type="button"
+                    {onclick}
                     in:fly={{ x: "100%", y: 0 }}
                     out:fly={{ x: "100%", y: 0 }}
                 >

@@ -1,6 +1,6 @@
 import { getSheetData } from "@components/utils"
 
-let sheet_data: any = $state(await getSheetData())
+
 
 const character_type_options = [
     {
@@ -168,6 +168,8 @@ const character_focus_options = [
         value: "backAlleyMiracles",
     },
 ];
+
+let sheet_data: any = $state(await getSheetData())
 
 export {
     character_type_options,
