@@ -10,10 +10,6 @@
 
         return;
     }
-
-    function _click_next(event: Event): void {
-        event.preventDefault();
-    }
 </script>
 
 <ul class="TabsNav">

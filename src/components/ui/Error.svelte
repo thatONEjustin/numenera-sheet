@@ -3,7 +3,7 @@
 
     let { error } = $props();
 
-    function onclick(event: Event) {
+    function onclick(_event: Event) {
         if (localStorage.getItem("sheetData")) {
             localStorage.removeItem("sheetData");
         }
