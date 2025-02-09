@@ -9,13 +9,15 @@
     } from "@game/data.svelte";
     import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
 
-    const data_array = [
-        {
-            name: "Attack Flourish",
-            description: `With your attack, you add stylish moves, entertaining quips, or a certain \"something\" that entertains or impresses others. Choose any number of creatures within short range who can see you; each of them gains a +1 bonus to its next die roll.`,
-            tags: ["enabler"],
-        },
-    ];
+    import { skills } from "@game/data.svelte";
+
+    // const data_array = [
+    //     {
+    //         name: "Attack Flourish",
+    //         description: `With your attack, you add stylish moves, entertaining quips, or a certain \"something\" that entertains or impresses others. Choose any number of creatures within short range who can see you; each of them gains a +1 bonus to its next die roll.`,
+    //         tags: ["enabler"],
+    //     },
+    // ];
 
     let input_value = $state("new");
 
@@ -26,6 +28,10 @@
     };
 
     let { class: className }: SkillsTabProps = $props();
+
+    $effect(() => {
+        console.log($state.snapshot(skills.length));
+    });
 </script>
 
 <SheetSection name="character-skill" class={className}>
@@ -34,23 +40,25 @@
         <h3 class="pl-2">Skills</h3>
     </div>
 
-    <div class="skills-list">
-        {#each data_array as skill}
-            <CharacterSkill {skill} />
-            <!--
+    {#key skills}
+        <div class="skills-list">
+            {#each skills as skill}
+                <CharacterSkill {skill} is_new={false} />
+                <!--
                 TODO: this needs to be its own component or at least snippet 
                 basically we need UX to replace the "form" of adding new
                 <CharacterSkill />'s 
-            <div class="skill">
-                <h4>{name}</h4>
-                <p>{description}</p>
-                {#each tags as tag}
-                    <small>{tag}</small>
-                {/each}
-            </div>
+                <div class="skill">
+                    <h4>{name}</h4>
+                    <p>{description}</p>
+                    {#each tags as tag}
+                        <small>{tag}</small>
+                    {/each}
+                </div>
             -->
-        {/each}
+            {/each}
 
-        <CharacterSkill />
-    </div>
+            <CharacterSkill is_new={true} />
+        </div>
+    {/key}
 </SheetSection>

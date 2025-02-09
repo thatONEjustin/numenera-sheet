@@ -41,33 +41,6 @@ export function storageAvailable(type: any) {
     }
 }
 
-
-/** 
- * BUG:
- * this is supposed to dispatch event on click outside of node
- * but I think the example I found was older because it uses 
- * custom events rather than the actions patterns
- *
-export function clickOutside(node: any, callbackFunction: () => {}) {
-    const handleClick = (event: any) => {
-        if (node && !node.contains(event.target) && !event.defaultPrevented) {
-            node.dispatchEvent(
-                new CustomEvent('ClickOutside', node)
-            )
-        }
-    }
-
-    document.addEventListener('click', handleClick, true);
-
-    return {
-        update(newCallBackFunction: any) {
-            console.log('update?')
-            callbackFunction = newCallBackFunction
-        }, destroy() {
-            document.removeEventListener('click', handleClick, true);
-        }
-    }
-} */
 import type { Action } from "svelte/action";
 export const clickOutside: Action<
     HTMLElement,
@@ -122,6 +95,25 @@ export function getSheetData() {
         } catch (error) {
             reject(error)
         }
+    })
+}
+
+export function getSkillsData() {
+    return new Promise(async (resolve, reject) => {
+
+        let skills_array: any = await getSheetData()
+
+        if (isEmptyObject(skills_array)) {
+            resolve([])
+            return;
+        }
+
+        if ("skills" in skills_array == true) {
+            resolve(skills_array["skills"])
+            return
+        }
+
+        reject("skills_array might not be properly read")
     })
 }
 

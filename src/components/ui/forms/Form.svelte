@@ -18,7 +18,7 @@
     $effect(() => {
         // if (isEmptyObject(sheet_data)) return;
         // console.log(isEmptyObject(sheet_data));
-        console.log($state.snapshot(sheet_data));
+        // console.log($state.snapshot(sheet_data));
         if (storageAvailable("localStorage") == false) return;
 
         localStorage.setItem(

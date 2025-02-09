@@ -43,11 +43,12 @@
     const [category_key, field_key] = name.split("_");
     function onclick(event?: Event) {
         event?.preventDefault();
+        value = element.value;
         sheet_data[category_key] = updateSheetData(
             sheet_data,
             category_key,
             field_key,
-            element.value,
+            value,
         );
 
         editing = false;

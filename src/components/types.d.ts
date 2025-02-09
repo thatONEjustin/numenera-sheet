@@ -29,8 +29,8 @@ type Form = {
 };
 
 type JustinTextInput = {
-    name: string;
-    type: string;
+    name?: string;
+    type?: string;
     hideLabel?: boolean;
     label?: string;
     labelTag?: Snippet;

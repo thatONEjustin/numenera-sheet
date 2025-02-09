@@ -1,50 +1,23 @@
-<script lang="ts">
-    import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
+<script lang="ts" generics="BaseInputTypes extends 'input' | 'textarea'">
+    import type {
+        JustinTextInput,
+        SvelteHTMLElements,
+    } from "@components/types.d";
+    type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
+
     import { isEmptyObject } from "@components/utils";
-    Object;
+    import { sheet_data, skills } from "@game/data.svelte";
 
-    let { skill = $bindable({}), ...input } = $props();
+    let {
+        skill = $bindable({
+            name: "",
+            description: "",
+            tags: "",
+        }),
+        is_new = $bindable(true),
+    } = $props();
 
-    let { id: raw_id, name: raw_name } = input;
-
-    /*
-    let id = $derived.by(() => {
-        return raw_id != "" ? raw_id : name;
-    });
-
-    // HACK: this is *just* a placeholder while I'm working out logic
-    let attribute_name = $derived.by(() => {
-        return raw_name;
-    });
-    */
-
-    let attribute_name = $derived.by(() => {
-        return raw_name;
-    });
-
-    function skill_data_key_generator(
-        key: string = "",
-        modifier: string,
-    ): string {
-        return (
-            "skill_" +
-            key +
-            modifier.charAt(0).toUpperCase() +
-            modifier.slice(1)
-        );
-    }
-
-    let is_new = $derived.by(() => {
-        if (isEmptyObject(skill)) return true;
-
-        if (skill.name == undefined || skill.tags.length == 0) {
-            return true;
-        }
-
-        return false;
-    });
-
-    import { sheet_data } from "@game/data.svelte";
+    let editing = $state(false);
 
     let tags_array = $derived.by(() => {
         if (isEmptyObject(skill)) return [];
@@ -55,44 +28,152 @@
 
         return skill.tags;
     });
+
+    let is_saveable = $derived.by(() => {
+        return (
+            name_input.value != "" &&
+            desc_input.value != "" &&
+            tags_input.value != ""
+        );
+    });
+
+    function save_skill() {
+        if (!is_saveable) {
+            return;
+        }
+
+        if (name_input.value != "") {
+            skill.name = name_input.value;
+        }
+
+        if (desc_input.value != "") {
+            skill.description = desc_input.value;
+        }
+
+        if (tags_input.value != "") {
+            if (tags_input.value.includes(",")) {
+                let array = tags_input.value.split(",");
+                skill.tags = array;
+            } else {
+                skill.tags = [tags_input.value];
+            }
+        }
+
+        if (is_new && !editing) {
+            skills.push(skill);
+
+            if (sheet_data["skills"] == undefined) {
+                sheet_data["skills"] = skills;
+                return;
+            }
+
+            sheet_data["skills"] = skills;
+        } else {
+            let editing_copy = skills;
+
+            editing_copy = editing_copy.filter((skill_ref: any) => {
+                return (
+                    skill_ref.name != skill.name &&
+                    skill_ref.description != skill.description &&
+                    skill_ref.tags != skill.tags
+                );
+            });
+
+            editing_copy.push(skill);
+
+            sheet_data["skills"] = editing_copy;
+
+            editing = false;
+            is_new = false;
+        }
+    }
+
+    function delete_skill() {
+        let deleted_skill_copy = skills;
+
+        deleted_skill_copy = deleted_skill_copy.filter((skill_ref: any) => {
+            return (
+                skill_ref.name != skill.name &&
+                skill_ref.description != skill.description &&
+                skill_ref.tags != skill.tags
+            );
+        });
+
+        sheet_data["skills"] = deleted_skill_copy;
+
+        editing = false;
+    }
+
+    let name_input: HTMLInputElement = $state() as HTMLInputElement;
+    let desc_input: HTMLInputElement = $state() as HTMLInputElement;
+    let tags_input: HTMLInputElement = $state() as HTMLInputElement;
+
+    function startEditing(event: Event) {
+        event.preventDefault();
+        editing = true;
+    }
+
+    $effect(() => {
+        console.log(`editing: ${editing}, is_new: ${is_new}`);
+    });
 </script>
 
 {#snippet input_fields(hide: boolean = false)}
-    <div class:hidden={hide}>
-        <TextInputField
-            name={skill_data_key_generator("", "name")}
-            id={skill_data_key_generator("", "name")}
-            value={skill?.name}
-            type="text"
-        />
-        <TextInputField
-            name={skill_data_key_generator(attribute_name, "description")}
-            id={skill_data_key_generator(attribute_name, "description")}
-            value={skill?.description}
-            type="text"
-        />
+    {#key skill}
+        <div class:hidden={hide}>
+            <label>
+                Name:
+                <input type="text" value={skill?.name} bind:this={name_input} />
+            </label>
 
-        <TextInputField
-            name={skill_data_key_generator(attribute_name, "tags")}
-            id={skill_data_key_generator(attribute_name, "tags")}
-            value={skill?.tags}
-            type="text"
-        />
-    </div>
+            <label>
+                Description:
+                <input
+                    type="text"
+                    value={skill?.description}
+                    bind:this={desc_input}
+                />
+            </label>
+
+            <label>
+                Tags:
+                <input type="text" value={skill?.tags} bind:this={tags_input} />
+            </label>
+
+            {#if is_new || editing}
+                <button type="button" onclick={save_skill}> save </button>
+
+                <!-- {#if is_new == false}
+                    <button type="button" onclick={delete_skill}>delete</button>
+                {/if} -->
+            {/if}
+        </div>
+    {/key}
 {/snippet}
 <div class="character-skill">
-    {#if !is_new}
-        <!-- content here -->
-        <div>
-            <h4>{skill.name}</h4>
-            <p>{skill.description}</p>
-            {#each tags_array as tag}
-                <small>{tag}</small>
-            {/each}
+    {#key is_new}
+        {#if !is_new && !editing}
+            <div>
+                <h4>{skill.name}</h4>
+                <p>{skill.description}</p>
+                {#each tags_array as tag}
+                    <small>{tag}</small>
+                {/each}
 
-            {@render input_fields(true)}
-        </div>
-    {:else}
-        {@render input_fields()}
-    {/if}
+                <button type="button" onclick={startEditing}> edit </button>
+
+                {@render input_fields(true)}
+            </div>
+        {:else}
+            {@render input_fields()}
+        {/if}
+    {/key}
 </div>
+
+<style lang="postcss">
+    @import "tailwindcss/theme" theme(reference);
+
+    input {
+        @apply border border-black rounded-md;
+    }
+</style>

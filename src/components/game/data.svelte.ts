@@ -1,6 +1,4 @@
-import { getSheetData } from "@components/utils"
-
-
+import { getSheetData, getSkillsData, isEmptyObject } from "@components/utils"
 
 const character_type_options = [
     {
@@ -170,10 +168,12 @@ const character_focus_options = [
 ];
 
 let sheet_data: any = $state(await getSheetData())
+let skills: any = $state(await getSkillsData())
 
 export {
     character_type_options,
     character_focus_options,
     character_descriptor_options,
-    sheet_data
+    sheet_data,
+    skills
 }
