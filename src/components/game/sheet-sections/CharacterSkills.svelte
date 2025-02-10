@@ -2,36 +2,17 @@
     import type { ClassValue } from "@components/types";
     import SheetSection from "@game/sheet-sections/SheetSection.svelte";
     import CharacterSkill from "@game/mechanics/CharacterSkill.svelte";
-    import {
-        character_type_options,
-        character_descriptor_options,
-        character_focus_options,
-    } from "@game/data.svelte";
-    import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
+    import { sheet_data } from "@game/data.svelte";
 
-    import { skills } from "@game/data.svelte";
-
-    // const data_array = [
-    //     {
-    //         name: "Attack Flourish",
-    //         description: `With your attack, you add stylish moves, entertaining quips, or a certain \"something\" that entertains or impresses others. Choose any number of creatures within short range who can see you; each of them gains a +1 bonus to its next die roll.`,
-    //         tags: ["enabler"],
-    //     },
-    // ];
-
-    let input_value = $state("new");
-
-    let new_skill_name = $state("");
+    let skills = $derived.by(() => {
+        return sheet_data["skills"];
+    });
 
     type SkillsTabProps = {
         class?: ClassValue;
     };
 
     let { class: className }: SkillsTabProps = $props();
-
-    $effect(() => {
-        console.log($state.snapshot(skills.length));
-    });
 </script>
 
 <SheetSection name="character-skill" class={className}>
@@ -41,24 +22,22 @@
     </div>
 
     {#key skills}
-        <div class="skills-list">
+        <div class="skills-list grid grid-cols-1 md:grid-cols-2 gap-x-6">
             {#each skills as skill}
                 <CharacterSkill {skill} is_new={false} />
-                <!--
-                TODO: this needs to be its own component or at least snippet 
-                basically we need UX to replace the "form" of adding new
-                <CharacterSkill />'s 
-                <div class="skill">
-                    <h4>{name}</h4>
-                    <p>{description}</p>
-                    {#each tags as tag}
-                        <small>{tag}</small>
-                    {/each}
-                </div>
-            -->
             {/each}
 
-            <CharacterSkill is_new={true} />
+            <div class="skills-list-add md:col-span-2">
+                <h2>Add Skill</h2>
+                <CharacterSkill is_new={true} />
+            </div>
         </div>
     {/key}
 </SheetSection>
+
+<style lang="postcss">
+    @import "tailwindcss/theme" theme(reference);
+    .skills-list-add {
+        @apply mt-4 pt-6 border-t border-t-gray-400;
+    }
+</style>

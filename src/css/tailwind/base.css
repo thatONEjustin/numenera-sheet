@@ -36,4 +36,8 @@
             @apply mt-10;
         }
     }
+
+    button {
+        @apply cursor-pointer;
+    }
 }

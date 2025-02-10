@@ -17,6 +17,10 @@
         is_new = $bindable(true),
     } = $props();
 
+    let name_input: HTMLInputElement = $state() as HTMLInputElement;
+    let desc_input: HTMLTextAreaElement = $state() as HTMLTextAreaElement;
+    let tags_input: HTMLInputElement = $state() as HTMLInputElement;
+
     let editing = $state(false);
 
     let tags_array = $derived.by(() => {
@@ -68,6 +72,12 @@
             }
 
             sheet_data["skills"] = skills;
+            is_new = true;
+            skill = {
+                name: "",
+                description: "",
+                tags: "",
+            };
         } else {
             let editing_copy = skills;
 
@@ -104,48 +114,94 @@
         editing = false;
     }
 
-    let name_input: HTMLInputElement = $state() as HTMLInputElement;
-    let desc_input: HTMLInputElement = $state() as HTMLInputElement;
-    let tags_input: HTMLInputElement = $state() as HTMLInputElement;
-
     function startEditing(event: Event) {
         event.preventDefault();
         editing = true;
     }
 
-    $effect(() => {
-        console.log(`editing: ${editing}, is_new: ${is_new}`);
-    });
+    $effect(() => console.log(`is_new: ${is_new}, is_editing: ${editing}`));
 </script>
 
 {#snippet input_fields(hide: boolean = false)}
     {#key skill}
-        <div class:hidden={hide}>
-            <label>
-                Name:
-                <input type="text" value={skill?.name} bind:this={name_input} />
-            </label>
+        <div
+            class={["character-skill-form", hide ? "!hidden" : ""]}
+            class:hidden={hide}
+        >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                <div class="character-skill-input">
+                    <label
+                        for="skill-name{skill?.name
+                            .replaceAll(' ', '')
+                            .toLowerCase()}">Name:</label
+                    >
 
-            <label>
-                Description:
-                <input
-                    type="text"
-                    value={skill?.description}
-                    bind:this={desc_input}
-                />
-            </label>
+                    <input
+                        class="character-skill-field"
+                        type="text"
+                        id="skill-name{skill?.name
+                            .replaceAll(' ', '')
+                            .toLowerCase()}"
+                        value={skill?.name}
+                        bind:this={name_input}
+                    />
+                </div>
+                <div class="character-skill-input">
+                    <label
+                        for="skill-tags{skill?.name
+                            .replaceAll(' ', '')
+                            .toLowerCase()}"
+                    >
+                        Tags:
+                    </label>
 
-            <label>
-                Tags:
-                <input type="text" value={skill?.tags} bind:this={tags_input} />
-            </label>
+                    <input
+                        class="character-skill-field"
+                        id="skill-tags{skill?.name
+                            .replaceAll(' ', '')
+                            .toLowerCase()}"
+                        type="text"
+                        value={skill?.tags}
+                        bind:this={tags_input}
+                    />
+                </div>
+            </div>
+
+            <div class="character-skill-input">
+                <label
+                    for="skill-description{skill?.description
+                        .replaceAll(' ', '')
+                        .toLowerCase()}"
+                >
+                    Description:
+                </label>
+                <textarea
+                    class="character-skill-field"
+                    id="skill-description{skill?.description
+                        .replaceAll(' ', '')
+                        .toLowerCase()}"
+                    bind:this={desc_input}>{skill?.description}</textarea
+                >
+            </div>
 
             {#if is_new || editing}
-                <button type="button" onclick={save_skill}> save </button>
+                <div class="flex flex-row items-start">
+                    <button
+                        type="button"
+                        onclick={save_skill}
+                        class="self-start mr-6"
+                    >
+                        save
+                    </button>
 
-                <!-- {#if is_new == false}
-                    <button type="button" onclick={delete_skill}>delete</button>
-                {/if} -->
+                    {#if is_new == false}
+                        <button
+                            type="submit"
+                            onclick={delete_skill}
+                            class="self-start">delete</button
+                        >
+                    {/if}
+                </div>
             {/if}
         </div>
     {/key}
@@ -153,17 +209,23 @@
 <div class="character-skill">
     {#key is_new}
         {#if !is_new && !editing}
-            <div>
-                <h4>{skill.name}</h4>
+            <div class="character-skill-display">
+                <div
+                    class="flex flex-row items-center justify-between border-b border-gray-400"
+                >
+                    <h4>{skill.name}</h4>
+                    <div>
+                        {#each tags_array as tag}
+                            <small>{tag}</small>
+                        {/each}
+                    </div>
+                </div>
                 <p>{skill.description}</p>
-                {#each tags_array as tag}
-                    <small>{tag}</small>
-                {/each}
 
-                <button type="button" onclick={startEditing}> edit </button>
-
-                {@render input_fields(true)}
+                <button type="button" onclick={startEditing}>edit</button>
             </div>
+
+            {@render input_fields(true)}
         {:else}
             {@render input_fields()}
         {/if}
@@ -173,7 +235,47 @@
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
 
-    input {
-        @apply border border-black rounded-md;
+    .character-skill-form {
+        @apply flex flex-col;
+    }
+
+    .character-skill-input {
+        @apply flex
+                flex-col
+                items-start
+                my-3;
+
+        > label {
+            @apply pb-1
+                    mb-3
+                    w-full;
+        }
+
+        > input,
+        > textarea {
+            @apply text-black
+                rounded-md
+                p-3
+                border
+                border-gray-300
+                text-left
+                transition-all
+                w-full;
+        }
+    }
+
+    .character-skill-display {
+        h4 {
+            @apply text-3xl mt-4 mb-2 pb-1;
+        }
+
+        p {
+            @apply text-xl my-2;
+        }
+
+        small {
+            @apply text-xs rounded-md bg-emerald-600 text-white px-2 py-1;
+            @apply mr-1 last:mr-0;
+        }
     }
 </style>
