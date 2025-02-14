@@ -24,10 +24,10 @@
     {#key skills}
         <div class="skills-list">
             {#each skills as skill}
-                <CharacterSkill {skill} />
+                <CharacterSkill {skill} is_new={false} />
             {/each}
 
-            <div class="skills-list-add md:col-span-2">
+            <div class="skills-list-add md:col-span-2 xl:col-span-2">
                 <h2>Add Skill</h2>
                 <CharacterSkill is_new={true} />
             </div>
@@ -37,6 +37,13 @@
 
 <style lang="postcss">
     @import "tailwindcss/theme" theme(reference);
+    .skills-list {
+        @apply grid grid-cols-1 w-full;
+
+        @variant md {
+            @apply grid-cols-2 gap-x-6;
+        }
+    }
     .skills-list-add {
         @apply mt-4 pt-6 border-t border-t-gray-400;
     }
