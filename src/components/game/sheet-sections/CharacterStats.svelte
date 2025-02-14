@@ -29,24 +29,21 @@
             name="stats_might"
             id="stats_might"
             value={stats?.might}
-            max={35}
-            required
+            max={69}
         />
         <CharacterStat
             label="Speed"
             name="stats_speed"
             id="stats_speed"
             value={stats?.speed}
-            max={35}
-            required
+            max={69}
         />
         <CharacterStat
             label="Intellect"
             name="stats_intellect"
             id="stats_intellect"
             value={stats?.intellect}
-            max={35}
-            required
+            max={69}
         />
     </div>
     <div class="grid grid-cols-4 gap-x-6">
@@ -55,19 +52,16 @@
             name="stats_mightEdge"
             id="stats_mightEdge"
             value={stats?.mightEdge ? stats?.mightEdge : "0"}
-            required
         />
         <CharacterStat
             name="stats_speedEdge"
             id="stats_speedEdge"
             value={stats?.speedEdge ? stats?.speedEdge : "0"}
-            required
         />
         <CharacterStat
             name="stats_intellectEdge"
             id="stats_intellectEdge"
             value={stats?.intellectEdge ? stats?.intellectEdge : "0"}
-            required
         />
     </div>
 </SheetSection>

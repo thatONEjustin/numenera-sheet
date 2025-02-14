@@ -10,9 +10,19 @@
     import { sheet_data } from "@game/data.svelte";
 
     let { character } = sheet_data;
+
+    let open: boolean = $derived.by(() => {
+        return (
+            character?.backstory != "" ||
+            character?.backstory != undefined ||
+            character?.description != "" ||
+            character?.description != undefined
+        );
+    });
 </script>
 
 <SheetSection name="character-info" class={className}>
+    <!--
     <TextInputField
         type="textarea"
         label="Description"
@@ -30,8 +40,9 @@
         id="character_backstory"
         value={character?.backstory}
     />
-    <!--
-    <Accordion open={true}>
+
+    -->
+    <Accordion {open}>
         {#snippet title()}
             <h3 class="py-6">Character Background</h3>
         {/snippet}
@@ -56,5 +67,4 @@
             />
         </div>
     </Accordion>
-    -->
 </SheetSection>

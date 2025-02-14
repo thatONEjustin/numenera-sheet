@@ -21,11 +21,10 @@
         <h3 class="pl-2">Skills</h3>
     </div>
 
-    {#key skills}
-        <div class="skills-list grid grid-cols-1 md:grid-cols-2 gap-x-6">
-            {#each skills as skill}
-                <CharacterSkill {skill} is_new={false} />
-            {/each}
+    <div class="skills-list">
+        {#each data_array as skill}
+            <CharacterSkill {skill} />
+        {/each}
 
             <div class="skills-list-add md:col-span-2">
                 <h2>Add Skill</h2>

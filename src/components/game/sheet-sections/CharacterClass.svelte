@@ -24,7 +24,6 @@
             class="w-[76px]"
             options={character_type_options}
             value={characterClass?.type}
-            required
         />
 
         <SelectField
@@ -34,7 +33,6 @@
             class="w-[126px] mx-2"
             options={character_descriptor_options}
             value={characterClass?.descriptor}
-            required
         />
 
         <SelectField
@@ -44,7 +42,6 @@
             class="w-fit"
             options={character_focus_options}
             value={characterClass?.focus}
-            required
         />
     </div>
 </SheetSection>

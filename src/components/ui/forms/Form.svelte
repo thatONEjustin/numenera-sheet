@@ -2,7 +2,7 @@
     import type { Form as FormProps } from "@components/types.d";
     import LZString from "lz-string";
 
-    import { storageAvailable } from "@components/utils";
+    import { storageAvailable, isEmptyObject } from "@components/utils";
     import { sheet_data } from "@game/data.svelte";
 
     let { children, class: className }: FormProps = $props();
@@ -16,10 +16,15 @@
     }
 
     $effect(() => {
-        // if (isEmptyObject(sheet_data)) return;
         // console.log(isEmptyObject(sheet_data));
         // console.log($state.snapshot(sheet_data));
-        if (storageAvailable("localStorage") == false) return;
+
+        if (
+            isEmptyObject(sheet_data) ||
+            storageAvailable("localStorage") == false
+        ) {
+            return;
+        }
 
         localStorage.setItem(
             "sheetData",

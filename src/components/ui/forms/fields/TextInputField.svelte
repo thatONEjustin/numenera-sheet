@@ -52,6 +52,7 @@
         );
 
         editing = false;
+        event?.preventDefault();
     }
 </script>
 
@@ -87,7 +88,7 @@
                     {rows}
                     {required}
                     {placeholder}
-                    class="transition-all"
+                    class={["transition-all", !editing ? "cursor-pointer" : ""]}
                     bind:this={element}>{value}</textarea
                 >
             {/if}

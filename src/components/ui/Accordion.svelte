@@ -4,14 +4,13 @@
 
     let {
         class: className = "",
-        open = false,
+        open = $bindable(false),
         title,
         children,
         openIndicator,
     }: AccordionProps = $props();
 
     function show(event: Event) {
-        event.preventDefault();
         open = !open;
     }
 </script>
@@ -37,18 +36,17 @@
         {/if}
     </button>
 
-    <div class="accordion" class:hidden={open} transition:slide>
-        {@render children?.()}
-    </div>
+    {#if open}
+        <div class="accordion" transition:slide>
+            {@render children?.()}
+        </div>
+    {/if}
 </div>
 
 <style lang="postcss">
-    .accordion {
-        @apply flex
-            flex-col;
-    }
+    @import "tailwindcss/theme" theme(reference);
 
     .accordion-title {
-        @apply flex flex-row justify-between cursor-pointer;
+        @apply flex flex-row w-full justify-between items-center cursor-pointer;
     }
 </style>
