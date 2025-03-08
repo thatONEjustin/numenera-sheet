@@ -24,7 +24,9 @@
     let editing = $state(false);
 
     let tags_array = $derived.by(() => {
-        if (isEmptyObject(skill)) return [];
+        if (isEmptyObject(skill)) {
+            return [];
+        }
 
         if (skill.tags == undefined) {
             return [];
@@ -119,7 +121,7 @@
         editing = true;
     }
 
-    $effect(() => console.log(`is_new: ${is_new}, is_editing: ${editing}`));
+    // $effect(() => console.log(`is_new: ${is_new}, is_editing: ${editing}`));
 </script>
 
 {#snippet input_fields(hide: boolean = false)}
