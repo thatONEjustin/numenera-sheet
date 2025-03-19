@@ -3,6 +3,7 @@
         JustinTextInput,
         SvelteHTMLElements,
     } from "@components/types.d";
+
     type TextInput = SvelteHTMLElements[BaseInputTypes] & JustinTextInput;
 
     import { isEmptyObject } from "@components/utils";
@@ -15,13 +16,19 @@
             tags: "",
         }),
         is_new = $bindable(true),
+        placeholders = $bindable({
+            name: "",
+            description:
+                "So there's no great way to do skills without literally building a dice roller app, so the best we can do is just copy and paste from the rulebook and keep track of things in notes/tags",
+            tags: "comma, separated, lists!",
+        }),
     } = $props();
+
+    let editing = $state(false);
 
     let name_input: HTMLInputElement = $state() as HTMLInputElement;
     let desc_input: HTMLTextAreaElement = $state() as HTMLTextAreaElement;
     let tags_input: HTMLInputElement = $state() as HTMLInputElement;
-
-    let editing = $state(false);
 
     let tags_array = $derived.by(() => {
         if (isEmptyObject(skill)) {
@@ -48,13 +55,8 @@
             return;
         }
 
-        if (name_input.value != "") {
-            skill.name = name_input.value;
-        }
-
-        if (desc_input.value != "") {
-            skill.description = desc_input.value;
-        }
+        skill.name = name_input.value;
+        skill.description = desc_input.value;
 
         if (tags_input.value != "") {
             if (tags_input.value.includes(",")) {
@@ -137,7 +139,6 @@
                             .replaceAll(' ', '')
                             .toLowerCase()}">Name:</label
                     >
-
                     <input
                         class="character-skill-field"
                         type="text"
@@ -146,6 +147,7 @@
                             .toLowerCase()}"
                         value={skill?.name}
                         bind:this={name_input}
+                        placeholder={placeholders.name}
                     />
                 </div>
                 <div class="character-skill-input">
@@ -165,6 +167,7 @@
                         type="text"
                         value={skill?.tags}
                         bind:this={tags_input}
+                        placeholder={placeholders.tags}
                     />
                 </div>
             </div>
@@ -182,7 +185,9 @@
                     id="skill-description{skill?.description
                         .replaceAll(' ', '')
                         .toLowerCase()}"
-                    bind:this={desc_input}>{skill?.description}</textarea
+                    bind:this={desc_input}
+                    placeholder={placeholders.description}
+                    >{skill?.description}</textarea
                 >
             </div>
 
@@ -191,7 +196,7 @@
                     <button
                         type="button"
                         onclick={save_skill}
-                        class="self-start mr-6"
+                        class="self-start px-3 py-2 transition-all border-2 bg-emerald-500 border-transparent rounded-md text-white hover:border-emerald-500 hover:text-emerald-500 hover:bg-transparent mr-6"
                     >
                         save
                     </button>
@@ -200,7 +205,8 @@
                         <button
                             type="submit"
                             onclick={delete_skill}
-                            class="self-start">delete</button
+                            class="self-start underline text-rose-600 py-2"
+                            >delete</button
                         >
                     {/if}
                 </div>
@@ -224,7 +230,12 @@
                 </div>
                 <p>{skill.description}</p>
 
-                <button type="button" onclick={startEditing}>edit</button>
+                <button
+                    type="button"
+                    onclick={startEditing}
+                    class="bg-amber-500 rounded-md px-3 py-2 border-2 border-amber-500 hover:bg-transparent transition-all hover:text-amber-500"
+                    >edit</button
+                >
             </div>
 
             {@render input_fields(true)}

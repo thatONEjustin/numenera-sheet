@@ -115,7 +115,6 @@
             px-2
             py-1
             text-sm
-            opacity-35
             transition-all;
 
         > i.nf {
@@ -123,7 +122,7 @@
         }
 
         &:hover {
-            @apply bg-white text-red-400 opacity-100;
+            @apply bg-transparent text-red-400 opacity-100;
         }
     }
 </style>

@@ -7,6 +7,14 @@
             h-full;
 	}
 
+    body {
+        background-image: url('./background.jpg');
+    }
+
+    h1, h2, h3, h4, h5, h6, .nf {
+        @apply text-cyan-100/80;
+    }
+
     h1 {
         @apply text-3xl;
     }

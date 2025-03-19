@@ -131,7 +131,7 @@
 
         > .input-ux {
             > input {
-                @apply text-black
+                @apply text-cyan-100/80
                     rounded-md
                     py-3
                     pl-3

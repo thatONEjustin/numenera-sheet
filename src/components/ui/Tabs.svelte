@@ -15,15 +15,26 @@
 <ul class="TabsNav">
     {#each tabs as { label }, index}
         {@const href = `#${label.toLowerCase().replace(" ", "")}`}
-        <li class={["TabsNav-tab", active === index ? "active" : ""]}>
-            <a {href} onclick={() => show_tab(index)}>
+        <li
+            class={[
+                "TabsNav-tab",
+                active === index ? "bg-cyan-600/60" : "",
+                active === index ? "glow" : "",
+                active === index ? "active" : "",
+            ]}
+        >
+            <a
+                {href}
+                onclick={() => show_tab(index)}
+                class="text-glow text-white/60"
+            >
                 {label}
             </a>
         </li>
     {/each}
 </ul>
 
-<div class="Tabs">
+<div class="Tabs glow">
     {#each tabs as { content: Content }, index}
         {#if active == index}
             <section
@@ -54,10 +65,7 @@
             @apply inline-flex rounded-t-md px-5 py-2.5;
 
             &.active {
-                @apply border
-                    border-blue-500
-                    border-b-blue-500
-                    bg-blue-500;
+                @apply border-0;
 
                 a {
                     @apply text-white;
@@ -67,18 +75,17 @@
     }
 
     .Tabs {
-        @apply border-2 
-            rounded-b-md 
+        @apply rounded-b-xl 
+            rounded-tr-xl
             overflow-hidden
             z-10
             transition-all
+            border-white/20
+            bg-cyan-600/90
             h-full;
 
         display: grid;
         grid-template-areas: "stack";
-
-        @apply border-blue-500
-            bg-white;
 
         > .Tab {
             @apply p-5;
