@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 
 package-lock.json*
+
+# netlify doesnt need build artifacts
+.netlify/
