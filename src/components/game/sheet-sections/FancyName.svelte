@@ -107,6 +107,7 @@
             flex-row
             items-center
             justify-center
+            opacity-50
             bg-red-400
             border-2
             border-red-400

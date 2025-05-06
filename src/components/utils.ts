@@ -103,17 +103,12 @@ export function getSkillsData() {
 
         let skills_array: any = await getSheetData()
 
-        if (isEmptyObject(skills_array)) {
-            resolve([])
-            return;
-        }
-
         if ("skills" in skills_array == true) {
             resolve(skills_array["skills"])
             return
         }
 
-        reject("skills_array might not be properly read")
+        resolve([])
     })
 }
 
