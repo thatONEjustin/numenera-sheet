@@ -11,6 +11,7 @@
     type CheckboxField = {
         name: string;
         class?: ClassValue;
+        labelCass?: ClassValue;
         label: string;
         checked?: boolean;
         hideLabel?: boolean;
@@ -40,7 +41,6 @@
     const [category_key, field_key] = name.split("_");
 
     function fake_submit(_: Event) {
-        // value = element?.value;
         sheet_data[category_key] = updateSheetData(
             sheet_data,
             category_key,
@@ -51,7 +51,7 @@
 </script>
 
 <div class={["checkbox-input", className]}>
-    <label for={id} class="flex">
+    <label for={id} class={["flex"]}>
         {label}
         {#key checked}
             <input

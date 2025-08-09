@@ -40,7 +40,7 @@
     .skills-list {
         @apply grid grid-cols-1 w-full;
 
-        @variant md {
+        @variant lg {
             @apply grid-cols-2 gap-x-6;
         }
     }

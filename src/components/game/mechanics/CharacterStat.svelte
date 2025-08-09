@@ -41,19 +41,4 @@
         {value}
         {labelTag}
     />
-    <!--
-    <TextInputField
-        class={className}
-        {name}
-        {type}
-        {id}
-        {hideLabel}
-        {label}
-        {required}
-        {rows}
-        {placeholder}
-        {value}
-        {labelTag}
-    />
-    -->
 </div>

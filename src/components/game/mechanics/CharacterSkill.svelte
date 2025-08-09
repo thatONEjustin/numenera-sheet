@@ -8,6 +8,7 @@
 
     import { isEmptyObject } from "@components/utils";
     import { sheet_data, skills } from "@game/data.svelte";
+    import { marked } from "marked";
 
     let {
         skill = $bindable({
@@ -29,6 +30,10 @@
     let name_input: HTMLInputElement = $state() as HTMLInputElement;
     let desc_input: HTMLTextAreaElement = $state() as HTMLTextAreaElement;
     let tags_input: HTMLInputElement = $state() as HTMLInputElement;
+
+    let skill_description = $derived.by(() => {
+        return marked.parse(skill?.description);
+    });
 
     let tags_array = $derived.by(() => {
         if (isEmptyObject(skill)) {
@@ -228,7 +233,7 @@
                         {/each}
                     </div>
                 </div>
-                <p>{skill.description}</p>
+                <div>{@html skill_description}</div>
 
                 <button
                     type="button"

@@ -15,14 +15,14 @@
 <Form>
     <FancyName />
 
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col lg:flex-row">
         <div class="w-full">
             <CharacterStats />
 
             <CharacterAdvancement />
             <RecoveryAvailable />
         </div>
-        <div class="w-1/5">
+        <div class="w-full lg:w-1/5">
             <h3>Hints</h3>
             <p>
                 Basically lets use this space for "todos" for the user, like

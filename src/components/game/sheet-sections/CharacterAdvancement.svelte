@@ -7,6 +7,7 @@
 
     const { class: className }: SheetProps = $props();
     import { sheet_data } from "@game/data.svelte";
+    import TextInputField from "@components/ui/forms/fields/TextInputField.svelte";
     const { advancement, advancementSteps } = sheet_data;
 </script>
 
@@ -57,26 +58,26 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6">
-        <div class="text-3xl flex flex-row items-center">
+        <div class="text-3xl flex flex-row items-start">
             <i class="nf nf-md-timer_refresh"></i>
             <h3 class="pl-2">Advancements</h3>
         </div>
         <CheckboxField
             name="advancementSteps_statBonus"
             id="statBonus"
-            label="Increase Capabilities"
+            label="+4 to one stat"
             checked={advancementSteps?.statBonus}
         />
         <CheckboxField
             name="advancementSteps_xtraEffort"
             id="extraEffort"
-            label="Extra Effort"
+            label="+1 Effort"
             checked={advancementSteps?.xtraEffort}
         />
         <CheckboxField
             name="advancementSteps_edge"
             id="edge"
-            label="Move towards perfection"
+            label="+1 stat edge"
             checked={advancementSteps?.edge}
         />
         <CheckboxField
