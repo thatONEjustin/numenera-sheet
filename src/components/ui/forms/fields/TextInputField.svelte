@@ -19,6 +19,7 @@
         labelTag,
         required = false,
         class: className,
+        inputClass = "",
         rows = 4,
         placeholder: raw_placeholder = "",
         value = $bindable(""),
@@ -73,7 +74,11 @@
                     {value}
                     {required}
                     {placeholder}
-                    class={["transition-all", !editing ? "cursor-pointer" : ""]}
+                    class={[
+                        "transition-all",
+                        !editing ? "cursor-pointer" : "",
+                        inputClass,
+                    ]}
                     onclick={editOnClick}
                     use:clickOutside
                     onClickOutside={() => (editing = false)}
@@ -88,7 +93,11 @@
                     {rows}
                     {required}
                     {placeholder}
-                    class={["transition-all", !editing ? "cursor-pointer" : ""]}
+                    class={[
+                        "transition-all",
+                        !editing ? "cursor-pointer" : "",
+                        inputClass,
+                    ]}
                     bind:this={element}>{value}</textarea
                 >
             {/if}

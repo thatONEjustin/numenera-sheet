@@ -11,7 +11,7 @@
     type CheckboxField = {
         name: string;
         class?: ClassValue;
-        labelCass?: ClassValue;
+        labelClass?: ClassValue;
         label: string;
         checked?: boolean;
         hideLabel?: boolean;
@@ -51,7 +51,7 @@
 </script>
 
 <div class={["checkbox-input", className]}>
-    <label for={id} class={["flex"]}>
+    <label for={id} class={["flex", input?.labelClass]}>
         {label}
         {#key checked}
             <input
@@ -70,71 +70,69 @@
 </div>
 
 <style lang="postcss">
+    @import "tailwindcss/theme" theme(reference);
+
     /* Customize the label (the checkbox-input) */
     .checkbox-input {
-        display: block;
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 22px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+        @apply block
+            relative
+            pl-8
+            mb-3
+            cursor-pointer
+            select-none;
     }
 
     /* Hide the browser's default checkbox */
     .checkbox-input input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
+        @apply absolute
+            opacity-0
+            h-0
+            w-0;
     }
 
     /* Create a custom checkbox */
     .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
+        @apply absolute
+            top-0
+            left-0
+            bg-white
+            h-6
+            w-6;
     }
 
     /* On mouse-over, add a grey background color */
     .checkbox-input:hover input ~ .checkmark {
-        background-color: #ccc;
+        @apply bg-gray-200;
     }
 
     /* When the checkbox is checked, add a blue background */
     .checkbox-input input:checked ~ .checkmark {
-        background-color: #2196f3;
+        @apply bg-blue-700;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */
     .checkmark:after {
+        @apply absolute
+            hidden;
         content: "";
-        position: absolute;
-        display: none;
     }
 
     /* Show the checkmark when checked */
     .checkbox-input input:checked ~ .checkmark:after {
-        display: block;
+        @apply block;
     }
 
     /* Style the checkmark/indicator */
     .checkbox-input .checkmark:after {
-        left: 9px;
-        top: 5px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
+        @apply left-2
+            top-0.5
+            w-1.5
+            h-4
+            border-white
+            border-t-2
+            border-r-2
+            rotate-x-180
+            rotate-45
+            origin-center;
     }
 </style>

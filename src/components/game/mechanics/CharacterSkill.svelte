@@ -233,7 +233,9 @@
                         {/each}
                     </div>
                 </div>
-                <div>{@html skill_description}</div>
+                <div class="character-skill-display-description">
+                    {@html skill_description}
+                </div>
 
                 <button
                     type="button"
@@ -287,13 +289,13 @@
             @apply text-3xl mt-4 mb-2 pb-1;
         }
 
-        p {
-            @apply text-xl my-2;
-        }
-
         small {
             @apply text-xs rounded-md bg-emerald-600 text-white px-2 py-1;
             @apply mr-1 last:mr-0;
         }
+    }
+
+    .character-skill-display-description {
+        @apply text-xl my-2;
     }
 </style>

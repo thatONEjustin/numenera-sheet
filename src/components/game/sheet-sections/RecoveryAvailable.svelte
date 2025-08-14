@@ -36,7 +36,8 @@
         />
         <CheckboxField
             name="recovery_available"
-            class="md:col-start-2 char_recovery"
+            class="md:col-start-2"
+            labelClass="text-xl"
             id="10hours"
             label="10 hours"
             value="10hours"
@@ -44,3 +45,7 @@
         />
     </div>
 </fieldset>
+
+<style lang="postcss">
+    @import "tailwindcss/theme" theme(reference);
+</style>

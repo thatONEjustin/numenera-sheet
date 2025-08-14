@@ -1,0 +1,14 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+
+// import ErrorForm from "@ui/Error.svelte"
+import JsonData from "@ui/JsonData.svelte"
+console.log(Astro.url.searchParams.get("json_data"))
+
+const special_string = Astro.url.searchParams.has("data") ? Astro.url.searchParams.get("data") : ""
+---
+
+<Layout>
+    <JsonData client:only="svelte" character_data={special_string} />
+</Layout>

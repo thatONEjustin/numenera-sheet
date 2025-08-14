@@ -38,7 +38,7 @@
 
 
     .Page {
-        @apply md:container mx-auto mt-2;
+        @apply md:container mx-auto mt-2 pb-16;
 
         @variant md {
             @apply mt-10;

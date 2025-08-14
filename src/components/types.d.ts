@@ -34,6 +34,7 @@ type JustinTextInput = {
     hideLabel?: boolean;
     label?: string;
     labelTag?: Snippet;
+    inputClass?: ClassValue,
     rows?: number;
     placeholder?: string;
     class?: ClassValue;
